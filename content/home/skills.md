@@ -25,7 +25,7 @@ feature:
   icon_pack: fas
   name: Statistics
 - description: 60%
-  icon: camera-retro
+  icon: rmarkdown
   icon_pack: fas
   name: R Markdown
 
