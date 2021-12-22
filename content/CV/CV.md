@@ -7,4 +7,3 @@ title: CV
 
 
 
-## Currently 
