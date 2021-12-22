@@ -28,6 +28,10 @@ feature:
   icon: markdown
   icon_pack: fas
   name: R Markdown
+- description: 50%
+  icon: latex
+  icon_pack: fas
+  name: LaTeX
 
 # Uncomment to use emoji icons.
 #- icon: ":smile:"
