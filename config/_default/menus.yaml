@@ -7,8 +7,8 @@ main:
   - name: Home
     url: '#about'
     weight: 10
-  - name: CV/
-    url: '#posts'
+  - name: CV
+    url: CV/
     weight: 20
   - name: Contact
     url: '#contact'
