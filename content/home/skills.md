@@ -17,20 +17,12 @@ subtitle:
 # - For available icons, see: https://wowchemy.com/docs/page-builder/#icons
 feature:
 - description: 80%
-  icon: r-project
-  icon_pack: fab
   name: R
 - description: 90%
-  icon: chart-line
-  icon_pack: fas
   name: Statistics
 - description: 60%
-  icon: markdown
-  icon_pack: fas
   name: R Markdown
 - description: 50%
-  icon: latex
-  icon_pack: fas
   name: LaTeX
 
 # Uncomment to use emoji icons.
