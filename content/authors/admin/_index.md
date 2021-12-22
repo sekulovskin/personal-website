@@ -1,60 +1,52 @@
 ---
 # Display name
-title: Nelson Bighetti
+title: Nikola Sekulovski
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position/tagline
-role: Professor of Artificial Intelligence
+role: MSc Student Methodology and Statistics
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: Stanford University
-  url: https://www.stanford.edu/
+- name: Department of Methodology and Statistics, Utrecht University
+  url: https://www.uu.nl/en/organisation/methodology-and-statistics
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
-
+bio: ''
 # Interests to show in About widget
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Bayesian Statistics
+- Psychometrics
+- R programming
+- R Markdown
+- Machine Learning
 
 # Education to show in About widget
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
+  - course: MSc in Methodology and Statistics
+    institution: Utrecht Univesity, The Netherlands
+    year: 2020 - present
+  - course: BSc in Psychology
+    institution: Ss. Cyril and Methodius University, North Macedonia
+    year: 2015-2019
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
+- icon: github
+  icon_pack: fab
+  link: https://github.com/sekulovskin
+- icon: linkedin
+  icon_pack: fab
+  link: https://www.linkedin.com/in/nikola-sekulovski-254507203
 - icon: envelope
   icon_pack: fas
   link: '/#contact'
-- icon: twitter
-  icon_pack: fab
-  link: https://twitter.com/GeorgeCushen
-- icon: graduation-cap  # Alternatively, use `google-scholar` icon from `ai` icon pack
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
-- icon: github
-  icon_pack: fab
-  link: https://github.com/gcushen
-- icon: linkedin
-  icon_pack: fab
-  link: https://www.linkedin.com/
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`, 
@@ -70,8 +62,5 @@ email: ""
 highlight_name: true
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
-
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+My primary interests are in Bayesian Statistics (more specifically in Bayesian Hypothesis Testing), Psychometrics, R programming and Machine Learning, or even better, the combination of the four! When it comes to the debate of Frequentest vs Bayesian, I am a fan of a "common-ground" approach approach (even though Centrism, in general, isn't my cup of tea, I believe it might just work when it comes to Statistics). You can see more of what I do on my GitHub profile or you can also read my CV. Feel free to contact me about any questions you have regarding my work or if you are interested in future collaboration. I am open for consultations, teaching or just a fun chat about statistics and data!
