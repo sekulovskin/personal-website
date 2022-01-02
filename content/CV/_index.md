@@ -29,7 +29,7 @@ header:
  
     <span style="color: grey;">Feb - March, 2018.</span>
     
- - **Intern:** [Ipsos](https://www.ipsos.com/mk-mk)
+ - **Intern:** [Ipsos, North Macedonia](https://www.ipsos.com/mk-mk)
 
      <span style="color: grey;">March - April, 2019.</span>
      
