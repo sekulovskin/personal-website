@@ -1,5 +1,5 @@
 ---
-title: 'Curriculum Vitae'
+title: '**Curriculum Vitae**'
 cms_exclude: true
 
 # Optional header image (relative to `static/media/` folder).
@@ -45,16 +45,6 @@ header:
    
    <span style="color: grey;">January - February, 2022.</span>
 
-     
-# Conferences 
-
- - [**Psihozij**](https://psihozij.wixsite.com/psihozij/o-nama), Zagreb, Croatia
-  
-   <span style="color: grey;">May, 2018.</span>
-  
- - [**33rd EFPSA Congress**](https://efpsa.org/), Grenaa, Denmark
- 
-   <span style="color: grey;">April, 2019.</span>
 
 # Skills
  
@@ -70,17 +60,27 @@ header:
  
  - Statistical (Machine) Learning
 
+# Conferences 
+
+ - [**Psihozij**](https://psihozij.wixsite.com/psihozij/o-nama), Zagreb, Croatia
+  
+   <span style="color: grey;">May, 2018.</span>
+  
+ - [**33rd EFPSA Congress**](https://efpsa.org/), Grenaa, Denmark
+ 
+   <span style="color: grey;">April, 2019.</span>
+
 # Languages:
 
 ### Advanced:
 
  - English 
  
- <span style="color: grey;">TOEFL score: 104.</span>
+   <span style="color: grey;">TOEFL score: 104.</span>
  
  - Macedonian
  
- <span style="color: grey;">Mother Tongue.</span>
+   <span style="color: grey;">Mother Tongue.</span>
  
 ### Basic:
 
