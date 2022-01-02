@@ -48,7 +48,7 @@ header:
 
 # Skills
  
- - Statistics (Statistical inference and modelling)
+ - Statistics
  
  - R-programming
  
@@ -59,6 +59,7 @@ header:
  - Psychometrics
  
  - Statistical (Machine) Learning
+ 
 
 # Conferences 
 
