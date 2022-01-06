@@ -27,7 +27,7 @@ interests:
 education:
   courses:
   - course: MSc in Methodology and Statistics
-    institution: Utrecht Univesity, The Netherlands
+    institution: Utrecht University, The Netherlands
     year: 2020 - present
   - course: BSc in Psychology
     institution: Ss. Cyril and Methodius University, North Macedonia
