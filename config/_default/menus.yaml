@@ -10,9 +10,6 @@ main:
   - name: CV
     url: CV/
     weight: 20
-  - name: Skills
-    url: '#skills'
-    weight: 30
   - name: Contact
     url: '#contact'
     weight: 40
