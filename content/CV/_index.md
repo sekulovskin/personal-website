@@ -46,20 +46,31 @@ header:
    <span style="color: grey;">January - February, 2022.</span>
 
 
-# Skills
+# Technical skills
  
- - Statistics
+ - **R-programming**
+   <span style="color: grey;">(Two of the major repositories I currently work on are private. However, they will be made public once the projects are completed.)</span>
  
- - R-programming
+ - **R Markdown**
+   
+   - LaTeX
+   - Bookdown
  
- - R-Markdown
+ - **SQL** 
+   <span style="color: grey;">(Self-taught, basic knowledge)</span>
  
- - LaTeX
+# Knowledge and professional interests
+
+ - **Statistics**
+  
+   - Bayesian Inference & Hypothesis Testing
+   - Psychometrics
+  
+ - **Data Science / Machine (statistical) learning**
  
- - Psychometrics
- 
- - Statistical (Machine) Learning
- 
+   - Regression
+   - Classification
+   - Deep learning/Neural Networks <span style="color: grey;">(Self-taught, basic knowledge)</span>
 
 # Conferences 
 
