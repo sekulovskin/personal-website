@@ -20,7 +20,6 @@ interests:
 - Bayesian Statistics
 - Psychometrics
 - R programming
-- R Markdown
 - Machine Learning
 
 # Education to show in About widget
@@ -63,4 +62,4 @@ highlight_name: true
 ---
 
 
-My primary professional interests are in Bayesian Statistics (more specifically in Bayesian Hypothesis Testing), Psychometrics, R programming and Machine Learning or, even better, some combination of the four! I am a fan of a "common-ground" approach  regarding the polarization of Statistics in the form of: *"Frequentist vs Bayesian"* (even though Centrism, in general, isn't my cup of tea, I believe it might work when it comes to Statistics). You can see more of what I do on my GitHub profile or you can also read my CV. Feel free to contact me about any questions you might have regarding my research/work or if you are interested in future collaboration. I am open for consultations, teaching or just having a fun chat about statistics and data!
+My primary professional interests are in Bayesian Statistics (more specifically in Bayesian Hypothesis Testing), Psychometrics, R programming and Machine Learning or, even better, some combination of the four! I am a fan of a "common ground" approach regarding the polarization of Statistics in the form of *"Frequentist vs Bayesian"* (even though Centrism, in general, isn't my cup of tea, I believe it might work when it comes to Statistics). You can see more of what I do on my GitHub profile or you can also read my CV. Feel free to contact me with any questions you might have regarding my research/work or if you are interested in future collaboration. I am open for consultations, teaching or just having a fun chat about statistics and data!
