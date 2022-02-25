@@ -1,2 +1,2 @@
-Website available at: https://sekulovskin.netlify.app/
+Website available at: www.nikolasekulovski.com
 
