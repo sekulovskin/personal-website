@@ -49,7 +49,9 @@ header:
 # Technical skills
  
  - **R-programming**
-   <span style="color: grey;">(Two of the major repositories I currently work on are private. However, they will be made public once the projects are completed.)</span>
+  
+ - **Python programming**
+    <span style="color: grey;">(Basic knowledge)</span>
  
  - **R Markdown**
    
@@ -57,7 +59,7 @@ header:
    - Bookdown
  
  - **SQL** 
-   <span style="color: grey;">(Self-taught, basic knowledge)</span>
+   <span style="color: grey;">(Basic knowledge)</span>
  
 # Knowledge and professional interests
 
