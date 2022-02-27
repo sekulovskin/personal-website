@@ -18,6 +18,8 @@ subtitle:
 feature:
 - description: 80%
   name: R
+- description: 20%
+  name: Python
 - description: 90%
   name: Statistics
 - description: 60%
@@ -26,6 +28,8 @@ feature:
   name: LaTeX
 - description: 70%
   name: SPSS
+- description: 70%
+  name: Scientific writing
 
 # Uncomment to use emoji icons.
 #- icon: ":smile:"
