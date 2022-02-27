@@ -60,6 +60,8 @@ header:
  
  - **SQL** 
    <span style="color: grey;">(Basic knowledge)</span>
+   
+ - IBM SPSS Statistics
  
 # Knowledge and professional interests
 
