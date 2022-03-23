@@ -62,11 +62,10 @@ header:
    
    - LaTeX
    - Bookdown
- 
- - **SQL** 
-   <span style="color: grey;">(Basic knowledge)</span>
    
  - **IBM SPSS Statistics**
+ 
+ - **JAGS**
  
 # Knowledge and professional interests
 
