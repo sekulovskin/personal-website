@@ -326,8 +326,8 @@ ggplot(aes(x = standlrt, y = normexam, col = school, group = school))+
   theme(legend.position = &quot;none&quot;)+
   geom_smooth(method = lm,
               se     = FALSE,
-              size   = .6, 
-              alpha  = .8)+ 
+              size   = .6,
+              alpha  = .8)+
   labs(x = &quot;`standlrt`&quot;,
        y = &quot;normexam&quot;,
        title = &quot;Random slopes standlrt for each school&quot;)</code></pre>
@@ -584,8 +584,8 @@ school
 <div id="r2_m-by-hand" class="section level4">
 <h4><span class="math inline">\(R^2_m\)</span> by hand</h4>
 <p>We can also manually compute the marginal <span class="math inline">\(R^2\)</span> which is defined as the proportion of variation in the outcome variable that can be explained by the fixed effect(s) over the overall variation.</p>
-<pre class="r watch-out"><code>fixef &lt;- fixef(model.1)  #extract the fixed effect 
-y_hat &lt;- fixef[1] + fixef[2]*tutorial$standlrt #predict the outcome 
+<pre class="r watch-out"><code>fixef &lt;- fixef(model.1)  #extract the fixed effect
+y_hat &lt;- fixef[1] + fixef[2]*tutorial$standlrt #predict the outcome
 
 sigma_f  &lt;- var(y_hat) #obtain the variance in the predicted outcome based on the fixed effect
 
@@ -595,7 +595,7 @@ sigma_u0 &lt;- 0.09044
 sigma_u1 &lt;- 0.01454
 sigma_e  &lt;- 0.55366
 
-# calculate the 
+# calculate the
 marginal_Rsq_fixed &lt;- (sigma_f)/(sigma_f + sigma_u0 + sigma_u1 + sigma_e)
 marginal_Rsq_fixed  </code></pre>
 <pre><code>## [1] 0.3170484</code></pre>
@@ -636,7 +636,7 @@ Tau.B[1:2,1:2] ~ dwish(Sigma.B, 2)  # inverse of covariance matrix following a W
   Sigma.B[2,1] &lt;- Sigma.B[1,2]
   rho ~ dunif(-1, 1)  #cor(alpha,beta)
 
-  
+
 }
 &quot;</code></pre>
 <div id="check-the-model" class="section level3">
@@ -654,7 +654,7 @@ model.def &lt;- jags.model(file = textConnection(jags.model),
 ##    Observed stochastic nodes: 4059
 ##    Unobserved stochastic nodes: 72
 ##    Total graph size: 16538
-## 
+##
 ## Initializing model</code></pre>
 <pre class="r watch-out"><code>update(object = model.def, n.iter = 1000)
 
@@ -663,21 +663,21 @@ parameters &lt;- c(&quot;mu.alpha&quot;, &quot;mu.beta&quot;)
 
 results &lt;- coda.samples(model = model.def, variable.names = parameters, n.iter =1000)
 summary(results)</code></pre>
-<pre><code>## 
+<pre><code>##
 ## Iterations = 2001:3000
-## Thinning interval = 1 
-## Number of chains = 2 
-## Sample size per chain = 1000 
-## 
+## Thinning interval = 1
+## Number of chains = 2
+## Sample size per chain = 1000
+##
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
-## 
+##
 ##               Mean      SD  Naive SE Time-series SE
 ## mu.alpha -0.008729 0.03983 0.0008907      0.0011982
 ## mu.beta   0.557882 0.01950 0.0004361      0.0008957
-## 
+##
 ## 2. Quantiles for each variable:
-## 
+##
 ##              2.5%      25%       50%     75%   97.5%
 ## mu.alpha -0.09253 -0.03285 -0.009318 0.01621 0.06652
 ## mu.beta   0.52022  0.54424  0.558047 0.57129 0.59710</code></pre>
@@ -698,7 +698,7 @@ model.def &lt;- jags.model(file = textConnection(jags.model),
 ##    Observed stochastic nodes: 4059
 ##    Unobserved stochastic nodes: 72
 ##    Total graph size: 16538
-## 
+##
 ## Initializing model</code></pre>
 <pre class="r watch-out"><code>update(object = model.def, n.iter = 1000)
 
@@ -718,11 +718,11 @@ fixed_betas &lt;- as.data.frame(fixed_betas)</code></pre>
 <p>Repeat each fixed effect N times (in this case 4059) and store it in a separate data frame which will be merged with the imputed data sets further below.</p>
 <pre class="r watch-out"><code>samp_fixed_alphas &lt;- list()
 for (i in 1:nrow(fixed_alphas)){
-   samp_fixed_alphas[[i]] &lt;-rep.int(fixed_alphas[i, 1], nrow(tutorial.1))  
+   samp_fixed_alphas[[i]] &lt;-rep.int(fixed_alphas[i, 1], nrow(tutorial.1))
 }</code></pre>
 <pre class="r watch-out"><code>samp_fixed_betas &lt;- list()
 for (i in 1:nrow(fixed_betas)){
-   samp_fixed_betas[[i]] &lt;-rep.int(fixed_betas[i, 1], nrow(tutorial.1))  
+   samp_fixed_betas[[i]] &lt;-rep.int(fixed_betas[i, 1], nrow(tutorial.1))
 }</code></pre>
 <p><strong>Get the sampled (random) intercepts (<span class="math inline">\(\alpha&#39;s\)</span>)</strong></p>
 <p>First, split the data per group:</p>
@@ -738,7 +738,7 @@ betas &lt;- samples [, 66:130] #extract the slopes</code></pre>
 <pre class="r watch-out"><code>samp_alphas &lt;- list()
 
 for (i in 1:nrow(alphas)){
-   samp_alphas[[i]] &lt;-rep.int(alphas[i, ], n_gr)  
+   samp_alphas[[i]] &lt;-rep.int(alphas[i, ], n_gr)
 }</code></pre>
 <p>Extract them in a big matrix with the samples from every iteration as a separate column:</p>
 <pre class="r watch-out"><code>samp_alphas_mat &lt;- matrix(nrow = nrow(tutorial.1), ncol = nrow(alphas))
@@ -751,7 +751,7 @@ for(i in 1:nrow(alphas)){
 <pre class="r watch-out"><code>samp_betas &lt;- list()
 
 for (i in 1:nrow(betas)){
-   samp_betas[[i]] &lt;-rep.int(betas[i, ], n_gr)  
+   samp_betas[[i]] &lt;-rep.int(betas[i, ], n_gr)
 }</code></pre>
 <p>Extract them in a big matrix with the samples from every iteration as a separate column:</p>
 <pre class="r watch-out"><code>samp_betas_mat &lt;- matrix(nrow = nrow(tutorial.1), ncol = nrow(betas))
@@ -812,7 +812,7 @@ estimates &lt;- data.frame(intercepts, slopes) #combine</code></pre>
 <pre class="r watch-out"><code>m &lt;- nrow(estimates) #number of &quot;imputations (iterations in this case)</code></pre>
 <p><strong>Combined estimate:</strong></p>
 <p><span class="math display">\[ \bar{\boldsymbol{\eta}} = \frac{1}{m} \sum_{l = 1}^{m} \hat{\boldsymbol{\eta}_l} \]</span></p>
-<pre class="r watch-out"><code>eta_bar &lt;- apply(estimates, 2, mean) 
+<pre class="r watch-out"><code>eta_bar &lt;- apply(estimates, 2, mean)
 eta_bar &lt;- t(eta_bar)
 eta_bar &lt;- as.matrix(eta_bar)</code></pre>
 <p><strong>Average over the variances:</strong></p>
@@ -853,7 +853,7 @@ nu &lt;- (nu_old*nu_obs)/(nu_old + nu_obs)</code></pre>
 <pre class="r watch-out"><code>gamma &lt;- ((nu + 1)/(nu + 3)) * lambda_hat + (2/(nu + 3))</code></pre>
 <p>**MI-based <span class="math inline">\(N_{eff}\)</span></p>
 <p><span class="math display">\[\text{MI-based} = N_{level-1} - \gamma*N_{level-1}\]</span> ### Calculateh the MI-based <span class="math inline">\(N_{eff}\)</span></p>
-<pre class="r watch-out"><code>MI_N_eff &lt;- N - gamma*N  
+<pre class="r watch-out"><code>MI_N_eff &lt;- N - gamma*N
 MI_N_eff</code></pre>
 <pre><code>## [1] 1019.118</code></pre>
 <p>The MI-based effective sample size is 1019.</p>
@@ -864,25 +864,25 @@ MI_N_eff</code></pre>
 <p>Compute the ICC. We already know that the ICC = .17 since it was given by the <code>summ</code> function, whoever, here we calculate it by hand just to illustrate that the ICC is calculated using the estimated variances from the intercept-only model:</p>
 <p><span class="math display">\[ICC = \frac{\sigma_{u0}}{\sigma_{u0} + \sigma_{e0}} \]</span></p>
 <pre class="r watch-out"><code>#fit a random intercept-only model
-model.0 &lt;- lmer(normexam ~1 + (1|school), REML = FALSE, data = tutorial.1) 
+model.0 &lt;- lmer(normexam ~1 + (1|school), REML = FALSE, data = tutorial.1)
 summary(model.0)</code></pre>
 <pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
 ## Formula: normexam ~ 1 + (1 | school)
 ##    Data: tutorial.1
-## 
-##      AIC      BIC   logLik deviance df.resid 
-##  11016.6  11035.6  -5505.3  11010.6     4056 
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.9471 -0.6486  0.0117  0.6992  3.6578 
-## 
+##
+##      AIC      BIC   logLik deviance df.resid
+##  11016.6  11035.6  -5505.3  11010.6     4056
+##
+## Scaled residuals:
+##     Min      1Q  Median      3Q     Max
+## -3.9471 -0.6486  0.0117  0.6992  3.6578
+##
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  school   (Intercept) 0.1686   0.4107  
-##  Residual             0.8478   0.9207  
+##  school   (Intercept) 0.1686   0.4107
+##  Residual             0.8478   0.9207
 ## Number of obs: 4059, groups:  school, 65
-## 
+##
 ## Fixed effects:
 ##             Estimate Std. Error t value
 ## (Intercept) -0.01317    0.05363  -0.246</code></pre>
@@ -905,21 +905,21 @@ ICC_N_eff </code></pre>
 <pre class="r watch-out"><code>hypotheses &lt;- &quot;standlrt = 0;
                standlrt &gt; 0&quot;</code></pre>
 <p>The <code>wrapper function</code> takes the following arguments: the fitted <code>lmer</code> object; the specified hypotheses (saved as a character vector); a Boolean argument, indicating whether to compute the BF based on standardized data (since we compare the fixed effects to zero, we do not need to standardize the data); the value for the sample size (which can be either <span class="math inline">\(N_{level-1}\)</span>, <span class="math inline">\(N_{level-2}\)</span>, ICC-based <span class="math inline">\(N_{eff}\)</span> or a value supplied by the user, in this case, we will use the calculated <code>MI_N_eff</code>), a multiplicative factor for the fraction which is by default set to 1 i.e., the default value for <em>J</em> (the number of fixed effects that are set equal to zero in the hypothesis) and a Boolean argument <code>jref</code>, which, if set to true, applies the calculation for <span class="math inline">\(J_{ref}\)</span> proposed in the paper and the input for the argument <code>fraction</code> is thus ignored. <code>jref</code> should always be used when testing equality constrained hypotheses.</p>
-<pre class="r watch-out"><code>BFs.1 &lt;- bain_2lmer(model.1, hypotheses, standardize = FALSE, 
+<pre class="r watch-out"><code>BFs.1 &lt;- bain_2lmer(model.1, hypotheses, standardize = FALSE,
                     N = MI_N_eff, seed = 123, jref = TRUE)
 print(BFs.1)   </code></pre>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit   Com   BF.u  BF.c               PMPa  PMPb  PMPc 
+##
+##    Fit   Com   BF.u  BF.c               PMPa  PMPb  PMPc
 ## H1 0.000 1.053 0.000 0.000              0.000 0.000 0.000
 ## H2 1.000 0.500 2.000 22919082073133.293 1.000 0.667 1.000
-## Hu                                            0.333      
+## Hu                                            0.333
 ## Hc 0.000 0.500 0.000                                0.000
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=0
 ##   H2: standlrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <p>The <span class="math inline">\(BF_{0u}\)</span> is a very small number close to zero, which indicates there is no support in the data for the null hypothesis, we can also take the inverse of this number to obtain <span class="math inline">\(BF_{u0}\)</span> which in this case equals to <span class="math inline">\(1.092\text{e+}169\)</span>, i.e., there is overwhelming support in the data for the unconstrained hypothesis.</p>
 <pre class="r watch-out"><code>#take the inverse of BF_ou
@@ -942,16 +942,16 @@ BF_iu</code></pre>
 <div id="simulate-the-data-where-h_0-is-true" class="section level2">
 <h2>Simulate the data where <span class="math inline">\(H_0\)</span> is true</h2>
 <p>In order to further clarify the nice operating characteristics of this BF, we simulate the outcome <code>normexam</code> by having the fixed effect for <code>standlrt</code> equal to zero and redo all the analyses.</p>
-<pre class="r watch-out"><code>set.seed(123) #set a random seed in order to make the results reproducible 
+<pre class="r watch-out"><code>set.seed(123) #set a random seed in order to make the results reproducible
 
 nG &lt;- 65  # number of schools
 b &lt;- 0   # new reg coefficient
 
 # simulate the random effects (using the estimated variances from model.1)
-intercept_var &lt;- rnorm(nG, 0, 0.3)  
-u_0 &lt;- rep(intercept_var, times = n_gr) 
-slope_var_1 &lt;- rnorm(nG, 0, 0.1)   
-u_1 &lt;- rep(slope_var_1, times = n_gr) 
+intercept_var &lt;- rnorm(nG, 0, 0.3)
+u_0 &lt;- rep(intercept_var, times = n_gr)
+slope_var_1 &lt;- rnorm(nG, 0, 0.1)
+u_1 &lt;- rep(slope_var_1, times = n_gr)
 # same with the residual variance
 epsilon &lt;- rnorm(4059, 0, 0.7)
 
@@ -1209,24 +1209,24 @@ school
 </div>
 <div id="test-the-fixed-effects-using-the-bf" class="section level2">
 <h2>Test the fixed effects using the BF</h2>
-<pre class="r watch-out"><code>BFs.2 &lt;- bain_2lmer(model.2, hypotheses, standardize = FALSE, 
+<pre class="r watch-out"><code>BFs.2 &lt;- bain_2lmer(model.2, hypotheses, standardize = FALSE,
                     N = 1193, seed = 123, jref = TRUE)
 print(BFs.2)     </code></pre>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc 
+##
+##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc
 ## H1 23.062 1.218 18.927 18.927 0.946 0.901 0.904
 ## H2 0.535  0.500 1.070  1.150  0.054 0.051 0.051
-## Hu                                  0.048      
+## Hu                                  0.048
 ## Hc 0.465  0.500 0.930                     0.044
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=0
 ##   H2: standlrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <p>The <span class="math inline">\(BF_{0u} = 18.93\)</span> and the <span class="math inline">\(BF_{iu} = 1.1\)</span>. In this case, we can conclude that <em>given the data</em>, the fixed coefficient for the predictor <code>standlrt</code> is not different from zero. Moreover, we can conclude that <em>given the data</em>, the fixed coefficient for the predictor <code>standlrt</code> is not different from zero.</p>
-<pre class="r watch-out"><code># obtain BF_0i.1 
+<pre class="r watch-out"><code># obtain BF_0i.1
 BF_0i.1 &lt;- BFs.2[[&quot;fit&quot;]]$BF[1]/BFs.2[[&quot;fit&quot;]]$BF[2]
 BF_0i.1</code></pre>
 <pre><code>## [1] 16.45191</code></pre>
@@ -1506,21 +1506,21 @@ school
 <pre class="r watch-out"><code>hypotheses &lt;- &quot;standlrt = avslrt = 0;
                standlrt &gt; 0 &amp; avslrt &gt; 0&quot;</code></pre>
 <p>We calculate the BFs by using the ICC-based <span class="math inline">\(N_{eff}\)</span> = 358 (which can be calculated automatically within the <code>wrapper function</code>) since currently the MI-based <span class="math inline">\(N_{eff}\)</span> has not been extended to include level-2 predictors.</p>
-<pre class="r watch-out"><code>BFs.3 &lt;- bain_2lmer(model.3, hypotheses, standardize = FALSE, 
+<pre class="r watch-out"><code>BFs.3 &lt;- bain_2lmer(model.3, hypotheses, standardize = FALSE,
                     N = &quot;ICC_effective&quot;, seed = 123, jref = TRUE)
 print(BFs.3)</code></pre>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit   Com   BF.u  BF.c     PMPa  PMPb  PMPc 
+##
+##    Fit   Com   BF.u  BF.c     PMPa  PMPb  PMPc
 ## H1 0.000 3.946 0.000 0.000    0.000 0.000 0.000
 ## H2 0.997 0.237 4.214 1231.597 1.000 0.808 0.999
-## Hu                                  0.192      
+## Hu                                  0.192
 ## Hc 0.003 0.763 0.003                      0.001
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=avslrt=0
 ##   H2: standlrt&gt;0&amp;avslrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <pre class="r watch-out"><code>BFs.3$b</code></pre>
 <pre><code>## [1] 0.05263158</code></pre>
@@ -1530,16 +1530,16 @@ print(BFs.3)</code></pre>
 <div id="example-4-model-that-includes-a-level-2-predictor-where-h_0-is-true" class="section level1">
 <h1><strong>Example 4:</strong> Model that includes a level-2 predictor where <span class="math inline">\(H_0\)</span> is true</h1>
 <p>Finally, repeat this analysis by, again, simulating the outcome where both coefficients are zero i.e., the <span class="math inline">\(R^2_m = 0\)</span>.</p>
-<pre class="r watch-out"><code>set.seed(12) #set a random seed in order to make the results reproducible 
+<pre class="r watch-out"><code>set.seed(12) #set a random seed in order to make the results reproducible
 
 nG &lt;- 65  # number of schools
 b &lt;- 0   # new reg coefficient
 
 # simulate the random effects (using the estimated variances from model.1)
-intercept_var &lt;- rnorm(nG, 0, 0.3)  
-u_0 &lt;- rep(intercept_var, times = n_gr) 
-slope_var_1 &lt;- rnorm(nG, 0, 0.1)   
-u_1 &lt;- rep(slope_var_1, times = n_gr) 
+intercept_var &lt;- rnorm(nG, 0, 0.3)
+u_0 &lt;- rep(intercept_var, times = n_gr)
+slope_var_1 &lt;- rnorm(nG, 0, 0.1)
+u_1 &lt;- rep(slope_var_1, times = n_gr)
 # same with the residual variance
 epsilon &lt;- rnorm(4059, 0, 0.7)
 #simulate the outcome
@@ -1810,21 +1810,21 @@ school
 </div>
 <div id="test-the-fixed-effects-using-the-bf-2" class="section level2">
 <h2>Test the (fixed) effects using the BF</h2>
-<pre class="r watch-out"><code>BFs.4 &lt;- bain_2lmer(model.4, hypotheses, standardize = FALSE, 
+<pre class="r watch-out"><code>BFs.4 &lt;- bain_2lmer(model.4, hypotheses, standardize = FALSE,
                     N = &quot;ICC_effective&quot;, seed = 123, jref = TRUE)
 print(BFs.4)</code></pre>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc 
+##
+##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc
 ## H1 58.159 4.527 12.846 12.846 0.978 0.908 0.895
 ## H2 0.070  0.236 0.294  0.242  0.022 0.021 0.021
-## Hu                                  0.071      
+## Hu                                  0.071
 ## Hc 0.930  0.764 1.218                     0.085
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=avslrt=0
 ##   H2: standlrt&gt;0&amp;avslrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <pre class="r watch-out"><code>#calculate BF_ui
 BF_0i.2 &lt;- BFs.4[[&quot;fit&quot;]]$BF[1]/BFs.4[[&quot;fit&quot;]]$BF[2]
