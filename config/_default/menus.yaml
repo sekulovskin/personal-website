@@ -13,8 +13,8 @@ main:
   - name: Skills
     url: '#skills'
     weight: 30
- # - name: Tutorials
-#    url: Tutorials/
+  - name: Tutorials
+    url: Tutorials/
     weight: 40
   - name: Contact
     url: '#contact'
