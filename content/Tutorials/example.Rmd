@@ -1,0 +1,730 @@
+---
+title: "***A Default Bayes Factor for testing Null Hypotheses about the Fixed Effects of Linear Two-level Models***: A worked example"
+author: "Nikola Sekulovski"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+bibliography: ["refs.bib"]
+csl: apa.csl
+link-citations: TRUE
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r include=FALSE}
+knitr::opts_chunk$set(class.source = "watch-out")
+```
+
+
+# **Introduction**
+
+This tutorial represents a complete and in-depth version of the *Example* section from the paper *A Default Bayes Factor for testing Null Hypotheses about the Fixed Effects of Linear Two-level Models*. The paper introduces a default Bayes Factor [abbreviated as BF, @kass1995bayes] with clear operating characteristics when testing whether the fixed effects of linear two-level models are *equal* to zero. This was achieved by generalizing an approach for linear regression given in @hoijtink2021prior, by having the BF = 19 when the marginal $R^2$ for the fixed effects [@nakagawa2013] is zero in the data. A `wrapper function` around the `R` package `bain` [@bain] was programmed for testing the fixed parameters of liner two-level models fitted with the `lmer` function from the `R` package `lme4` [@lme4]. The function includes the adjustment for the fraction of the scaling parameter of the prior distribution, as proposed by our paper. Researchers are encouraged to make use of this function which can be downloaded from [this](https://github.com/sekulovskin/research-archive-masters-thesis) repository. This tutorial also gives a step-by-step illustration of how to calculate the so-called *Multiple Imputation-based Effective Sample Size* (abbreviated as MI-based $N_{eff}$), which represents a novel method for calculating the effective sample size for two-level models containing predictors with varying slopes.
+
+
+# **Packages** 
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(R2MLwiN)   # includes the data set
+library(lme4)      # fitting two-level models
+library(tidyverse) # data manipulation and plotting
+library(jtools)    # model summaries & automatic calculation of R^2_m
+library(DT)        # interactive tables
+
+# for the MI-based N_eff
+library(rjags)
+library(MASS)
+
+#the wrapper function
+source("wrapper_function.R") 
+```
+
+
+# **The Data**
+
+Throughout the examples, we will be using the `tutorial` data, which is an openly available two-level data set from the `R` package `R2MLwiN`. The data represents a subset from a larger data set of examination results from six inner London Education Authorities with 4059 students nested within 65 schools. The variables used for the aims of this example are: (i) the students' exam score (`normexam`) which will serve as the outcome variable; (ii) students' score at age 11 on the London Reading Test (`standlrt`); (iii) the school indicator (`school`) with 65 schools of varying size. Additionally, in the end, a level-2 predictor in the form of the average LRT score for each school (`avslrt`) is included to illustrate that this approach can also be used when having a level-2 predictor.
+
+## Load and inspect the data
+
+```{r}
+data("tutorial")
+
+tutorial.1 <- tutorial[, c(1,2,3,5)] #subset the data with only the variables of interest
+```
+
+Display the data 
+```{r}
+datatable(tutorial.1, options = list(pageLength = 5))
+```
+
+
+
+# **Example 1:** Model with random intercept and a random level-1 predictor where $H_0$ is false.
+
+In the first example, we will fit a model containing a random intercept and a random slope for the `standlrt` variable. First, let's visualize this model by plotting the predictor `standlrt` against the outcome `normexam`, and asking for separate regression slopes for each school.
+
+```{r}
+tutorial.1 %>%
+ggplot(aes(x = standlrt, y = normexam, col = school, group = school))+
+  geom_point(size = 1.2, alpha = 0.5,
+             position = "jitter")+
+  theme_classic() +
+  theme(legend.position = "none")+
+  geom_smooth(method = lm,
+              se     = FALSE,
+              size   = .6, 
+              alpha  = .8)+ 
+  labs(x = "`standlrt`",
+       y = "normexam",
+       title = "Random slopes standlrt for each school")
+```
+
+We can see that the schools indeed have different slopes for the predictor `standlrt`. So, let's fit this model with `lmer`.
+
+## Fit the model
+
+We will estimate the two-level models using *Full Maximum Likelihood Estimation*, [here](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) is an interesting blog post about the differences bewtween FMLE and REML. However, researchers are advised to use whichever method they choose based on other methodological considerations not related to testing the fixed effects, since it was shown in the paper that the estimation method has a negligible influence on the value of the BF. 
+
+```{r}
+model.1 <- lmer(normexam ~ standlrt + (standlrt | school), REML = FALSE, data = tutorial.1)
+```
+
+### Inspect the model fit and calculate $R^2_m$
+
+The `summ` function from the package `jtools` [@jtools] gives visually pleasing summaries of fitted `lme4` models and reports the marginal effect size for the fixed effects  ($R^2_m$) as well as reports p-values, based on the Satterthwaite approximation for the degrees of freedom [for details on testing the fixed effects by using Null Hypothesis Significance Methods, see, @luke2017evaluating]. 
+
+```{r}
+summ(model.1) 
+```
+
+The fixed effect for `standlrt` is quite large, which is  evident both by its SE and by the highly significant p-value (it rejects the null hypothesis which states that the fixed effect is equal to zero). The value for the ICC in this data set is .14, which is an indication of the within-group clustering before accounting for it by introducing (random) predictors. In other words, the correlation between two randomly sampled students within the same school is around .14.
+
+#### $R^2_m$ using `summ`
+
+From the table above we can see that the Pseudo-$R^2$ (fixed effects) i.e., the $R^2_m$ is .32, which indicates a large effect size based on @cohen1992power (it should be noted that these guidelines for the effect size are for multiple linear regression, thus, they are generalized to the fixed effects of two-level models).
+
+#### $R^2_m$ by hand 
+
+We can also manually compute the marginal $R^2$ which is defined as the proportion of variation in the outcome variable that can be explained by the fixed effect(s) over the overall variation.
+
+```{r}
+fixef <- fixef(model.1)  # extract the fixed effect 
+y_hat <- fixef[1] + fixef[2]*tutorial$standlrt # predict the outcome 
+
+sigma_f  <- var(y_hat) # obtain the variance in the predicted outcome based on the fixed effect
+
+# extract the estimated random effects from the fitted model (you can use the summary function)
+# i.e., summary(model.1)
+sigma_u0 <- 0.09044
+sigma_u1 <- 0.01454
+sigma_e  <- 0.55366
+
+# calculate the 
+marginal_Rsq_fixed <- (sigma_f)/(sigma_f + sigma_u0 + sigma_u1 + sigma_e)
+marginal_Rsq_fixed  
+
+```
+
+We can see that this value corresponds to the  Pseudo-$R^2$ (fixed effects) given by the `summ` function. Thus, we expect to reject the null when using the BF.
+
+## Calculate the MI-based $N_{eff}$
+
+In this subsection, we illustrate, step-by-step how to calculate the newly-proposed MI-based $N_{eff}$.
+
+
+First, we specify the same model in JAGS as a text file:
+
+```{r}
+jags.model <-  "model {
+# Likelihood
+for (i in 1:4059){
+  normexam[i] ~ dnorm(mu[i], tau)
+  mu[i] <- alpha[school[i]] + beta[school[i]] * standlrt[i]
+}
+
+# lvl 2
+for(j in 1:65){
+alpha[j] <- B[j,1]
+beta[j]  <-  B[j,2]
+B[j,1:2] ~ dmnorm (B.hat[j,], Tau.B[,])
+B.hat[j,1] <- mu.alpha
+B.hat[j,2] <- mu.beta
+}
+
+# Priors
+mu.alpha ~ dnorm(0, 0.0001)
+mu.beta ~ dnorm(0,  0.0001)
+tau ~ dgamma (0.001, 0.001)  #resiudal variance
+Tau.B[1:2,1:2] ~ dwish(Sigma.B, 2)  # inverse of covariance matrix following a Wishard prior
+  Sigma.B[1,1] <- pow(sigma.alpha, 2)  #sonstruct the cov matrix
+  sigma.alpha ~ dgamma (0.001, 0.001)  #ntercept variance
+  Sigma.B[2,2] <- pow(sigma.beta, 2)
+  sigma.beta ~ dgamma (0.001, 0.001)    #slope variance
+  Sigma.B[1,2] <- rho*sigma.alpha*sigma.beta
+  Sigma.B[2,1] <- Sigma.B[1,2]
+  rho ~ dunif(-1, 1)  #cor(alpha,beta)
+
+  
+}
+"
+```
+
+
+### Check the model
+
+Since we are using uninformative priors, we will take a small detour and estimate the model to show that the posterior parameter estimates correspond to those obtained with `lmer`.
+
+```{r, warning=FALSE, message=FALSE}
+# Check and inspect the model
+model.def <- jags.model(file = textConnection(jags.model),
+                        inits = list(.RNG.name="base::Wichmann-Hill",
+                                     .RNG.seed=100),
+                        data = tutorial, n.chains = 2)
+
+update(object = model.def, n.iter = 1000)
+
+# ask only for these parameters
+parameters <- c("mu.alpha", "mu.beta")
+
+results <- coda.samples(model = model.def, variable.names = parameters, n.iter =1000)
+summary(results)
+```
+
+We can see that the posterior mean estimates along with their standard deviations roughly correspond to their (Full) Maximum Likelihood Counterparts.
+
+### Obtain multiple imputed data sets
+
+Now, we refit the model again and ask to monitor all the random effects, which we will treat as multiple imputed values:
+
+```{r, warning=FALSE, message=FALSE}
+#fit the model again but ask to monitor all the random effects
+model.def <- jags.model(file = textConnection(jags.model),
+                        inits = list(.RNG.name="base::Wichmann-Hill",
+                                     .RNG.seed=100),
+                        data = tutorial, n.chains = 2)
+
+update(object = model.def, n.iter = 1000)
+
+#only the random effects (the ones we need for the aim of this study)
+parameters <- c("alpha", "beta", "mu.alpha", "mu.beta", "beta")
+
+results <- coda.samples(model = model.def, variable.names = parameters, n.iter =1000)
+```
+
+Extract the samples from the posterior (from both chains):
+
+```{r}
+chain1 <- as.data.frame(results[[1]])
+chain2 <- as.data.frame(results[[2]])
+samples <- rbind(chain1, chain2) #combine both chains
+```
+
+Extract the fixed effect from each sampled vector:
+
+```{r}
+fixed_alphas <- samples[, 131]
+fixed_betas <- samples[, 132]
+fixed_alphas <- as.data.frame(fixed_alphas)
+fixed_betas <- as.data.frame(fixed_betas)
+```
+
+Repeat each fixed effect N times (in this case 4059) and store it in a separate data frame which will be merged with the imputed data sets further below:
+
+```{r}
+#the fixed intercepts
+samp_fixed_alphas <- list()
+for (i in 1:nrow(fixed_alphas)){
+   samp_fixed_alphas[[i]] <-rep.int(fixed_alphas[i, 1], nrow(tutorial.1))  
+}
+
+#the fixed slopes
+samp_fixed_betas <- list()
+for (i in 1:nrow(fixed_betas)){
+   samp_fixed_betas[[i]] <-rep.int(fixed_betas[i, 1], nrow(tutorial.1))  
+}
+```
+
+**Get the sampled (random) intercepts ($\alpha_j's$)**
+
+First, split the data per group:
+
+```{r}
+split <- split(tutorial.1, tutorial.1$school)
+```
+
+Afterwards, extract the size of each group:
+
+```{r}
+n_gr <- sapply(split, nrow) 
+```
+
+
+Exclude the fixed effects from the samples data set:
+
+```{r}
+samples <- samples[, -c(131,132)]
+```
+
+Extract the (random) alphas and betas into separate df's: 
+
+```{r}
+alphas <- samples [, 1:65] #extract the intercepts
+betas <- samples [, 66:130] #extract the slopes
+```
+
+Use the size of each group to replicate, from each iteration, the respective $\alpha_j$, `n_gr` number of times:
+
+```{r}
+samp_alphas <- list()
+
+for (i in 1:nrow(alphas)){
+   samp_alphas[[i]] <-rep.int(alphas[i, ], n_gr)  
+}
+```
+
+Extract these in a big matrix with the samples from every iteration as a separate column:
+
+```{r}
+samp_alphas_mat <- matrix(nrow = nrow(tutorial.1), ncol = nrow(alphas))
+
+for(i in 1:nrow(alphas)){
+  samp_alphas_mat[, i] <- unlist(samp_alphas[[i]])
+}
+```
+
+
+**Get the sampled (random) slopes ($\beta_j's$)**
+
+Use the size of each group to replicate, from each iteration, the respective $\beta_j$, `n_gr` number of times:
+
+```{r}
+samp_betas <- list()
+
+for (i in 1:nrow(betas)){
+   samp_betas[[i]] <-rep.int(betas[i, ], n_gr)  
+}
+```
+
+Extract them in a big matrix with the samples from every iteration as a separate column:
+
+```{r}
+samp_betas_mat <- matrix(nrow = nrow(tutorial.1), ncol = nrow(betas))
+
+for(i in 1:nrow(betas)){
+  samp_betas_mat[, i] <- unlist(samp_betas[[i]])
+}
+```
+
+
+**Combine**
+
+First, combine the $\alpha_j's$:
+
+```{r}
+imputed <- list()
+
+for (i in 1:ncol(samp_alphas_mat)){
+  imputed[[i]] <- cbind(tutorial.1, samp_alphas_mat[, i])
+}
+```
+
+Add the $\beta_j's$:
+
+```{r}
+for (i in 1:ncol(samp_betas_mat)){
+  imputed[[i]] <- cbind(imputed[[i]], samp_betas_mat[, i])
+}
+```
+
+**Add the fixed effects:**
+
+The $\alpha's$:
+
+```{r}
+for (i in 1:length(imputed)){
+  imputed[[i]] <- cbind(imputed[[i]], samp_fixed_alphas[[i]])
+}
+```
+
+The $\beta's$:
+
+```{r}
+for (i in 1:length(imputed)){
+  imputed[[i]] <- cbind(imputed[[i]], samp_fixed_betas[[i]])
+}
+```
+
+Voila, we obtained 2000 imputed data sets.
+
+### Transform the outcome variable
+
+In order to be able to fit multiple linear regression models we need to transform the outcome variable from the two-level data as follows:
+
+$$Z_{ij} = y_i - \alpha_j - \beta_j*\text{standlrt}_i + \alpha + \beta*\text{standlrt}_i$$
+
+This leads to:
+$$ Z_i = \eta_0 + \eta_1*\text{standlrt}_i + e_i $$
+
+Construct a function that calculates `Z`:
+
+```{r}
+transform_z <- function(df){
+  df$z <- df[, 3] - df[, 5] - df[, 6] * df[, 4] + df[, 7] + df[, 8] * df[, 4]
+  df
+}
+```
+
+Apply the function to the "imputed" data sets and obtain a column for `Z` in each one:
+
+```{r}
+imputed <- lapply(imputed, transform_z)
+```
+
+ **Estimates:**
+
+Fit `linear regression` models to each imputed data set and extract the coefficients and their respective variance-covariance matrices:
+
+```{r}
+estimates <- list()
+vCOV <- list()
+for(i in seq_along(imputed)){
+  estimates[[i]] <- coef(lm(imputed[[i]][,9] ~ imputed[[i]][,4]))
+  vCOV [[i]] <- vcov(lm(imputed[[i]][,9] ~ imputed[[i]][,4]))
+}
+```
+
+extract these estimates in a data frame:
+```{r}
+estimates <- unlist(estimates)
+intercepts <- estimates[seq(1,length(estimates),2)] # select every other element
+slopes <- estimates[seq(2,length(estimates),2)]     # opposite
+estimates <- data.frame(intercepts, slopes)         # combine
+```
+
+### Apply the equations given in @van2018flexible[Ch. 2.3]
+
+```{r}
+m <- nrow(estimates) # number of "imputations" (i.e., iterations in this case)
+```
+
+**Combined estimate:**
+
+$$ \bar{\boldsymbol{\eta}} = \frac{1}{m} \sum_{l = 1}^{m} \hat{\boldsymbol{\eta}_l} $$
+
+```{r}
+eta_bar <- apply(estimates, 2, mean) 
+eta_bar <- t(eta_bar)
+eta_bar <- as.matrix(eta_bar)
+```
+
+
+**Average over the variances:**
+
+$$ \bar{U} = \frac{1}{m} \sum_{l = 1}^{m} \bar{U}_l $$
+
+Since the list `vCOV` contains variance-covariance matrices and we need to take the average across all of them (and not within them). Thus, it is best to extract each element of each covariance matrix and then take the average:
+
+```{r}
+V <- matrix(nrow = nrow(estimates), ncol = 4)
+
+for(i in seq_along(vCOV)){
+  V[i, 1] <- vCOV[[i]][1,1]
+  V[i, 2] <- vCOV[[i]][1,2]
+  V[i, 3] <- vCOV[[i]][2,1]
+  V[i, 4] <- vCOV[[i]][2,2]
+}
+
+U_bar <- apply(V, 2, mean)
+U_bar <- matrix(U_bar, nrow = 2, ncol = 2)
+```
+
+ **Unbiased estimate of the variance between the m complete data estimates:**
+
+$$B = \frac{1}{m-1} \sum_{l = 1}^{m} (\hat{\boldsymbol{\eta}}_l - \bar{\boldsymbol{\eta}})(\hat{\boldsymbol{\eta}}_l - \bar{\boldsymbol{\eta}})'.$$
+
+```{r}
+B <- cov(estimates)
+```
+
+**Total variance:**
+
+ $$T = \bar{U} + (1 + \frac{1}{m})*B$$
+ 
+```{r}
+Total_var <- U_bar + (1 + 1/m)*B
+```
+
+
+                              
+**Proportion of variation attributable to the missing data (a compromise over all estimates)**
+
+$$\bar{\lambda} =(1 + \frac{1}{m}) tr(BT^{-1})/k$$
+
+```{r}
+k <- ncol(estimates) #number of parameters
+lambda_hat <- (1+ 1/m) * sum(diag(B %*% ginv(Total_var)))/k
+```
+
+**Degrees of freedom:**
+$$\nu_{old} = \frac{m-1}{\lambda^2}; \ \nu_{com} = n - k; \ \nu_{obs} = \frac{\nu_{com} + 1}{\nu_{com} + 3}\nu_{com}(1-\lambda); \\ \nu = \frac{\nu_{old} \nu_{obs}}{\nu_{old} + \nu_{obs}}$$
+
+
+```{r}
+N <- nrow(tutorial.1) # sample size
+
+nu_old <- (m - 1)/lambda_hat^2
+
+nu_com <- N - k
+
+nu_obs <- ((nu_com +1)/(nu_com + 3))*nu_com*(1 - lambda_hat)
+
+nu <- (nu_old*nu_obs)/(nu_old + nu_obs)
+```
+
+**Fraction of missing information:**
+$$\gamma = \frac{\nu + 1}{\nu + 3}\lambda+\frac{2}{\nu + 3}$$
+
+```{r}
+gamma <- ((nu + 1)/(nu + 3)) * lambda_hat + (2/(nu + 3))
+```
+
+**MI-based $N_{eff}$
+
+$$\text{MI-based} = N_{level-1} - \gamma*N_{level-1}$$
+### Calculateh the MI-based $N_{eff}$
+```{r}
+MI_N_eff <- N - gamma*N  
+MI_N_eff
+```
+
+The MI-based effective sample size is 1019. 
+
+### Compare with the ICC-based $N_{eff}$
+
+**Calculate the ICC-based $N_{eff}$**
+
+Compute the ICC. We already know that the ICC = .17 since it was given by the `summ` function, whoever, here we calculate it by hand just to illustrate that the ICC is calculated using the estimated variances from the intercept-only model and the average school (group) size.
+
+$$ICC = \frac{\sigma_{u0}}{\sigma_{u0} + \sigma_{e0}} $$
+
+```{r}
+# fit a random intercept-only model
+model.0 <- lmer(normexam ~1 + (1|school), REML = FALSE, data = tutorial.1) 
+summary(model.0)
+ICC <- 0.1686 / (0.1686 + 0.8478)
+ICC
+```
+
+$$\text{ICC-based} \; N_{eff} = \frac{N_{level-1}}{1+(n_c - 1)ICC}$$
+As already mentioned, a drawback of the ICC-based $N_{eff}$ is that when the data has varying group sizes, a compromise, such as taking the average group size, has to be made:
+
+```{r}
+n_clus <- mean(sapply(split, nrow)) # the average group size (62.4 in this case)
+ICC_N_eff <- N / (1 + (n_clus - 1) * ICC)
+ICC_N_eff 
+```
+
+The value for the ICC-based $N_{eff}$ is 363. This clearly illustrates that after accounting for part of the within-group variation by fitting a model containing a random intercept and random slope for the predictor `standlrt`, the effective number of level-1 observations increase from 362 to 1019. 
+
+
+## Test the fixed effects uising the BF
+
+For the aims of this example we test a null hypothesis stating that the fixed effect for `standlrt` is zero and an inequality constrained (informative) hypothesis stating that the fixed effect is *larger* than zero:
+
+$$H_0:\text{standlrt} = 0; \; H_i:\text{standlrt} >0$$
+
+We define these hypotheses in one character vector:
+
+```{r}
+hypotheses <- "standlrt = 0;
+               standlrt > 0"
+```
+
+The `wrapper function` takes the following arguments: the fitted `lmer` object; the specified hypotheses (saved as a character vector); a Boolean argument, indicating whether to compute the BF based on standardized data (since we compare the fixed effects to zero, we do not need to standardize the data); the value for the sample size (which can be either $N_{level-1}$, $N_{level-2}$, ICC-based $N_{eff}$ or a value supplied by the user, in this case, we will use the calculated `MI_N_eff`), a multiplicative factor for the fraction which is by default set to 1 i.e., the default value for *J* (the number of fixed effects that are set equal to zero in the hypothesis) and a Boolean argument `jref`, which, if set to true, applies the calculation for $J_{ref}$ proposed in the paper and the input for the argument `fraction` is ignored. As thoroghly discussed in the paper, `jref` should always be used when testing equality constrained hypotheses. 
+
+```{r}
+BFs.1 <- bain_2lmer(model.1, hypotheses, standardize = FALSE, 
+                    N = MI_N_eff, seed = 123, jref = TRUE)
+print(BFs.1)   
+```
+
+The $BF_{0u}$ is a very small number close to zero, which indicates there is no support in the data for the null hypothesis, we can also take the inverse of this number to obtain $BF_{u0}$ which in this case equals to $1.092\text{e+}169$, i.e., there is overwhelming support in the data for the unconstrained hypothesis.
+
+```{r}
+#take the inverse of BF_ou
+BFu0 <- 1/BFs.1[["fit"]]$BF[1]
+BFu0
+```
+
+
+The $BF_{iu}$ is around 2, which indicates that the support in the data is two times in favour of $H_i$.  Additionally, we can easily obtain the BF of the informative hypothesis against the null hypothesis, by taking the ratio of their respective BFs against the unconstrained hypothesis. In this case $BF_{iu} =2.5\text{e+}181$.
+
+```{r}
+# Get BF_i0
+BF_iu <- BFs.1[["fit"]]$BF[2]/BFs.1[["fit"]]$BF[1]
+BF_iu
+```
+
+
+Finally, we inspect the value for the *fraction b*, in this case it is around 0.003. 
+
+```{r}
+BFs.1$b
+```
+
+This allows us to interpret the resulting BFs as *Approximate BFs*. Thus, we can say: using the default AAFBF  [@gu2018approximated] set to equal 19 when the *marginal* $R^2$ for the fixed effects is zero in the data [@hoijtink2021prior], the *approximate* BF of the informative hypothesis against the null hypothesis is $2.5\text{e+}181$, and we conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is larger than zero.
+
+# **Example 2:** Model with random intercept and a random level-1 predictor where $H_0$ is true.
+
+## Simulate the data where $H_0$ is true
+
+In order to further clarify the nice operating characteristics of this BF, we simulate the outcome `normexam` by having the fixed effect for  `standlrt` equal to zero and redo all the analyses.
+
+```{r}
+set.seed(123) #set a random seed in order to make the results reproducible 
+
+nG <- 65  # number of schools
+b <- 0   # new reg coefficient
+
+# simulate the random effects (using the estimated variances from model.1)
+intercept_var <- rnorm(nG, 0, 0.3)  
+u_0 <- rep(intercept_var, times = n_gr) 
+slope_var_1 <- rnorm(nG, 0, 0.1)   
+u_1 <- rep(slope_var_1, times = n_gr) 
+# same with the residual variance
+epsilon <- rnorm(4059, 0, 0.7)
+
+# simulate the new outcome
+normexam <-  b *tutorial$standlrt +  u_0 + u_1*tutorial$standlrt + epsilon  #construct the new outcome variable
+
+# out everything together in a new df
+tutorial.2 <- data.frame(tutorial$school, tutorial$student, normexam, tutorial$standlrt)
+names(tutorial.2) <- c("school", "student", "normexam", "standlrt")
+```
+
+## Fit the model
+
+We will estimate the two-level models using *Full Maximum Likelihood Estimation*. However, researchers are advised to use whichever method they choose based on other methodological considerations not related to testing the fixed effects, since it was shown in the paper that the estimation method has a negligible influence on the value of the BF. 
+
+```{r}
+model.2<- lmer(normexam ~ standlrt + (standlrt | school), REML = FALSE, data = tutorial.2)
+```
+
+### Inspect the model fit and calculate $R^2_m$
+
+```{r}
+summ(model.2) 
+```
+
+Now, we can see that the value for the fixed effect of `standlrt` is estimated to be zero (this can also be seen from the non-significant p-value). Moreover, now $R^2_m = 0$, and we expect that we will also be able to reject the null using our new default BF. 
+
+Additionally, the ICC now is .15 which yields an ICC based $N_{eff}$ of 375 and MI-based $N_{eff}$ of 1193 (to keep this tutorial as short as possible this calculation is not included). 
+
+## Test the fixed effects using the BF
+
+
+```{r}
+BFs.2 <- bain_2lmer(model.2, hypotheses, standardize = FALSE, 
+                    N = 1193, seed = 123, jref = TRUE)
+print(BFs.2)     
+```
+
+The $BF_{0u} = 18.93$ and the $BF_{iu} = 1.1$. In this case, we can conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is not different from zero.  Moreover, we can conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is not different from zero.
+
+```{r}
+# obtain BF_0i.1 
+BF_0i.1 <- BFs.2[["fit"]]$BF[1]/BFs.2[["fit"]]$BF[2]
+BF_0i.1
+
+# obtain b
+BFs.2$b
+```
+
+The BF of the null hypothesis against the unconstrained hypothesis, $BF_{0i} = 16.4$. Thus, we can say that the support in the data is around 16 times in favour of the null hypothesis against the informative, that is, *given the data* the fixed effect for `standlrt` is equal to zero, based on the **approximate* $BF_{iu}$ (the value for the fraction *b* is still 0.03).
+
+
+# **Example 3:** Model that includes a level-2 predictor where $H_0$ is false
+
+To illustrate that this approach can also be used when the model contains a level-2 predictor, we add the variable `avslrt` to the model, which represents the average LRT score for each school.
+
+## Fit the model and inspect the $R^2_m$
+
+```{r}
+model.3 <- lmer(normexam ~ standlrt + avslrt + (standlrt | school), REML = FALSE, data = tutorial)
+summ(model.3)
+```
+Now we can see that the level-2 predictor is also larger than zero, both by the value of the estimate and its respective SE but also from the value for $R^2_m$ which is now .35 (compared to .32 when only having `standlrt` as a predictor).
+
+## Test the (fixed) effects using the BF
+
+Now the hypotheses are defined as follows:
+
+$$H_0:\text{standlrt} = \text{avslrt} = 0; \; H_i:\text{standlrt} > 0 \; \& \;  \text{avslrt} >0$$
+```{r}
+hypotheses <- "standlrt = avslrt = 0;
+               standlrt > 0 & avslrt > 0"
+```
+
+We calculate the BFs by using the ICC-based $N_{eff}$ = 358 (which can be calculated automatically within the `wrapper function`) since currently the MI-based $N_{eff}$ has not been extended to include level-2 predictors.
+
+```{r}
+BFs.3 <- bain_2lmer(model.3, hypotheses, standardize = FALSE, 
+                    N = "ICC_effective", seed = 123, jref = TRUE)
+print(BFs.3)
+BFs.3$b
+```
+This yields $BF_{0u} \simeq0$ and $BF_{iu} \simeq 4.2$, with a value for *b* of exactly 0.05. Thus we can say that based on the approximate BF, there is evidence in the data that both the fixed effect for `standlrt` and the level-2 coefficient for `avslrt` are larger than zero. 
+
+# **Example 4:** Model that includes a level-2 predictor where $H_0$ is true
+
+Finally, repeat this analysis by, again, simulating the outcome where both coefficients are zero i.e., the $R^2_m = 0$.
+
+```{r}
+set.seed(12) #set a random seed in order to make the results reproducible 
+
+nG <- 65  # number of schools
+b <- 0   # new reg coefficient
+
+# simulate the random effects (using the estimated variances from model.1)
+intercept_var <- rnorm(nG, 0, 0.3)  
+u_0 <- rep(intercept_var, times = n_gr) 
+slope_var_1 <- rnorm(nG, 0, 0.1)   
+u_1 <- rep(slope_var_1, times = n_gr) 
+# same with the residual variance
+epsilon <- rnorm(4059, 0, 0.7)
+#simulate the outcome
+normexam <-  b *tutorial$standlrt + b*tutorial$avslrt +  u_0 + u_1*tutorial$standlrt + epsilon
+
+# out everything together in a new df
+tutorial.3 <- data.frame(tutorial$school, tutorial$student, normexam, tutorial$standlrt, tutorial$avslrt)
+names(tutorial.3) <- c("school", "student", "normexam", "standlrt", "avslrt")
+```
+
+## Fit the model and inspect the $R^2_m$
+
+```{r}
+model.4 <- lmer(normexam ~ standlrt + avslrt + (standlrt | school), REML = FALSE, data = tutorial.3)
+summ(model.4)
+```
+We can now see that the $R^2_m$ = 0, thus we expect a BF *in favour* of the null hypothesis.
+
+## Test the (fixed) effects using the BF
+
+```{r}
+BFs.4 <- bain_2lmer(model.4, hypotheses, standardize = FALSE, 
+                    N = "ICC_effective", seed = 123, jref = TRUE)
+print(BFs.4)
+
+#calculate BF_ui
+BF_0i.2 <- BFs.4[["fit"]]$BF[1]/BFs.4[["fit"]]$BF[2]
+BF_0i.2
+
+# obtain b
+BFs.4$b
+```
+This time we obtain a $BF_{0u} = 12.8$ and a $BF_{iu} = 0.3$, which translates to a $BF_{0i}= 53.2$, thus we can say that the evidence in the data is 53 times in favour of $H_0$ (i.e., that the effects of both `standlrt` and `avslrt` are zero) against $H_i$ (i.e., that the effects of both `standlrt` and `avslrt` are larger than zero).
+
+# **References**
+
