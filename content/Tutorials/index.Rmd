@@ -63,7 +63,7 @@ bain_2lmer(x, hypotheses, standardize = FALSE,
 As illustrated in the example call above, the `wrapper` takes the following arguments: 
 
 - `x`: the fitted `lmer` object;
-- `hypotheses`: the specified hypothesis/hypotheses (saved as a character vector); 
+- `hypotheses`: the specified hypotheses (saved as a character vector), the names of the parameters specified in the hypotheses should correspond to the names of the predictors as specified when calling `lmer` (see the examples below); 
 - `standardize`: a logical argument, indicating whether to compute the BF based on standardized data. This is not relevant for testing whether the fixed effects are equal to zero, however, as mentioned in the paper, it is important when comparing the parameters to each other;
 - `N`: the value for the sample size, with the following options: 
   
@@ -97,18 +97,16 @@ descr(tutorial.1, stats = c("mean", "med", "sd", "min", "max"),) # descriptive s
 
 For this example, we fit a two-level model containing a random intercept and a random slope for the `standlrt` variable, i.e.,
 
-$$\text{normexam}_{ij} = \alpha + \beta_1*\text{standlrt}_{ij} + u_{0j} + u_{1j}*\text{standlrt}_{ij} + \epsilon_{ij},$$
+$$\text{normexam}_{ij} = \alpha + \beta_1\;\text{standlrt}_{ij} + u_{0j} + u_{1j}\;\text{standlrt}_{ij} + \epsilon_{ij},$$
 where $i$ = 1,. . . ,*N* and $j$ = 1,. . . , *G*
 where *N* denotes the number of students (level-1 observations i.e., 4059) and *G* denotes the total number of schools (level-2 observations i.e., 65), $\alpha$ represents the fixed intercept, $\beta_1$ represents the effect for `standlrt`, $u_{0j}$ represents the random component denoting the deviation of school $j$ from the fixed intercept and $u_{1j}$ denotes the deviation of school $j$ from the fixed intercept. Lastly,  $\epsilon_{ij}$ represents the standard residual error term for student $i$ in school $j$.  $u_{0j}$, $u_{1j}$ and $\epsilon_{ij}$  have estimated variance components denoted as $\sigma_{u0}$, $\sigma_{u1}$ and $\sigma_\epsilon$, respectively.
 
 
 First, let's visualize this model by plotting the predictor `standlrt` against the outcome `normexam`, with separate regression lines for each school.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.width= "60%"}
 tutorial.1 %>%
 ggplot(aes(x = standlrt, y = normexam, col = school, group = school))+
-  geom_point(size = 1.2, alpha = 0.5,
-             position = "jitter")+
   theme_classic() +
   theme(legend.position = "none")+
   geom_smooth(method = lm,
@@ -409,10 +407,10 @@ Bazinga, we obtained 2000 imputed data sets.
 
 In order to be able to fit multiple linear regression models we need to transform the outcome variable from the two-level data as follows:
 
-$$Z_{ij} = \text{normexam}_{ij} - \alpha_j - \beta_j*\text{standlrt}_i + \alpha + \beta*\text{standlrt}_i$$
+$$Z_{ij} = \text{normexam}_{ij} - \alpha_j - \beta_j\;\text{standlrt}_{ij} + \alpha + \beta\;\text{standlrt}_{ij}$$
 
 This leads to:
-$$ Z_i = \eta_0 + \eta_1*\text{standlrt}_i + e_i $$
+$$ Z_i = \eta_0 + \eta_1\;\text{standlrt}_i + e_i $$
 
 Construct a function that calculates `Z`:
 
@@ -589,9 +587,9 @@ The value for the ICC-based $N_{eff}$ is 363. This clearly illustrates that afte
 
 For the aims of this example we test a null hypothesis stating that the fixed effect for `standlrt` is zero and a simple inequality constrained (informative) hypothesis stating that the fixed effect is *larger* than zero:
 
-$$H_0:\text{standlrt} = 0; \; H_i:\text{standlrt} >0$$
+$$H_0: \beta_1 = 0; \; H_i:\beta_1 >0$$
 
-We define these hypotheses in one character vector:
+We define these hypotheses in one character vector (note the names correspond to the variable names used when calling `lmer`:
 
 ```{r}
 hypotheses <- "standlrt = 0;
@@ -685,8 +683,7 @@ BFs.2 <- bain_2lmer(model.2, hypotheses, standardize = FALSE,
 print(BFs.2)     
 ```
 
-The $BF_{0u} = 18.93$ and the $BF_{iu} = 1.1$. In this case, we can conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is not different from zero.  Moreover, we can conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is not different from zero.
-
+The $BF_{0u} = 18.93$ and the $BF_{iu} = 1.1$. In this case, we conclude that *given the data*, the fixed coefficient for the predictor `standlrt` is not different from zero.
 ```{r}
 # obtain BF_0i.1 
 BF_0i.1 <- BFs.2[["fit"]]$BF[1]/BFs.2[["fit"]]$BF[2]
@@ -701,7 +698,11 @@ The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.
 
 # **Example 3:** Model that includes a level-2 predictor where $H_0$ is false
 
-To illustrate that this approach can also be used when the model contains a level-2 predictor, we add the variable `avslrt` to the model, which represents the average LRT score for each school.
+To illustrate that this approach can also be used when the model contains a level-2 predictor, we add the variable `avslrt` to the model, which represents the average LRT score for each school. Thus, the liner equation for the model becomes:
+
+$$\text{normexam}_{ij} = \alpha + \beta_1\;\text{standlrt}_{ij} + \beta_{1,2}\;\text{avslrt}_{j}+ u_{0j} + u_{1j}*\text{standlrt}_{ij} + \epsilon_{ij},$$
+
+where, $\beta_{1,2}$ denotes the estimated coefficient for the level-2 predictor `avslrt`.  
 
 ## Fit the model and inspect the $R^2_m$
 
@@ -716,13 +717,13 @@ Now, we see that the level-2 predictor is also larger than zero, evident both by
 
 Now the hypotheses are defined as follows:
 
-$$H_0:\text{standlrt} = \text{avslrt} = 0; \; H_i:\text{standlrt} > 0 \; \& \;  \text{avslrt} >0$$
+$$H_0: \beta_1  = \beta_{1,2}  = 0; \;H_i:\beta_1 > 0 \; \&\; \beta_{1,2} > 0$$$
 ```{r}
 hypotheses <- "standlrt = avslrt = 0;
                standlrt > 0 & avslrt > 0"
 ```
 
-We calculate the BFs by using the ICC-based $N_{eff}$ = 358 (which can be calculated automatically within the `wrapper function`) since currently the MI-based $N_{eff}$ has not been extended to include level-2 predictors.
+We calculate the BFs by using the ICC-based $N_{eff}$ = 358 (which can be calculated automatically within the `wrapper function`) since the MI-based $N_{eff}$ has not yet been extended to include level-2 predictors and, as shown in the paper, the sample size does not influence the BF when using $J_{ref}$.
 
 ```{r}
 BFs.3 <- bain_2lmer(model.3, hypotheses, standardize = FALSE, 
