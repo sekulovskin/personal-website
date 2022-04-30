@@ -21,7 +21,7 @@ knitr::opts_chunk$set(class.source = "watch-out")
 
 # **Introduction**
 
-This tutorial represents a complete and extensive version of the *Example* section from my master's thesis. 
+This tutorial represents a complete and extensive version of the *Examples* section from my master's thesis. 
 The paper introduces a default Bayes Factor [abbreviated as BF, @kass1995bayes] with clear operating characteristics when testing whether the fixed effects of linear two-level models are *equal* to zero. This was achieved by generalizing an approach for linear regression given in @hoijtink2021prior, by having the BF = 19 when the marginal $R^2$ for the fixed effects [@nakagawa2013] is zero in the data. A `wrapper function` around the `R` package `bain` [@bain] was programmed for testing the fixed parameters of liner two-level models fitted with the `lmer` function from the `R` package `lme4` [@lme4]. The function includes an adjustment for the fraction of the scaling parameter of the prior distribution, as proposed in the thesis. Researchers can download the function from [this](https://github.com/sekulovskin/research-archive-masters-thesis) repository. This tutorial also gives a step-by-step illustration of how to calculate the so-called *Multiple Imputation-based Effective Sample Size* (abbreviated as MI-based $N_{eff}$), which represents a new method for calculating the effective sample size for two-level models containing predictors with varying slopes.
 
 The tutorial aims to:
@@ -145,7 +145,7 @@ From the table above we can see that the Pseudo-$R^2$ (fixed effects) i.e., the 
 
 We can also manually compute the marginal $R^2$ which is defined as the proportion of variation in the outcome variable that can be explained by the fixed effct(s):
 
-$$R^2_m = \frac{\sigma_f}{\sigma_f + \sigma_{u0} + \sigma_{u1} + \sigma_\epsilon}.$$
+$$R^2_m = \frac{\sigma_f^2}{\sigma_f^2 + \sigma_{u0}^2 + \sigma_{u1}^2 + \sigma_\epsilon^2}^.$$
 ```{r}
 fixef <- fixef(model.1)  # extract the fixed effect 
 y_hat <- fixef[1] + fixef[2]*tutorial$standlrt # predict the outcome 
