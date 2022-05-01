@@ -89,7 +89,7 @@ data("tutorial")
 tutorial.1 <- tutorial[, c(1,2,3,5)] # subset the data with only the variables of interest
 
 st_options(descr.silent = TRUE)
-descr(tutorial.1, stats = c("mean", "med", "sd", "min", "max"),) # descriptive statistics for the outcome and the level-1 predictor
+descr(tutorial.1, stats = c("mean", "med", "sd", "min", "max")) # descriptive statistics for the outcome and the level-1 predictor
 ```
 
 
@@ -693,7 +693,7 @@ BF_0i.1
 BFs.2$b
 ```
 
-The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.4$. Thus, we say that the support in the data is around 16 times in favour of the null hypothesis against the informative, that is, *given the data* the fixed effect for `standlrt` is equal to zero, based on the **approximate* $BF_{iu}$ (the value for the fraction *b* is still 0.03).
+The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.5$. Thus, we say that the support in the data is around 16 times in favour of the null hypothesis against the informative, that is, *given the data* the fixed effect for `standlrt` is equal to zero, based on the **approximate* $BF_{iu}$ (the value for the fraction *b* is still 0.03).
 
 
 # **Example 3:** Model that includes a level-2 predictor where $H_0$ is false
