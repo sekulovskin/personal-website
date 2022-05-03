@@ -53,7 +53,7 @@ source("wrapper_function.R")
 
 Please note, that you need to have [`JAGS`](https://mcmc-jags.sourceforge.io/) installed on your local machine to be able to compute the MI-based $N_{eff}$.
 
-# The `wrapper function`
+# The wrapper function
 
 ```{r, eval=FALSE}
 bain_2lmer(x, hypotheses, standardize = FALSE, 
