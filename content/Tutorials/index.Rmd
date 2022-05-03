@@ -104,9 +104,10 @@ where *N* denotes the number of students (level-1 observations i.e., 4059) and *
 
 First, let's visualize this model by plotting the predictor `standlrt` against the outcome `normexam`, with separate regression lines for each school.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.width= "60%"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', out.width= "50%"}
 tutorial.1 %>%
 ggplot(aes(x = standlrt, y = normexam, col = school, group = school))+
+  geom_point(size = 0.2) +
   theme_classic() +
   theme(legend.position = "none")+
   geom_smooth(method = lm,
@@ -700,7 +701,7 @@ The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.
 
 To illustrate that this approach can also be used when the model contains a level-2 predictor, we add the variable `avslrt` to the model, which represents the average LRT score for each school. Thus, the liner equation for the model becomes:
 
-$$\text{normexam}_{ij} = \alpha + \beta_1\;\text{standlrt}_{ij} + \beta_{1,2}\;\text{avslrt}_{j}+ u_{0j} + u_{1j}*\text{standlrt}_{ij} + \epsilon_{ij},$$
+$$\text{normexam}_{ij} = \alpha + \beta_1\;\text{standlrt}_{ij} + \beta_{1,2}\;\text{avslrt}_{j}+ u_{0j} + u_{1j}\;\text{standlrt}_{ij} + \epsilon_{ij},$$
 
 where, $\beta_{1,2}$ denotes the estimated coefficient for the level-2 predictor `avslrt`.  
 
