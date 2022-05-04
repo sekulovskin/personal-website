@@ -8,10 +8,6 @@ superuser: true
 # Role/position/tagline
 role: MSc Student Methodology and Statistics
 
-# Organizations/Affiliations to show in About widget
-organizations:
-- name: Department of Methodology and Statistics, Utrecht University
-  url: https://www.uu.nl/en/organisation/methodology-and-statistics
 
 # Short bio (displayed in user profile at end of posts)
 bio: ''
