@@ -142,7 +142,7 @@ The fixed effect for `standlrt` is estimated to be larger than zero, which is ev
 
 #### $R^2_m$ using `summ()`
 
-From the table above we can see that the Pseudo-$R^2$ (fixed effects) i.e., the $R^2_m$ is .32, which indicates a large effect size based on @cohen1992powerin for the $R^2$ of multiple linear regression.
+From the table above we can see that the Pseudo-$R^2$ (fixed effects) i.e., the $R^2_m$ is .32, which indicates a large effect size based on @cohen1992power for the $R^2$ of multiple linear regression.
 
 #### $R^2_m$ by hand 
 
