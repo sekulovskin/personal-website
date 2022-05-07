@@ -435,6 +435,12 @@ Apply the function to the "imputed" data sets and obtain a column for $Z$ in eac
 imputed <- lapply(imputed, transform_z)
 ```
 
+Now let's quickly have a look at one of the imputed data sets:
+
+```{r}
+datatable(imputed[[1]][,-c(1,2)], options = list(pageLength = 5)) # exclude the school and student columns 
+```
+
  **Estimates:**
 
 Fit linear regression models to each imputed data set and extract the estimated coefficients and their respective variance-covariance matrices:
