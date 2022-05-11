@@ -63,8 +63,10 @@ header:
  
  - **R Markdown**
    
-   - LaTeX
    - Bookdown
+   - Blogdown
+   
+ - **LaTeX**
    
  - **IBM SPSS Statistics**
  
