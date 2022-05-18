@@ -56,7 +56,7 @@ header:
 
 # Technical skills
  
- - **R-programming**
+ - **R programming**
   
  - **Python programming**
     <span style="color: grey;">(Basic knowledge)</span>
@@ -83,7 +83,7 @@ header:
  
    - Regression
    - Classification
-   - Deep learning/Neural Networks <span style="color: grey;">(Self-taught, basic knowledge)</span>
+   - Neural Networks/Deep learning <span style="color: grey;">(Self-taught, basic knowledge)</span>
 
 # Conferences 
 
