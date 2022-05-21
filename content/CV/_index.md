@@ -41,7 +41,7 @@ header:
 
    <span style="color: grey;">September - December, 2021</span>
    
- - **Intern:** [Cito](https://www.cito.com/) (Project: [Recovery from Early Mistakes in Multistage Tests](https://github.com/sekulovskin/recovery-MST-Cito))
+ - **Intern:** [Cito](https://www.cito.com/) Institute for Educational Measurement (Project: [Recovery from Early Mistakes in Multistage Tests](https://github.com/sekulovskin/recovery-MST-Cito))
    
    <span style="color: grey;">January - February, 2022</span>
    
