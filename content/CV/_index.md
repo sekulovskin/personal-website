@@ -20,7 +20,7 @@ header:
      
  - **Master's degree:** *Methodology and Statistics*, Department of Methodology and Statistics, Utrecht University (2020 - present)
  
-     <span style="color: grey;">Utrecht, The Netherlands</span>
+     <span style="color: grey;">Utrecht, the Netherlands</span>
     
 
 # Work Experience 
