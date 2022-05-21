@@ -88,7 +88,7 @@ header:
 
 # Conferences 
 
- - [**Psihozij**](https://psihozij.wixsite.com/psihozij/o-nama), Zagreb, Croatia
+ - [**Psihozij**](https://psihozij.ffzg.unizg.hr/), Zagreb, Croatia
   
    <span style="color: grey;">May, 2018</span>
   
