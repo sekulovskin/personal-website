@@ -78,6 +78,7 @@ header:
   
    - Bayesian Inference & Hypothesis Testing
    - Psychometrics
+   - Stuctural Equation Modeling
   
  - **Data Science / Machine (statistical) learning**
  
