@@ -149,26 +149,25 @@ From the table above we can see that the Pseudo-$R^2$ (fixed effects) i.e., the 
 We can also manually compute the marginal $R^2$ which is defined as the proportion of variation in the outcome variable that can be explained by the fixed effect(s):
 
 $$R^2_m = \frac{\sigma_f^2}{\sigma_f^2 + \sigma_{u0}^2 + \sigma_{u1}^2 + \sigma_\epsilon^2},$$
-where $\sigma_f^2$ is calculated as follows:
+where $\sigma_f^2$ is calculated is defined as
+
+$$\sigma_f^2 = \text{var}(\alpha +\beta_1\;\text{standlrt}_{ij}).$$
 
 ```{r}
 fixef <- fixef(model.1)  # extract the fixed effect 
 y_hat <- fixef[1] + fixef[2]*tutorial$standlrt # predict the outcome 
 
 sigma_f  <- var(y_hat) # obtain the variance in the predicted outcome based on the fixed effect
-```
 
-
-```{r}
 # extract the estimated random effects from the fitted model (you can use the summary function)
 # i.e., summary(model.1)
 sigma_u0 <- 0.09044
 sigma_u1 <- 0.01454
 sigma_e  <- 0.55366
 
-# calculate the 
+# calculate the R^2_m
 marginal_Rsq_fixed <- (sigma_f)/(sigma_f + sigma_u0 + sigma_u1 + sigma_e)
-marginal_Rsq_fixed  
+marginal_Rsq_fixed
 ```
 
 We can see that this value corresponds to the Pseudo-$R^2$ (fixed effects) given by the `summ` function. Thus, we expect the BF reject the null (i.e., show support for the unconstrained hypothesis).
