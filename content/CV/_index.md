@@ -51,7 +51,7 @@ header:
    
   - **Student Assistant:** [Department of Methodology and Statistics](https://www.uu.nl/en/organisation/methodology-and-statistics)
 
-     <span style="color: grey;">March 2022 - June 2022</span>
+     <span style="color: grey;">March 2022 - present</span>
 
 
 # Technical skills
