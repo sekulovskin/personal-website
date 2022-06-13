@@ -26,7 +26,7 @@ education:
     year: 2020 - 2022
   - course: BSc in Psychology
     institution: Ss. Cyril and Methodius University, North Macedonia
-    year: 2015-2019
+    year: 2015 - 2019
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
