@@ -6,7 +6,7 @@ title: Nikola Sekulovski
 superuser: true
 
 # Role/position/tagline
-role: MSc Student Methodology and Statistics
+role: MSc in Methodology and Statistics
 
 
 # Short bio (displayed in user profile at end of posts)
@@ -23,7 +23,7 @@ education:
   courses:
   - course: MSc in Methodology and Statistics
     institution: Utrecht University, The Netherlands
-    year: 2020 - present
+    year: 2020 - 2022
   - course: BSc in Psychology
     institution: Ss. Cyril and Methodius University, North Macedonia
     year: 2015-2019
