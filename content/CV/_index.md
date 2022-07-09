@@ -27,23 +27,23 @@ header:
 
  - **Surveyor:** [Center for Research and Policy Making](http://www.crpm.org.mk/) (Project: [UN WOMEN EVAW](https://www.unwomen.org/en/what-we-do/ending-violence-against-women))
  
-    <span style="color: grey;">Feb - March, 2018</span>
+    <span style="color: grey;">Feb - March 2018</span>
     
  - **Intern:** [Ipsos, North Macedonia](https://www.ipsos.com/mk-mk)
 
-     <span style="color: grey;">March - April, 2019</span>
+     <span style="color: grey;">March - April 2019</span>
      
  - **Data Analyst:** Freelance 
 
-    <span style="color: grey;">March - September, 2020</span>
+    <span style="color: grey;">March - September 2020</span>
     
  - **Student Assistant:** [Department of Methodology and Statistics](https://www.uu.nl/en/organisation/methodology-and-statistics)
 
-   <span style="color: grey;">September - December, 2021</span>
+   <span style="color: grey;">September - December 2021</span>
    
  - **Intern:** [Cito](https://www.cito.com/) Institute for Educational Measurement (Project: [Recovery from Early Mistakes in Multistage Tests](https://github.com/sekulovskin/recovery-MST-Cito))
    
-   <span style="color: grey;">January - February, 2022</span>
+   <span style="color: grey;">January - February 2022</span>
    
  - **Statistical consultations for bachelor and master’s students**
  
@@ -51,7 +51,7 @@ header:
    
   - **Student Assistant:** [Department of Methodology and Statistics](https://www.uu.nl/en/organisation/methodology-and-statistics)
 
-     <span style="color: grey;">March 2022 - present</span>
+     <span style="color: grey;">March - July 2022</span>
 
 
 # Technical skills
@@ -90,11 +90,11 @@ header:
 
  - [**Psihozij**](https://psihozij.ffzg.unizg.hr/), Zagreb, Croatia
   
-   <span style="color: grey;">May, 2018</span>
+   <span style="color: grey;">May 2018</span>
   
  - [**33rd EFPSA Congress**](https://efpsa.org/), Grenaa, Denmark
  
-   <span style="color: grey;">April, 2019</span>
+   <span style="color: grey;">April 2019</span>
 
 # Languages:
 
