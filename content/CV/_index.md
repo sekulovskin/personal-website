@@ -45,13 +45,14 @@ header:
    
    <span style="color: grey;">January - February 2022</span>
    
- - **Statistical consultations for bachelor and master’s students**
- 
-     <span style="color: grey;">2019 - present</span>
    
   - **Student Assistant:** [Department of Methodology and Statistics](https://www.uu.nl/en/organisation/methodology-and-statistics)
 
      <span style="color: grey;">March - July 2022</span>
+     
+ - **Statistical consultations for bachelor and master’s students**
+ 
+     <span style="color: grey;">2019 - present</span>
 
 
 # Technical skills
