@@ -32,6 +32,8 @@ feature:
   name: SQL
 - description: 80%
   name: Scientific writing
+- description: 20%
+  name: C++
 
 # Uncomment to use emoji icons.
 #- icon: ":smile:"
