@@ -60,7 +60,7 @@ header:
      
  - **PhD candidate** [Psychological Methods group, Univeristy of Amsterdam](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
 
-     <span style="color: grey;">Start date: Septmber 2022</span>
+     <span style="color: grey;">Start date: September 2022</span>
 
 
 # Technical skills
