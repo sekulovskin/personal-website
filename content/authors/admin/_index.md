@@ -6,7 +6,7 @@ title: Nikola Sekulovski
 superuser: true
 
 # Role/position/tagline
-role: MSc Methodology and Statistics
+#role: PhD candidate in Methodology and Statistics
 
 
 # Short bio (displayed in user profile at end of posts)
@@ -21,6 +21,9 @@ interests:
 # Education to show in About widget
 education:
   courses:
+  - course: PhD - Bayesian Network Psychometrics
+    institution: University of Amsterdam, The Netherlands
+    year: 2022 - present
   - course: MSc in Methodology and Statistics
     institution: Utrecht University, The Netherlands
     year: 2020 - 2022
