@@ -22,7 +22,7 @@ header:
  
      <span style="color: grey;">Utrecht, the Netherlands</span>
      
- -  **PhD degree:** *Methodology and Statistics*, Psychological Methods Group, Department of Psychology, University of Amsterdam (2022 - present) 
+ -  **PhD degree:** *Bayesian Network Psychometrics*, Psychological Methods Group, Department of Psychology, University of Amsterdam (2022 - present) 
  
      <span style="color: grey;">Utrecht, the Netherlands</span>
     
