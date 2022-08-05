@@ -22,9 +22,9 @@ header:
  
      <span style="color: grey;">Utrecht, the Netherlands</span>
      
- -  **PhD degree:** *Bayesian Network Psychometrics*, Psychological Methods Group, Department of Psychology, University of Amsterdam (2022 - present) 
+ -  **PhD degree:** *Bayesian Network Psychometrics*, Psychological Methods group, Department of Psychology, University of Amsterdam (2022 - present) 
  
-     <span style="color: grey;">Utrecht, the Netherlands</span>
+     <span style="color: grey;">Amsterdam, the Netherlands</span>
     
 
 # Work Experience 
@@ -57,6 +57,10 @@ header:
  - **Statistical consultations for bachelor and master’s students**
  
      <span style="color: grey;">2019 - present</span>
+     
+ - **PhD candidate** [Psychological Methods group, Univeristy of Amsterdam](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
+
+     <span style="color: grey;">Start date: Septmber 2022</span>
 
 
 # Technical skills
@@ -64,6 +68,9 @@ header:
  - **R programming**
   
  - **Python programming**
+    <span style="color: grey;">(Basic knowledge)</span>
+    
+ - **C++ programming**
     <span style="color: grey;">(Basic knowledge)</span>
  
  - **R Markdown**
