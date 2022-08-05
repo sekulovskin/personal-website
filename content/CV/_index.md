@@ -21,6 +21,10 @@ header:
  - **Master's degree:** *Methodology and Statistics*, Department of Methodology and Statistics, Utrecht University (2020 - 2022) *Cum laude*
  
      <span style="color: grey;">Utrecht, the Netherlands</span>
+     
+ -  **PhD degree:** *Methodology and Statistics*, Psychological Methods Group, Department of Psychology, University of Amsterdam (2022 - present) 
+ 
+     <span style="color: grey;">Utrecht, the Netherlands</span>
     
 
 # Work Experience 
