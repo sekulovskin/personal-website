@@ -6,7 +6,7 @@ title: Nikola Sekulovski
 superuser: true
 
 # Role/position/tagline
-#role: PhD candidate in Methodology and Statistics
+role: PhD student
 
 
 # Short bio (displayed in user profile at end of posts)

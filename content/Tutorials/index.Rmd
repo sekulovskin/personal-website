@@ -530,7 +530,7 @@ lambda_hat <- (1+ 1/m) * sum(diag(B %*% ginv(Total_var)))/k
 
 **Degrees of freedom:**
 
-$$\nu_{old} = \frac{m-1}{\lambda^2}; \ \nu_{com} = n - k; \ \nu_{obs} = \frac{\nu_{com} + 1}{\nu_{com} + 3}\nu_{com}(1-\lambda); \\ \nu = \frac{\nu_{old} \nu_{obs}}{\nu_{old} + \nu_{obs}}$$
+$$\nu_{old} = \frac{m-1}{\bar{\lambda}^2}; \; \nu_{com} = N_{level-1} - k; \; \nu_{obs} = \frac{\nu_{com} + 1}{\nu_{com} + 3}\nu_{com}(1-\bar{\lambda}); \; \nu = \frac{\nu_{old} \nu_{obs}}{\nu_{old} + \nu_{obs}}.$$
 
 
 ```{r}
@@ -547,7 +547,7 @@ nu <- (nu_old*nu_obs)/(nu_old + nu_obs)
 
 **Fraction of missing information:**
 
-$$\gamma = \frac{\nu + 1}{\nu + 3}\lambda+\frac{2}{\nu + 3}$$
+$$\gamma = \frac{\nu + 1}{\nu + 3}\bar{\lambda}+\frac{2}{\nu + 3}$$
 
 ```{r}
 gamma <- ((nu + 1)/(nu + 3)) * lambda_hat + (2/(nu + 3))
@@ -748,6 +748,22 @@ BFs.3$b
 
 This yields $BF_{0u} \simeq0$ and $BF_{iu} \simeq 4.2$, with a value for *b* of exactly 0.05. Thus we say that based on the *approximate* BF, there is evidence in the data that both the fixed effect for `standlrt` and the level-2 coefficient for `avslrt` are larger than zero. 
 
+```{r}
+#take the inverse of BF_ou
+
+BFu0 <- 1/BFs.3[["fit"]]$BF[1]
+BFu0
+
+# Get BF_i0
+BF_iu <- BFs.3[["fit"]]$BF[2]/BFs.3[["fit"]]$BF[1]
+BF_iu
+```
+
+ Additionally, $BF_{u0} \simeq 1.9\text{e+}167$ and $BF_{iu}\simeq 2.4\text{e+}170$.
+ 
+ Since the value for *b* is exactly equal to 0.05 we say that based on the approximate BF, there is substantial evidence in the data that both the fixed effect for `standlrt` and the level-2 coefficient for `avslrt` are larger than zero. 
+ 
+ 
 # **Example 4:** Model that includes a level-2 predictor where $H_0$ is true
 
 Finally, we repeat this analysis again, by simulating the outcome where the coefficients for both the level-1 and the level-2 predictors are zero i.e., the $R^2_m = 0$.
@@ -798,6 +814,36 @@ BFs.4$b
 ```
 
 We obtain a $BF_{0u} = 12.8$ and a $BF_{iu} = 0.3$, which translates to a $BF_{0i}= 53.2$. Thus, we can say that the evidence in the data is 53 times in favour of $H_0$ (i.e., that the effects of both `standlrt` and `avslrt` are zero) against $H_i$ (i.e., that the effects of both `standlrt` and `avslrt` are larger than zero).
+
+# Example 5: Model that includes a level-2 predictor and a cross-level interaction
+
+Finally, using the data set with the simulated outcome with no effect of the predictors, we estimate a model that includes a cross-level interaction between `standlrt` and `avslrt`. 
+
+```{r}
+model.5 <- lmer(normexam ~ standlrt + avslrt + standlrt:avslrt + (standlrt | school), REML = FALSE, data = tutorial.3)
+summ(model.5)
+```
+
+
+As can be seen from Table 3, based on its standard error, the cross-level interaction effect is significant, even though the direct fixed effects of both level-1 and level-2 predictors aren't. 
+
+```{r}
+hypotheses <- "standlrt = avslrt = standlrt:avslrt = 0;
+               standlrt > 0 & avslrt > 0 & standlrt:avslrt > 0"
+
+BFs.5 <- bain_2lmer(model.5, hypotheses, standardize = F, N = "ICC_effective", seed = 123, jref = TRUE)
+print(BFs.5)
+BFs.5$b
+
+#calculate BF_ui
+BF_0i.4 <- BFs.5[["fit"]]$BF[1]/BFs.5[["fit"]]$BF[2]
+BF_0i.4
+
+```
+
+
+When applying the proposed framework on this model, we obtain  $BF_{0u} = 2.1$ and a $BF_{iu} = 1$, which translates to $BF_{0i} \approx 2$. This suggests that when including an interaction effect, $BF_{0u}$ and consequently $BF_{0i}$ are smaller relative to their counterparts from Example 4, which indicates that the interaction effect is larger than zero. The *fraction b* is now 0.14, which means that this should be explicitly stated when reporting the results. More specifically, it should be stated that the values given by `bain`, in this case are treated as an information criteria that are inspired by the BF.
+
 
 # **References**
 
