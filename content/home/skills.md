@@ -18,7 +18,7 @@ subtitle:
 feature:
 - description: 90%
   name: R
-- description: 20%
+- description: 10%
   name: Python
 - description: 90%
   name: Statistics
