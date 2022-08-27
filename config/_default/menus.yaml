@@ -13,7 +13,7 @@ main:
   - name: Skills
     url: '#skills'
     weight: 30
-  - name: A Bayes factor for two-level models
+  - name: A Bayes factor for Two-level Models
     url: A tutorial on the Bayes factor/
     weight: 40
   - name: Contact
