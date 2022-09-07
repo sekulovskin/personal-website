@@ -815,9 +815,9 @@ BFs.4$b
 
 We obtain a $BF_{0u} = 12.8$ and a $BF_{iu} = 0.3$, which translates to a $BF_{0i}= 53.2$. Thus, we can say that the evidence in the data is 53 times in favour of $H_0$ (i.e., that the effects of both `standlrt` and `avslrt` are zero) against $H_i$ (i.e., that the effects of both `standlrt` and `avslrt` are larger than zero).
 
-# Example 5: Model that includes a level-2 predictor and a cross-level interaction
+# Example 5: Model that includes a cross-level interaction
 
-Finally, using the data set with the simulated outcome with no effect of the predictors, we estimate a model that includes a cross-level interaction between `standlrt` and `avslrt`. 
+Finally, using the data set with the simulated outcome with no effect of the predictors (used in the preceding example), we estimate a model that includes a cross-level interaction between `standlrt` and `avslrt`. 
 
 ```{r}
 model.5 <- lmer(normexam ~ standlrt + avslrt + standlrt:avslrt + (standlrt | school), REML = FALSE, data = tutorial.3)
@@ -825,10 +825,17 @@ summ(model.5)
 ```
 
 
-As can be seen from Table 3, based on its standard error, the cross-level interaction effect is significant, even though the direct fixed effects of both level-1 and level-2 predictors aren't. 
+Based on the estimate and its standard error, the cross-level interaction effect is larger than the direct effects of the two predictors, which leads us to believe that the cross-level interaction is different from zero (it's also "almost significant" based on its p-value).
+
+In order to formally test this using our proposed framework, we include a second null hypothesis:
+
+$$H_{0_{2}}:\beta_1 = \beta_{1,2} = \beta_1*\beta_{1,2} = 0$$,
+
+and keep the other two hypotheses used in Examples 3 and 4 i.e., $H_{0_{1}}: \beta_1  = \beta_{1,2}  = 0$ and $H_i:\beta_1 > 0 \; \&\; \beta_{1,2} > 0$. 
 
 ```{r}
-hypotheses <- "standlrt = avslrt = standlrt:avslrt = 0;
+hypotheses <- "standlrt = avslrt =0;
+               standlrt = avslrt = standlrt:avslrt = 0;
                standlrt > 0 & avslrt > 0 & standlrt:avslrt > 0"
 
 BFs.5 <- bain_2lmer(model.5, hypotheses, standardize = F, N = "ICC_effective", seed = 123, jref = TRUE)
@@ -842,7 +849,9 @@ BF_0i.4
 ```
 
 
-When applying the proposed framework on this model, we obtain  $BF_{0u} = 2.1$ and a $BF_{iu} = 1$, which translates to $BF_{0i} \approx 2$. This suggests that when including an interaction effect, $BF_{0u}$ and consequently $BF_{0i}$ are smaller relative to their counterparts from Example 4, which indicates that the interaction effect is larger than zero. The *fraction b* is now 0.14, which means that this should be explicitly stated when reporting the results. More specifically, it should be stated that the values given by `bain`, in this case are treated as an information criteria that are inspired by the BF.
+We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. The *fraction b* is now 0.14, which means that it should be explicitly stated that the values given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
+
+Thus, we say that, based on the information criterion inspired by the BF, the evidence in the data is 3.2 times in favor of  $H_{0_{1}}$ against $H_{0_{2}}$. This means that there is support in the data for the null hypothesis that *only* the *direct* effects are equal to zero, whereas the interaction effect is larger from zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
 
 
 # **References**

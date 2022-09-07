@@ -13,8 +13,8 @@ main:
   - name: Skills
     url: '#skills'
     weight: 30
-  - name: Tutorials
-    url: Tutorials/
+  - name: A Bayes factor for Two-level Models
+    url: Tutorial/
     weight: 40
   - name: Contact
     url: '#contact'
