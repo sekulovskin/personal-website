@@ -16,7 +16,6 @@ interests:
 - Bayesian Statistics
 - Network Psychometrics
 - R programming
-- Machine Learning
 
 # Education to show in About widget
 education:
