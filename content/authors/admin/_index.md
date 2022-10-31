@@ -15,7 +15,7 @@ bio: ''
 interests:
 - Bayesian Statistics
 - Network Psychometrics
-- R programming
+- Bayesian Hypothesis Testing
 
 # Education to show in About widget
 education:
