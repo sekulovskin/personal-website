@@ -707,7 +707,7 @@ BF_0i.1
 BFs.2$b
 ```
 
-The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.5$. Thus, we say that the support in the data is around 16 times in favour of the null hypothesis against the informative, that is, *given the data* the fixed effect for `standlrt` is equal to zero, based on the *approximate* $BF_{iu}$ (the value for the fraction *b* is still 0.03).
+The BF of the null hypothesis against the informative hypothesis, $BF_{0i} = 16.5$. Thus, we say that the support in the data is around 16 times in favour of the null hypothesis against the informative, that is, *given the data* the fixed effect for `standlrt` is equal to zero, based on the *approximate* $BF_{0i}$ (the value for the fraction *b* is still 0.03).
 
 
 # **Example 3:** Model that includes a level-2 predictor where $H_0$ is false
@@ -759,7 +759,7 @@ BF_iu <- BFs.3[["fit"]]$BF[2]/BFs.3[["fit"]]$BF[1]
 BF_iu
 ```
 
- Additionally, $BF_{u0} \simeq 1.9\text{e+}167$ and $BF_{iu}\simeq 2.4\text{e+}170$.
+ Additionally, $BF_{u0} \simeq 1.9\text{e+}167$ and $BF_{i0}\simeq 2.4\text{e+}170$.
  
  Since the value for *b* is exactly equal to 0.05 we say that based on the approximate BF, there is substantial evidence in the data that both the fixed effect for `standlrt` and the level-2 coefficient for `avslrt` are larger than zero. 
  
@@ -825,13 +825,15 @@ summ(model.5)
 ```
 
 
-Based on the estimate and its standard error, the cross-level interaction effect is larger than the direct effects of the two predictors, which leads us to believe that the cross-level interaction is different from zero (it's also "almost significant" based on its p-value).
+Based on the estimate and its standard error, the cross-level interaction effect is larger than the fixed effects of the two predictors, which leads us to believe that the cross-level interaction is different from zero (it's also "almost significant" based on its p-value).
 
 In order to formally test this using our proposed framework, we include a second null hypothesis:
 
-$$H_{0_{2}}:\beta_1 = \beta_{1,2} = \beta_1*\beta_{1,2} = 0$$,
+$$H_{0_{2}}:\beta_1 = \beta_{1,2} = \beta_{int} = 0$$,
 
-and keep the other two hypotheses used in Examples 3 and 4 i.e., $H_{0_{1}}: \beta_1  = \beta_{1,2}  = 0$ and $H_i:\beta_1 > 0 \; \&\; \beta_{1,2} > 0$. 
+where $\beta_{int} = \text{standlrt}_{ij}*\text{avslrt}_j$.
+
+We keep the other two hypotheses used in Examples 3 and 4 i.e., $H_{0_{1}}: \beta_1  = \beta_{1,2}  = 0$ and $H_i:\beta_1 > 0 \; \&\; \beta_{1,2} > 0$. 
 
 ```{r}
 hypotheses <- "standlrt = avslrt =0;
@@ -851,7 +853,7 @@ BF_0i.4
 
 We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. The *fraction b* is now 0.14, which means that it should be explicitly stated that the values given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
 
-Thus, we say that, based on the information criterion inspired by the BF, the evidence in the data is 3.2 times in favor of  $H_{0_{1}}$ against $H_{0_{2}}$. This means that there is support in the data for the null hypothesis that *only* the *direct* effects are equal to zero, whereas the interaction effect is larger from zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
+Thus, we say that, based on the information criterion inspired by the BF, the evidence in the data is 3.2 times in favor of  $H_{0_{1}}$ against $H_{0_{2}}$. This means that there is support in the data for the null hypothesis that *only* the fixed effects are equal to zero, whereas the interaction effect is larger from zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
 
 
 # **References**
