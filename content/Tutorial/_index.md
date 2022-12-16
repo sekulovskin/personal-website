@@ -1,11 +1,11 @@
 ---
-cms_exclude: true
+title: Tutorials
 
-# To publish author profile pages, remove all of the `_build` and `cascade` settings below.
-_build:
-  render: never
-cascade:
-  _build:
-    render: never
-    list: always
+# Listing view
+view: title
+
+# Optional banner image (relative to `assets/media/` folder).
+banner:
+  caption: ''
+  image: ''
 ---
