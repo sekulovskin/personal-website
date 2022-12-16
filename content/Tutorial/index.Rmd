@@ -737,7 +737,7 @@ hypotheses <- "standlrt = avslrt = 0;
                standlrt > 0 & avslrt > 0"
 ```
 
-We calculate the BFs by using the ICC-based $N_{eff}$ = 358 (which can be calculated automatically within the `wrapper function`) since the MI-based $N_{eff}$ has not yet been extended to include level-2 predictors and, as shown in the paper, the sample size does not influence the BF when using $J_{ref}$ and the effect size in our data is large.
+We calculate the BFs by using the ICC-based $N_{eff}$ = 358 (which can be calculated automatically within the `wrapper function`) since the MI-based $N_{eff}$ has not yet been extended to include level-2 predictors and, as shown in the paper, the sample size does not influence the BF when using $J_{ref}$.
 
 ```{r}
 BFs.3 <- bain_2lmer(model.3, hypotheses, standardize = FALSE, 
@@ -851,9 +851,9 @@ BF_0i.4
 ```
 
 
-We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. The *fraction b* is now 0.14, which means that it should be explicitly stated that the values given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
+We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. Since now *M* is 3, the *fraction b* is equal to 0.14, which means that it should be explicitly stated that the BFs given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
 
-Thus, we say that, based on the information criterion inspired by the BF, the evidence in the data is 3.2 times in favor of  $H_{0_{1}}$ against $H_{0_{2}}$. This means that there is support in the data for the null hypothesis that *only* the fixed effects are equal to zero, whereas the interaction effect is larger from zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
+Thus, we say that, based on the *information criterion inspired by the BF* with *fit* = 1.1 and *complexity* = 0.34^[These values are obtained by taking the ratios of the appropriate fit and complexity values of the respective $BF_{0u}$s.], the evidence in the data is 3.2 times in favour of  $H_{0_{1}}$ against $H_{0_{2}}$ with. This means that there is support in the data for the null hypothesis that *only* the fixed effects are equal to zero, whereas the interaction effect is larger than zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
 
 
 # **References**
