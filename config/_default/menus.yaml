@@ -14,7 +14,7 @@ main:
     url: '#skills'
     weight: 30
   - name: Blog
-    url: '#posts'
+    url: post/
     weight: 40
   - name: Contact
     url: '#contact'
