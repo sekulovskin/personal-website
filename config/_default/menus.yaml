@@ -13,7 +13,7 @@ main:
   - name: Skills
     url: '#skills'
     weight: 30
-  - name: BF tutorial
+  - name: BF Tutorial
     url: tutorial/
     weight: 40
   - name: Contact
