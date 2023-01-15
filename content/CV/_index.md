@@ -98,15 +98,6 @@ header:
    - Classification
    - Neural Networks/Deep learning <span style="color: grey;">(Self-taught, basic knowledge)</span>
 
-# Conferences 
-
- - [**Psihozij**](https://psihozij.ffzg.unizg.hr/), Zagreb, Croatia
-  
-   <span style="color: grey;">May 2018</span>
-  
- - [**33rd EFPSA Congress**](https://efpsa.org/), Grenaa, Denmark
- 
-   <span style="color: grey;">April 2019</span>
 
 # Languages:
 
