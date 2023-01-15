@@ -6,7 +6,7 @@ title: Nikola Sekulovski
 superuser: true
 
 # Role/position/tagline
-role: PhD Student, [Psychological Methods programme, UvA](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
+role: PhD Student, [Psychological Methods, UvA](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
 
 
 # Short bio (displayed in user profile at end of posts)
@@ -60,4 +60,4 @@ highlight_name: true
 ---
 
 
-My primary professional interests are in Bayesian Statistics, Network Psychometrics, R programming and Machine Learning or, even better, a combination of the four! I am a fan of a "common ground" approach regarding the polarization of Statistics in the form of *"Frequentist vs Bayesian"* (even though Centrism, in general, is not my cup of tea, I believe it might work when it comes to Statistics). You can see more of what I do on my GitHub profile or you can also read my CV. Feel free to contact me with any questions you might have regarding my research/work. I am open for research collaboration, consultations, teaching, or just having a chat about statistics, data and society.
+I am a PhD student at the Department of Psychological Methods of the University of Amsterdam. I am working on a project devoted to developing a new methodology for Bayesian estimation of graphical models (for more details see [this](https://bayesiangraphicalmodeling.com/) page). My primary research interests are in Bayesian Statistics, Network Psychometrics, R programming and Machine Learning and their combination in enhancing research methods in Psychology and the Social Sciences in general. I am open to research collaboration, consultations, teaching, or just having a chat about statistics, data and society.

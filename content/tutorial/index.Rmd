@@ -831,7 +831,7 @@ In order to formally test this using our proposed framework, we include a second
 
 $$H_{0_{2}}:\beta_1 = \beta_{1,2} = \beta_{int} = 0$$,
 
-where $\beta_{int} = \text{standlrt}_{ij}*\text{avslrt}_j$.
+where $\beta_{int}$ is the regression coefficient for the interaction term $\text{standlrt}_{ij}*\text{avslrt}_j$.
 
 We keep the other two hypotheses used in Examples 3 and 4 i.e., $H_{0_{1}}: \beta_1  = \beta_{1,2}  = 0$ and $H_i:\beta_1 > 0 \; \&\; \beta_{1,2} > 0$. 
 
@@ -851,9 +851,9 @@ BF_0i.4
 ```
 
 
-We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. Since now *M* is 3, the *fraction b* is equal to 0.14, which means that it should be explicitly stated that the BFs given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
+We obtain the following results: $BF_{0_{1}u}$ = 6.6,  $BF_{0_{2}u}$ = 2.1 and $BF_{iu}$ = 1. Which yields a $BF_{0_{1} 0_{2}}$ = 3.2. Since now the *fraction b* is equal to 0.14, it follows that it should be explicitly stated that the BFs given by `bain`, in this case, are treated as information criteria that are inspired by the BF. However, for all practical purposes, the interpretation of the values for the BFs (as support in the data for one of the hypotheses against the other) remains the same. 
 
-Thus, we say that, based on the *information criterion inspired by the BF* with *fit* = 1.1 and *complexity* = 0.34^[These values are obtained by taking the ratios of the appropriate fit and complexity values of the respective $BF_{0u}$s.], the evidence in the data is 3.2 times in favour of  $H_{0_{1}}$ against $H_{0_{2}}$ with. This means that there is support in the data for the null hypothesis that *only* the fixed effects are equal to zero, whereas the interaction effect is larger than zero. This can also be seen by inspecting the BFs against the unconstrained hypothesis (i.e., $BF_{0_{1}u}$, $BF_{0_{2}u}$ and $BF_{iu}$).
+Thus, we say that, based on the *information criterion inspired by the BF*, the evidence in the data is 3.2 times in favour of  $H_{0_{1}}$ against $H_{0_{2}}$. This means that there is support in the data for the null hypothesis that *only* the fixed effects are equal to zero, whereas the interaction effect is larger than zero. 
 
 
 # **References**
