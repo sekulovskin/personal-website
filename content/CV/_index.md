@@ -22,7 +22,7 @@ header:
  
      <span style="color: grey;">Utrecht, the Netherlands</span>
      
- -  **PhD degree:** *Bayesian Network Psychometrics*, Psychological Methods group, Department of Psychology, University of Amsterdam (2022 - present) 
+ -  **PhD degree:** *Bayesian Network Psychometrics*, Psychological Methods, Department of Psychology, University of Amsterdam (2022 - present) 
  
      <span style="color: grey;">Amsterdam, the Netherlands</span>
     
@@ -58,7 +58,7 @@ header:
  
      <span style="color: grey;">2019 - present</span>
      
- - **PhD candidate** [Psychological Methods group, Univeristy of Amsterdam](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
+ - **PhD candidate** [Psychological Methods, Univeristy of Amsterdam](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
 
      <span style="color: grey;">Start date: September 2022</span>
 
@@ -84,19 +84,14 @@ header:
  
  - **JAGS**
  
+ - **JASP**
+ 
 # Knowledge and professional interests
 
- - **Statistics**
-  
-   - Bayesian Inference & Hypothesis Testing
-   - Psychometrics
-   - Stuctural Equation Modeling
-  
- - **Data Science / Machine (statistical) learning**
- 
-   - Regression
-   - Classification
-   - Neural Networks/Deep learning <span style="color: grey;">(Self-taught, basic knowledge)</span>
+
+ - Bayesian Inference & Hypothesis Testing
+ - Psychometrics
+ - Graphical Modeling & Network Psychometrics 
 
 
 # Languages:

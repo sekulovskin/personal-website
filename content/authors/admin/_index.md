@@ -60,4 +60,5 @@ highlight_name: true
 ---
 
 
-I am a PhD student at the Department of Psychological Methods of the University of Amsterdam. I am working on a project devoted to developing a new methodology for Bayesian estimation of graphical models (for more details see [this](https://bayesiangraphicalmodeling.com/) page). My primary research interests are in Bayesian Statistics, Network Psychometrics, R programming and Machine Learning and their combination in enhancing research methods in Psychology and the Social Sciences in general. I am open to research collaboration, consultations, teaching, or just having a chat about statistics, data and society.
+I am a PhD student at the Department of Psychological Methods of the University of Amsterdam. I am currently working on a project focused on creating a new methodology for Bayesian estimation of graphical models (for more details see [this](https://bayesiangraphicalmodeling.com/) page). My primary research interests lie in the areas of Bayesian Statistics, Network Psychometrics, R programming, and Hypothesis Testing. By combining these fields, I aim to enhance research methods in Psychology and the Social Sciences more broadly. I am open to research collaboration, consultations, teaching, or just having a chat about statistics, data and society.
+
