@@ -9,5 +9,5 @@ share: false
 
 **Accepted for publication**
 
-<p style="font-size:medium;text-align:justify">Sekulovski, N., & Hoijtink, H. (in press).<a href = "https://github.com/sekulovskin/research-archive-masters-thesis/blob/main/Manuscript/Manuscript.pdf"> Default Bayes Factor for Testing Null Hypotheses About the
-Fixed Effects of Linear Two-Level Models.</a>. <em>Accepted for publication in Psychological Methods</em>.</p> 
+<p style="font-size:medium;text-align:justify">Sekulovski, N., & Hoijtink, H. (2023).<a href = "https://psycnet.apa.org/doiLanding?doi=10.1037%2Fmet0000573"> Default Bayes Factor for Testing Null Hypotheses About the
+Fixed Effects of Linear Two-Level Models.</a>. <em>Psychological Methods</em>.</p> 
