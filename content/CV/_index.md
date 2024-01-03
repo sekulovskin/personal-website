@@ -111,4 +111,6 @@ header:
  - Dutch
  
  - Turkish
+
+ - German
  
