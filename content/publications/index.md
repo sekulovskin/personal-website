@@ -12,7 +12,7 @@ share: false
 
 <p style="font-size:medium;text-align:justify">Keetelaar, S., Sekulovski, N*., Borsboom, D., & Marsman, M. (2023). <a href = "https://psyarxiv.com/532hd"> Comparing Maximum Likelihood and Pseudo-Maximum Likelihood Estimators for the Ising Model</a>. <em>PsyArXiv</em>.</p>
 
-**Accepted for publication (in press)**
+**In press**
 
 <p style="font-size:medium;text-align:justify">Sekulovski, N*., Keetelaar, S., Huth, K. B. S., Wagenmakers, E.-J., van Bork, R., van den Bergh, D., & Marsman, M. (in press). <a href = "https://psyarxiv.com/ch7a2">Testing Conditional Independence in Psychometric Networks: An Analysis of Three Bayesian Methods</a>. <em>Multivariate Behavioral Research</em>.</p>
 
