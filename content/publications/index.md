@@ -16,7 +16,7 @@ share: false
 
 <p style="font-size:medium;text-align:justify">Sekulovski, N*., Keetelaar, S., Huth, K. B. S., Wagenmakers, E.-J., van Bork, R., van den Bergh, D., & Marsman, M. (in press). <a href = "https://psyarxiv.com/ch7a2">Testing Conditional Independence in Psychometric Networks: An Analysis of Three Bayesian Methods</a>. <em>Multivariate Behavioral Research</em>.</p>
 
-<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š., Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N*.,… Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>PsyArXiv</em>.</p>
+<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N., Visser, I., van Elk, M., & Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
 
 **2024**
 
