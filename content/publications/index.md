@@ -3,6 +3,7 @@ title: Publications
 share: false
 ---
 
+[Google Scholar Page](https://scholar.google.com/citations?user=cn5deUoAAAAJ&hl=en)
 
 **Submitted for publication**
 
