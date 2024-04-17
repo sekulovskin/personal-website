@@ -11,7 +11,6 @@ share: false
 
 <p style="font-size:medium;text-align:justify">Sekulovski, N*., Keetelaar, S., Haslbeck, J. M. B., & Marsman, M. (2023). <a href = "https://psyarxiv.com/6m7ca/"> Sensitivity Analysis of Prior Distributions in Bayesian Graphical Modeling: Guiding Informed Prior Choices for Conditional Independence Testing</a>. <em>PsyArXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify">Keetelaar, S., Sekulovski, N*., Borsboom, D., & Marsman, M. (2023). <a href = "https://psyarxiv.com/532hd"> Comparing Maximum Likelihood and Pseudo-Maximum Likelihood Estimators for the Ising Model</a>. <em>PsyArXiv</em>.</p>
 
 **In press**
 
