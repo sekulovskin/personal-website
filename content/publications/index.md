@@ -22,7 +22,7 @@ share: false
 
 **2024**
 
-<p style="font-size:medium;text-align:justify">Huth, K., Keetelaar, S., Sekulovski, N*., van den Bergh, D., & Marsman, M. (2024). <a href = "https://advances.in/psychology/10.56296/aip00010/"> Simplifying Bayesian analysis of graphical models for the social sciences with easybgm: A user-friendly R-package</a>. <em>e66366</em>.</p>
+<p style="font-size:medium;text-align:justify">Huth, K., Keetelaar, S., Sekulovski, N*., van den Bergh, D., & Marsman, M. (2024). <a href = "https://advances.in/psychology/10.56296/aip00010/"> Simplifying Bayesian analysis of graphical models for the social sciences with easybgm: A user-friendly R-package</a>. <em>Advances .in/psychology, e66366</em>.</p>
 
 **2023**
 
