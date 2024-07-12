@@ -62,6 +62,4 @@ email: ""
 highlight_name: true
 ---
 
-
-I am a PhD student at the Department of Psychological Methods of the University of Amsterdam. I am currently working on a project focused on creating a new methodology for Bayesian estimation of graphical models (for more details see [this](https://bayesiangraphicalmodeling.com/) page). My primary research interests lie in the areas of Bayesian Statistics, Network Psychometrics and R programming. By combining these fields, I aim to enhance research methods in Psychology and the Social Sciences more broadly. I am open to research collaboration, consultations, teaching, or just having a chat about statistics, data and society.
-
+I am a PhD. candidate at the Department of Psychological Methods at the University of Amsterdam, working in the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). My current project focuses on the further development of Bayesian methods for the analysis of graphical models, mainly for cross-sectional psychological data. My research interests lie in the areas of Bayesian hypothesis testing and network psychometrics. On this website you can find my publications, what I am working on, and my contact information. I am happy to collaborate on research projects, offer consulting, or just engage in stimulating conversations about statistics, science, society, and philosophy in our increasingly complex world.
