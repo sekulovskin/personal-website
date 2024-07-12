@@ -11,7 +11,7 @@ share: false
 
 **In press**
 
-<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N., Visser, I., van Elk, M., & Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
+<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N*., Visser, I., van Elk, M., & Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
 
 **2024**
 
