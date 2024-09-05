@@ -5,6 +5,10 @@ share: false
 
 [Google Scholar Page](https://scholar.google.com/citations?user=cn5deUoAAAAJ&hl=en)
 
+**Submitted for Publication**
+
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N.</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>Royal Society Open Science</em>.</p>
+
 **In press**
 
 <p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N*., Visser, I., van Elk, M., & Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
