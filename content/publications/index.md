@@ -7,7 +7,7 @@ share: false
 
 **Submitted for Publication**
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>Royal Society Open Science</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>PsyArXiv</em>.</p>
 
 **In press**
 
