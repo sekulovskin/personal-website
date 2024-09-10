@@ -9,11 +9,10 @@ share: false
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>PsyArXiv</em>.</p>
 
-**In press**
-
-<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., <b>Sekulovski, N</b>., Visser, I., van Elk, M., & Wagenmakers, E.-J. (in press). <a href = "https://osf.io/preprints/psyarxiv/ajush"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
 
 **2024**
+
+<p style="font-size:medium;text-align:justify">Hoogeveen, S., Borsboom, D., Kucharský, Š, Marsman, M., Molenaar, D., de Ron, J., <b>Sekulovski, N</b>., Visser, I., van Elk, M., & Wagenmakers, E.-J. (2024). <a href = "https://royalsocietypublishing.org/doi/10.1098/rsos.240049"> Prevalence, Patterns, and Predictors of Paranormal Beliefs in the Netherlands: A Several-Analysts Approach</a>. <em>Royal Society Open Science</em>.</p>
 
 <p style="font-size:medium;text-align:justify">Huth, K., Keetelaar, S., <b>Sekulovski, N</b>., van den Bergh, D., & Marsman, M. (2024). <a href = "https://advances.in/psychology/10.56296/aip00010/"> Simplifying Bayesian analysis of graphical models for the social sciences with easybgm: A user-friendly R-package</a>. <em>Advances .in/psychology</em>.</p>
 
