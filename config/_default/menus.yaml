@@ -14,7 +14,7 @@ main:
     url: software/
     weight: 30
   - name: Blog
-    url: /tutorial/
+    url: /blog/
     weight: 40
   - name: Contact
     url: '#contact'
