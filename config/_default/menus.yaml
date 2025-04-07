@@ -14,9 +14,7 @@ main:
     url: software/
     weight: 30
   - name: Blog
-    url: tutorial/
-    ├── index1.html
-    ├── index2.html
+    url: /tutorial/
     weight: 40
   - name: Contact
     url: '#contact'
