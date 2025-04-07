@@ -13,7 +13,7 @@ main:
   - name: Software
     url: software/
     weight: 30
-  - name: BF Tutorial
+  - name: Blog
     url: tutorial/
     weight: 40
   - name: Contact
