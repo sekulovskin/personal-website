@@ -6,7 +6,7 @@ title: Nikola Sekulovski
 superuser: true
 
 # Role/position/tagline
-role: PhD Student, [Psychological Methods, UvA](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
+role: PhD Candidate, [Psychological Methods, UvA](https://psyres.uva.nl/content/research-groups/programme-group-psychological-methods/programme-group-psychological-methods.html)
 
 
 # Short bio (displayed in user profile at end of posts)
