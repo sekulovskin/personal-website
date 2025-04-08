@@ -16,26 +16,24 @@ title: "Tutorial for the paper: Default Bayes Factor for testing Null Hypotheses
 
 <meta name="author" content="Nikola Sekulovski" />
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
+<script>
+
 document.addEventListener('DOMContentLoaded', function(e) {
   var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
   var i, h, a;
   for (i = 0; i < hs.length; i++) {
     h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;
     a = h.attributes;
     while (a.length > 0) h.removeAttribute(a[0].name);
   }
 });
 </script>
 <script>(function() {
-  // If window.HTMLWidgets is already defined, then use it; otherwise create a
-  // new object. This allows preceding code to set options that affect the
-  // initialization process (though none currently exist).
+
   window.HTMLWidgets = window.HTMLWidgets || {};
 
-  // See if we're running in a viewer pane. If not, we're in a web browser.
+
   var viewerMode = window.HTMLWidgets.viewerMode =
       /\bviewer_pane=1\b/.test(window.location);
 
