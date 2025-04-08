@@ -6,7 +6,7 @@
 ### Creator and Maintainer:
 
 **simBgms**</br>
-<p style="font-size:medium;text-align:justify">An R package designed to make it easier and more accessible for researchers to conduct simulation studies using Bayesian Markov Random Field models. The development version can be downloaded from the <a href="https://github.com/sekulovskin/simBgms">Github repository</a>.</p>
+<p style="font-size:medium;text-align:justify">IMPORTANT: This package will soon be updated, stay tuned! An R package designed to make it easier and more accessible for researchers to conduct simulation studies using Bayesian Markov Random Field models. The development version can be downloaded from the <a href="https://github.com/sekulovskin/simBgms">Github repository</a>.</p>
 
 
 ### Contributor:
