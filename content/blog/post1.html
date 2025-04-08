@@ -1,3 +1,8 @@
+---
+title: "A Tutorial for the Paper: A Default Bayes Factor for testing Null Hypotheses About the Fixed Effects of Linear Two-level Models"
+---
+
+
 <!DOCTYPE html>
 
 <html>
@@ -2586,35 +2591,35 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; }
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.at { color: #7d9029; }
+code span.bn { color: #40a070; }
+code span.bu { color: #008000; }
+code span.cf { color: #007020; font-weight: bold; }
+code span.ch { color: #4070a0; }
+code span.cn { color: #880000; }
+code span.co { color: #60a0b0; font-style: italic; }
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.do { color: #ba2121; font-style: italic; }
+code span.dt { color: #902000; }
+code span.dv { color: #40a070; }
+code span.er { color: #ff0000; font-weight: bold; }
+code span.ex { }
+code span.fl { color: #40a070; }
+code span.fu { color: #06287e; }
+code span.im { color: #008000; font-weight: bold; }
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; }
+code span.kw { color: #007020; font-weight: bold; }
+code span.op { color: #666666; }
+code span.ot { color: #007020; }
+code span.pp { color: #bc7a00; }
+code span.sc { color: #4070a0; }
+code span.ss { color: #bb6688; }
+code span.st { color: #4070a0; }
+code span.va { color: #19177c; }
+code span.vs { color: #4070a0; }
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -2771,7 +2776,7 @@ pre, code {
 background-color: #f7f7f7;
 border-radius: 3px;
 color: #333;
-white-space: pre-wrap; 
+white-space: pre-wrap;
 }
 pre {
 border-radius: 3px;
@@ -2839,18 +2844,18 @@ text-decoration: underline; }
 a[href^="https:"] {
 text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
 </style>
 
 
@@ -2997,10 +3002,10 @@ variables.</p>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">st_options</span>(<span class="at">descr.silent =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">descr</span>(tutorial<span class="fl">.1</span>, <span class="at">stats =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;med&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>)) <span class="co"># descriptive statistics for the outcome and the level-1 predictor</span></span></code></pre></div>
-<pre><code>## Descriptive Statistics  
-## tutorial.1  
-## N: 4059  
-## 
+<pre><code>## Descriptive Statistics
+## tutorial.1
+## N: 4059
+##
 ##                 normexam   standlrt
 ## ------------- ---------- ----------
 ##          Mean       0.00       0.00
@@ -3064,13 +3069,13 @@ see, <a href="#ref-luke2017evaluating">Luke, 2017</a>)</span>.</p>
 <pre><code>## MODEL INFO:
 ## Observations: 4059
 ## Dependent Variable: normexam
-## Type: Mixed effects linear regression 
-## 
+## Type: Mixed effects linear regression
+##
 ## MODEL FIT:
 ## AIC = 9328.87, BIC = 9366.72
 ## Pseudo-R² (fixed effects) = 0.32
-## Pseudo-R² (total) = 0.43 
-## 
+## Pseudo-R² (total) = 0.43
+##
 ## FIXED EFFECTS:
 ## --------------------------------------------------------
 ##                      Est.   S.E.   t val.    d.f.      p
@@ -3078,23 +3083,23 @@ see, <a href="#ref-luke2017evaluating">Luke, 2017</a>)</span>.</p>
 ## (Intercept)         -0.01   0.04    -0.29   65.28   0.78
 ## standlrt             0.56   0.02    27.62   62.60   0.00
 ## --------------------------------------------------------
-## 
+##
 ## p values calculated using Kenward-Roger standard errors and d.f.
-## 
+##
 ## RANDOM EFFECTS:
 ## ------------------------------------
-##   Group      Parameter    Std. Dev. 
+##   Group      Parameter    Std. Dev.
 ## ---------- ------------- -----------
-##   school    (Intercept)     0.30    
-##   school     standlrt       0.12    
-##  Residual                   0.74    
+##   school    (Intercept)     0.30
+##   school     standlrt       0.12
+##  Residual                   0.74
 ## ------------------------------------
-## 
+##
 ## Grouping variables:
 ## --------------------------
-##  Group    # groups   ICC  
+##  Group    # groups   ICC
 ## -------- ---------- ------
-##  school      65      0.14 
+##  school      65      0.14
 ## --------------------------</code></pre>
 <p>The fixed effect for <code>standlrt</code> is estimated to be larger
 than zero, which is evident both by its SE and by the highly significant
@@ -3197,7 +3202,7 @@ those obtained with <code>lmer</code> when using FML.</p>
 ##    Observed stochastic nodes: 4059
 ##    Unobserved stochastic nodes: 72
 ##    Total graph size: 16539
-## 
+##
 ## Initializing model</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">update</span>(<span class="at">object =</span> model.def, <span class="at">n.iter =</span> <span class="dv">1000</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
@@ -3206,15 +3211,15 @@ those obtained with <code>lmer</code> when using FML.</p>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">coda.samples</span>(<span class="at">model =</span> model.def, <span class="at">variable.names =</span> parameters, <span class="at">n.iter =</span><span class="dv">1000</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="fu">summary</span>(results)</span></code></pre></div>
-<pre><code>## 
+<pre><code>##
 ## Iterations = 2001:3000
-## Thinning interval = 1 
-## Number of chains = 2 
-## Sample size per chain = 1000 
-## 
+## Thinning interval = 1
+## Number of chains = 2
+## Sample size per chain = 1000
+##
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
-## 
+##
 ##                    Mean       SD  Naive SE Time-series SE
 ## invSigma[1,1]  13.52115  3.58318 0.0801224      0.1558283
 ## invSigma[2,1] -16.27213  8.90956 0.1992239      0.5807041
@@ -3223,9 +3228,9 @@ those obtained with <code>lmer</code> when using FML.</p>
 ## mu.alpha       -0.01271  0.04361 0.0009752      0.0013995
 ## mu.beta         0.55412  0.02121 0.0004743      0.0008501
 ## tau             1.80630  0.04071 0.0009103      0.0009105
-## 
+##
 ## 2. Quantiles for each variable:
-## 
+##
 ##                    2.5%       25%       50%       75%     97.5%
 ## invSigma[1,1]   8.05983  11.05483  13.07467  15.39220  22.17893
 ## invSigma[2,1] -39.38018 -20.46357 -14.63042 -10.09460  -4.02706
@@ -3271,7 +3276,7 @@ burn-in period of a 1000 extra iterations).</p>
 ##    Observed stochastic nodes: 4059
 ##    Unobserved stochastic nodes: 72
 ##    Total graph size: 16539
-## 
+##
 ## Initializing model</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">update</span>(<span class="at">object =</span> model.def, <span class="at">n.iter =</span> <span class="dv">1000</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
@@ -3503,20 +3508,20 @@ variance estimated from a random intercept-only model.</p>
 <pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
 ## Formula: normexam ~ 1 + (1 | school)
 ##    Data: tutorial.1
-## 
-##      AIC      BIC   logLik deviance df.resid 
-##  11016.6  11035.6  -5505.3  11010.6     4056 
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.9471 -0.6486  0.0117  0.6992  3.6578 
-## 
+##
+##      AIC      BIC   logLik deviance df.resid
+##  11016.6  11035.6  -5505.3  11010.6     4056
+##
+## Scaled residuals:
+##     Min      1Q  Median      3Q     Max
+## -3.9471 -0.6486  0.0117  0.6992  3.6578
+##
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  school   (Intercept) 0.1686   0.4107  
-##  Residual             0.8478   0.9207  
+##  school   (Intercept) 0.1686   0.4107
+##  Residual             0.8478   0.9207
 ## Number of obs: 4059, groups:  school, 65
-## 
+##
 ## Fixed effects:
 ##             Estimate Std. Error t value
 ## (Intercept) -0.01317    0.05363  -0.246</code></pre>
@@ -3568,17 +3573,17 @@ size and <code>ref</code> set to <code>TRUE</code>:</p>
 <span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>                    <span class="at">N =</span> MI_N_eff, <span class="at">seed =</span> <span class="dv">123</span>, <span class="at">jref =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb62-3"><a href="#cb62-3" tabindex="-1"></a><span class="fu">print</span>(BFs<span class="fl">.1</span>)   </span></code></pre></div>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit   Com   BF.u  BF.c               PMPa  PMPb  PMPc 
+##
+##    Fit   Com   BF.u  BF.c               PMPa  PMPb  PMPc
 ## H1 0.000 1.053 0.000 0.000              0.000 0.000 0.000
 ## H2 1.000 0.500 2.000 22919082073133.293 1.000 0.667 1.000
-## Hu                                            0.333      
+## Hu                                            0.333
 ## Hc 0.000 0.500 0.000                                0.000
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=0
 ##   H2: standlrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <p>The <span class="math inline">\(BF_{0u}\)</span> is a very small
 number close to zero, which indicates there is no support in the data
@@ -3656,13 +3661,13 @@ for <code>standlrt</code> equal to zero and redo all the analyses.</p>
 <pre><code>## MODEL INFO:
 ## Observations: 4059
 ## Dependent Variable: normexam
-## Type: Mixed effects linear regression 
-## 
+## Type: Mixed effects linear regression
+##
 ## MODEL FIT:
 ## AIC = 8800.37, BIC = 8838.23
 ## Pseudo-R² (fixed effects) = 0.00
-## Pseudo-R² (total) = 0.16 
-## 
+## Pseudo-R² (total) = 0.16
+##
 ## FIXED EFFECTS:
 ## -------------------------------------------------------
 ##                     Est.   S.E.   t val.    d.f.      p
@@ -3670,23 +3675,23 @@ for <code>standlrt</code> equal to zero and redo all the analyses.</p>
 ## (Intercept)         0.01   0.04     0.23   65.23   0.82
 ## standlrt            0.00   0.02     0.09   61.43   0.93
 ## -------------------------------------------------------
-## 
+##
 ## p values calculated using Kenward-Roger standard errors and d.f.
-## 
+##
 ## RANDOM EFFECTS:
 ## ------------------------------------
-##   Group      Parameter    Std. Dev. 
+##   Group      Parameter    Std. Dev.
 ## ---------- ------------- -----------
-##   school    (Intercept)     0.29    
-##   school     standlrt       0.10    
-##  Residual                   0.70    
+##   school    (Intercept)     0.29
+##   school     standlrt       0.10
+##  Residual                   0.70
 ## ------------------------------------
-## 
+##
 ## Grouping variables:
 ## --------------------------
-##  Group    # groups   ICC  
+##  Group    # groups   ICC
 ## -------- ---------- ------
-##  school      65      0.15 
+##  school      65      0.15
 ## --------------------------</code></pre>
 <p>Note that the value for the fixed effect of <code>standlrt</code> is
 estimated to be zero (this can also be seen from the highly
@@ -3701,17 +3706,17 @@ default BF will tend towards 19.</p>
 <span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>                    <span class="at">N =</span> <span class="dv">1070</span>, <span class="at">seed =</span> <span class="dv">123</span>, <span class="at">jref =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a><span class="fu">print</span>(BFs<span class="fl">.2</span>)     </span></code></pre></div>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc 
+##
+##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc
 ## H1 23.062 1.218 18.927 18.927 0.946 0.901 0.904
 ## H2 0.535  0.500 1.070  1.150  0.054 0.051 0.051
-## Hu                                  0.048      
+## Hu                                  0.048
 ## Hc 0.465  0.500 0.930                     0.044
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=0
 ##   H2: standlrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <p>The <span class="math inline">\(BF_{0u} = 18.93\)</span> and the
 <span class="math inline">\(BF_{iu} = 1.1\)</span>. In this case, we
@@ -3752,13 +3757,13 @@ estimated coefficient for the level-2 predictor <code>avslrt</code>.</p>
 <pre><code>## MODEL INFO:
 ## Observations: 4059
 ## Dependent Variable: normexam
-## Type: Mixed effects linear regression 
-## 
+## Type: Mixed effects linear regression
+##
 ## MODEL FIT:
 ## AIC = 9324.43, BIC = 9368.59
 ## Pseudo-R² (fixed effects) = 0.35
-## Pseudo-R² (total) = 0.44 
-## 
+## Pseudo-R² (total) = 0.44
+##
 ## FIXED EFFECTS:
 ## --------------------------------------------------------
 ##                      Est.   S.E.   t val.    d.f.      p
@@ -3767,23 +3772,23 @@ estimated coefficient for the level-2 predictor <code>avslrt</code>.</p>
 ## standlrt             0.55   0.02    27.09   63.16   0.00
 ## avslrt               0.29   0.11     2.70   71.47   0.01
 ## --------------------------------------------------------
-## 
+##
 ## p values calculated using Kenward-Roger standard errors and d.f.
-## 
+##
 ## RANDOM EFFECTS:
 ## ------------------------------------
-##   Group      Parameter    Std. Dev. 
+##   Group      Parameter    Std. Dev.
 ## ---------- ------------- -----------
-##   school    (Intercept)     0.27    
-##   school     standlrt       0.12    
-##  Residual                   0.74    
+##   school    (Intercept)     0.27
+##   school     standlrt       0.12
+##  Residual                   0.74
 ## ------------------------------------
-## 
+##
 ## Grouping variables:
 ## --------------------------
-##  Group    # groups   ICC  
+##  Group    # groups   ICC
 ## -------- ---------- ------
-##  school      65      0.12 
+##  school      65      0.12
 ## --------------------------</code></pre>
 <p>Now, we see that the level-2 predictor is also larger than zero,
 evident both by the value of the estimate and its respective SE but also
@@ -3807,17 +3812,17 @@ sample size does not influence the BF when using <span class="math inline">\(J_{
 <span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a>                    <span class="at">N =</span> <span class="st">&quot;ICC_effective&quot;</span>, <span class="at">seed =</span> <span class="dv">123</span>, <span class="at">jref =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb83-3"><a href="#cb83-3" tabindex="-1"></a><span class="fu">print</span>(BFs<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit   Com   BF.u  BF.c     PMPa  PMPb  PMPc 
+##
+##    Fit   Com   BF.u  BF.c     PMPa  PMPb  PMPc
 ## H1 0.000 3.946 0.000 0.000    0.000 0.000 0.000
 ## H2 0.997 0.236 4.224 1229.900 1.000 0.809 0.999
-## Hu                                  0.191      
+## Hu                                  0.191
 ## Hc 0.003 0.764 0.003                      0.001
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=avslrt=0
 ##   H2: standlrt&gt;0&amp;avslrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a>BFs<span class="fl">.3</span><span class="sc">$</span>b</span></code></pre></div>
 <pre><code>## [1] 0.05263158</code></pre>
@@ -3876,13 +3881,13 @@ are zero i.e., the <span class="math inline">\(R^2_m = 0\)</span>.</p>
 <pre><code>## MODEL INFO:
 ## Observations: 4059
 ## Dependent Variable: normexam
-## Type: Mixed effects linear regression 
-## 
+## Type: Mixed effects linear regression
+##
 ## MODEL FIT:
 ## AIC = 8934.82, BIC = 8978.98
 ## Pseudo-R² (fixed effects) = 0.00
-## Pseudo-R² (total) = 0.14 
-## 
+## Pseudo-R² (total) = 0.14
+##
 ## FIXED EFFECTS:
 ## --------------------------------------------------------
 ##                      Est.   S.E.   t val.    d.f.      p
@@ -3891,23 +3896,23 @@ are zero i.e., the <span class="math inline">\(R^2_m = 0\)</span>.</p>
 ## standlrt            -0.01   0.02    -0.35   62.44   0.73
 ## avslrt              -0.08   0.11    -0.75   71.30   0.45
 ## --------------------------------------------------------
-## 
+##
 ## p values calculated using Kenward-Roger standard errors and d.f.
-## 
+##
 ## RANDOM EFFECTS:
 ## ------------------------------------
-##   Group      Parameter    Std. Dev. 
+##   Group      Parameter    Std. Dev.
 ## ---------- ------------- -----------
-##   school    (Intercept)     0.26    
-##   school     standlrt       0.10    
-##  Residual                   0.71    
+##   school    (Intercept)     0.26
+##   school     standlrt       0.10
+##  Residual                   0.71
 ## ------------------------------------
-## 
+##
 ## Grouping variables:
 ## --------------------------
-##  Group    # groups   ICC  
+##  Group    # groups   ICC
 ## -------- ---------- ------
-##  school      65      0.12 
+##  school      65      0.12
 ## --------------------------</code></pre>
 <p>We can now see that the <span class="math inline">\(R^2_m\)</span> =
 0, thus we expect the BF to be <em>in favour</em> of the null
@@ -3919,17 +3924,17 @@ hypothesis.</p>
 <span id="cb94-2"><a href="#cb94-2" tabindex="-1"></a>                    <span class="at">N =</span> <span class="st">&quot;ICC_effective&quot;</span>, <span class="at">seed =</span> <span class="dv">123</span>, <span class="at">jref =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb94-3"><a href="#cb94-3" tabindex="-1"></a><span class="fu">print</span>(BFs<span class="fl">.4</span>)</span></code></pre></div>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc 
+##
+##    Fit    Com   BF.u   BF.c   PMPa  PMPb  PMPc
 ## H1 58.159 4.527 12.846 12.846 0.978 0.908 0.895
 ## H2 0.069  0.236 0.294  0.241  0.022 0.021 0.020
-## Hu                                  0.071      
+## Hu                                  0.071
 ## Hc 0.931  0.764 1.218                     0.085
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=avslrt=0
 ##   H2: standlrt&gt;0&amp;avslrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># calculate BF_ui</span></span>
 <span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>BF_0i<span class="fl">.2</span> <span class="ot">&lt;-</span> BFs<span class="fl">.4</span>[[<span class="st">&quot;fit&quot;</span>]]<span class="sc">$</span>BF[<span class="dv">1</span>]<span class="sc">/</span>BFs<span class="fl">.4</span>[[<span class="st">&quot;fit&quot;</span>]]<span class="sc">$</span>BF[<span class="dv">2</span>]</span>
@@ -3957,13 +3962,13 @@ and <code>avslrt</code>.</p>
 <pre><code>## MODEL INFO:
 ## Observations: 4059
 ## Dependent Variable: normexam
-## Type: Mixed effects linear regression 
-## 
+## Type: Mixed effects linear regression
+##
 ## MODEL FIT:
 ## AIC = 8933.29, BIC = 8983.76
 ## Pseudo-R² (fixed effects) = 0.00
-## Pseudo-R² (total) = 0.14 
-## 
+## Pseudo-R² (total) = 0.14
+##
 ## FIXED EFFECTS:
 ## ------------------------------------------------------------
 ##                          Est.   S.E.   t val.    d.f.      p
@@ -3973,23 +3978,23 @@ and <code>avslrt</code>.</p>
 ## avslrt                  -0.04   0.11    -0.33   71.86   0.74
 ## standlrt:avslrt          0.10   0.05     1.87   69.68   0.07
 ## ------------------------------------------------------------
-## 
+##
 ## p values calculated using Kenward-Roger standard errors and d.f.
-## 
+##
 ## RANDOM EFFECTS:
 ## ------------------------------------
-##   Group      Parameter    Std. Dev. 
+##   Group      Parameter    Std. Dev.
 ## ---------- ------------- -----------
-##   school    (Intercept)     0.26    
-##   school     standlrt       0.10    
-##  Residual                   0.71    
+##   school    (Intercept)     0.26
+##   school     standlrt       0.10
+##  Residual                   0.71
 ## ------------------------------------
-## 
+##
 ## Grouping variables:
 ## --------------------------
-##  Group    # groups   ICC  
+##  Group    # groups   ICC
 ## -------- ---------- ------
-##  school      65      0.12 
+##  school      65      0.12
 ## --------------------------</code></pre>
 <p>Based on the estimate and its standard error, the cross-level
 interaction effect is larger than the fixed effects of the two
@@ -4012,19 +4017,19 @@ and <span class="math inline">\(H_i:\beta_1 &gt; 0 \; \&amp;\;
 <span id="cb102-5"><a href="#cb102-5" tabindex="-1"></a>BFs<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">bain_2lmer</span>(model<span class="fl">.5</span>, hypotheses, <span class="at">standardize =</span> F, <span class="at">N =</span> <span class="st">&quot;ICC_effective&quot;</span>, <span class="at">seed =</span> <span class="dv">123</span>, <span class="at">jref =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb102-6"><a href="#cb102-6" tabindex="-1"></a><span class="fu">print</span>(BFs<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## Bayesian informative hypothesis testing for an object of class numeric:
-## 
-##    Fit    Com    BF.u  BF.c  PMPa  PMPb  PMPc 
+##
+##    Fit    Com    BF.u  BF.c  PMPa  PMPb  PMPc
 ## H1 79.317 12.052 6.581 6.581 0.682 0.618 0.618
 ## H2 71.897 34.967 2.056 2.056 0.213 0.193 0.193
 ## H3 0.145  0.144  1.009 1.010 0.105 0.095 0.095
-## Hu                                 0.094      
+## Hu                                 0.094
 ## Hc 0.855  0.856  0.999                   0.094
-## 
+##
 ## Hypotheses:
 ##   H1: standlrt=avslrt=0
 ##   H2: standlrt=avslrt=standlrt:avslrt=0
 ##   H3: standlrt&gt;0&amp;avslrt&gt;0&amp;standlrt:avslrt&gt;0
-## 
+##
 ## Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement. PMPa contains the posterior model probabilities of the hypotheses specified. PMPb adds Hu, the unconstrained hypothesis. PMPc adds Hc, the complement of the union of the hypotheses specified.</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a>BFs<span class="fl">.5</span><span class="sc">$</span>b</span></code></pre></div>
 <pre><code>## [1] 0.1404422</code></pre>
