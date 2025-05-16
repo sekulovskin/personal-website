@@ -9,10 +9,9 @@ share: false
 
 <p style="font-size:medium;text-align:justify"><b>Marsman, M., Waldorp, L. J., <b>Sekulovski, N</b>., & Haslbeck, J. M. B. (2024). <a href = "https://doi.org/10.31219/osf.io/f4pk9"> A Bayesian Independent Samples t Test for Parameter Differences in Networks of Binary and Ordinal Variables</a>. <em>PsyArXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>PsyArXiv</em>.</p>
-
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N<b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M.(2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v1"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
 
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2024). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>PsyArXiv</em>.</p>
 
 **2024**
 
