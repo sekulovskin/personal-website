@@ -11,7 +11,7 @@ This is a short software tutorial accompanying the paper 'Stochastic Block Model
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,10 +92,10 @@ div.csl-indent {
 <script src="tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="tutorial_files/libs/quarto-html/anchor.min.js"></script>
 <link href="tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="tutorial_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="tutorial_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="tutorial_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="tutorial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="tutorial_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="tutorial_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -144,7 +144,7 @@ text-align: justify}
 </style>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is a short software tutorial accompanying the paper <em>“A Stochastic Block Prior for Clustering in Graphical Models”</em>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(cf., <a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., in press</a>)</span>. Apart from providing an elegant approach for incorporating the theoretical assumption of clustering directly into the statistical model, the approach comes with the methodological benefit of allowing researchers to infer the number of clusters in the network model given the data at hand, as well as to test hypotheses about clustering.</p>
+<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Stochastic Block Prior for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(cf., <a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. Apart from providing an elegant approach for incorporating the theoretical assumption of clustering directly into the statistical model, the approach comes with the methodological benefit of allowing researchers to infer the number of clusters in the network model given the data at hand, as well as to test hypotheses about clustering.</p>
 <p>In this brief tutorial, we first illustrate how this analysis can be done using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>, and then using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. We will start with the package <code>bgms</code>, which includes the core code to perform the analysis. Then, we will demonstrate how the same analysis can be performed using <code>easybgm</code>, which offers a more accessible way to run the same procedure for those without a strong background in <code>R</code>.</p>
 </section>
 <section id="bgms" class="level1">
@@ -154,10 +154,10 @@ text-align: justify}
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"remotes"</span>)) { </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)   </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}   </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"MaartenMarsman/bgms"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Bayesian-Graphical-Modelling-Lab/bgms"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, say we wish to analyze whether the network structure inferred from our empirical dataset exhibits clustering. To do this, we estimate the most representative vector of node allocations given the data, which simply denotes the cluster to which each node is assigned, thereby providing insight into potential clustering in the network. We also wish to test hypotheses about clustering using the cluster Bayes factors. All of this can be achieved using the <code>bgm</code> function in the <code>bgms</code> package.</p>
-<p>The first step is to estimate the model using the <code>bgm</code> function, setting the <code>edge_prior</code> argument to <code>"Stochastic-Block"</code>. There are also additional arguments relevant to the SBM. One is the concentration parameter of the Dirichlet prior on the cluster allocation probabilities. This parameter controls the expected cluster sizes: higher values lead to more uniform cluster sizes, while lower values promote more uneven, possibly sparse cluster allocations. The default is <code>dirichlet_alpha = 1</code>. Another is the rate parameter (<span class="math inline">\(\lambda\)</span>) of the truncated Poisson prior, which governs the prior on the number of clusters. This parameter reflects the expected number of clusters before observing the data; by default, <code>lambda = 1</code>, which implies no prior assumption of clustering. In the example code below, we use the default values for these prior hyperparameters. We also leave the default settings for the remaining function arguments. However, we strongly recommend that researchers carefully consider these values when conducting their own analyses. For more details, see, for example <span class="citation" data-cites="bgms_package">Marsman et al. (<a href="#ref-bgms_package" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="Huth2024easybgm">Huth et al. (<a href="#ref-Huth2024easybgm" role="doc-biblioref">2024</a>)</span>.</p>
+<p>The first step is to estimate the model using the <code>bgm</code> function, setting the <code>edge_prior</code> argument to <code>"Stochastic-Block"</code>. There are also additional arguments relevant to the SBM. One is the concentration parameter of the Dirichlet prior on the cluster allocation probabilities. This parameter controls the expected cluster sizes: higher values lead to more uniform cluster sizes, while lower values promote more uneven, possibly sparse cluster allocations. The default is <code>dirichlet_alpha = 1</code>. Another is the rate parameter (<span class="math inline">\(\lambda\)</span>) of the truncated Poisson prior, which governs the prior on the number of clusters. This parameter reflects the expected number of clusters before observing the data; by default, <code>lambda = 1</code>, which implies no prior assumption of clustering. In the example code below, we use the default values for these prior hyperparameters. We also leave the default settings for the remaining function arguments. However, we strongly recommend that researchers carefully consider these values when conducting their own analyses. For more details, see, for example <span class="citation" data-cites="bgms_package">Marsman et al. (<a href="#ref-bgms_package" role="doc-biblioref">2023</a>)</span>. If you use <code>save = TRUE</code>, refer to the subsection below for an additional step needed to retrieve the summarized results.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms) <span class="co"># load the bgms package </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># load the data</span></span>
@@ -219,7 +219,7 @@ text-align: justify}
 <h2 class="anchored" data-anchor-id="when-save-true">when <code>save = TRUE</code></h2>
 <p>We would also like to note that, if for any reason, researchers wish to save the samples from the posterior distribution, then in order to obtain the summarized posterior clustering information, they would need to use the function <code>summarySBM</code> as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(Wenchuan, </span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(dataset, </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>, </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">save =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>cluster_summerized <span class="ot">&lt;-</span> <span class="fu">summarySBM</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -264,7 +264,7 @@ text-align: justify}
 Huth, K. B. S., Keetelaar, S., Sekulovski, N., Bergh, D. van den, &amp; Marsman, M. (2024). Simplifying bayesian analysis of graphical models for the social sciences with easybgm: A user-friendly r-package. <em>AIP Advances</em>, <em>e66366</em>. <a href="https://doi.org/10.56296/aip00010">https://doi.org/10.56296/aip00010</a>
 </div>
 <div id="ref-MarsmanHaslbeck_2023_ordinal" class="csl-entry" role="listitem">
-Marsman, M., Bergh, D. van den, &amp; Haslbeck, J. M. B. (in press). Bayesian analysis of the ordinal <span>M</span>arkov random field. <em>Psychometrika</em>. <a href="https://doi.org/10.1017/psy.2024.4">https://doi.org/10.1017/psy.2024.4</a>
+Marsman, M., Bergh, D. van den, &amp; Haslbeck, J. M. B. (2025). Bayesian analysis of the ordinal <span>M</span>arkov random field. <em>Psychometrika</em>. <a href="https://doi.org/10.1017/psy.2024.4">https://doi.org/10.1017/psy.2024.4</a>
 </div>
 <div id="ref-bgms_package" class="csl-entry" role="listitem">
 Marsman, M., Huth, K., Sekulovski, N., &amp; Bergh, D. van den. (2023). <em>Bgms: <span>B</span>ayesian variable selection for networks of binary and/or ordinal variables</em>. <a href="https://CRAN.R-project.org/package=bgms">https://CRAN.R-project.org/package=bgms</a>
@@ -353,8 +353,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -465,7 +463,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
