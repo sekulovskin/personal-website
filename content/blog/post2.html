@@ -193,9 +193,9 @@ text-align: justify}
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>posterior_odds <span class="ot">&lt;-</span> <span class="fu">sum</span>(H1) <span class="sc">/</span> H0 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After calculating the posterior odds, we need to divide these by the prior odds in order to obtain the Bayes factor. For this Bayes factor, the prior odds are defined as:</p>
-<p><span class="math display">\[ \frac{(\exp(\lambda) - 1 - \lambda)}{\lambda}.\]</span> Since we leave the default value for the rate parameter <span class="math inline">\(\lambda\)</span> of the Poisson distribution, we calculate the prior odds as follows:</p>
+<p><span class="math display">\[ \frac{(\exp(\lambda) - 1 - \lambda)}{\lambda}.\]</span> We calculate the prior odds as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> fit<span class="sc">$</span>arguments<span class="sc">$</span>lambda  <span class="co"># extract the value of lambda used (in this case the default)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>prior_odds <span class="ot">&lt;-</span> (<span class="fu">exp</span>(lambda) <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> lambda) <span class="sc">/</span> lambda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally the Bayes factor is given by</p>
@@ -231,7 +231,7 @@ text-align: justify}
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pheatmap"</span>) <span class="co"># if not already installed</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(fit<span class="sc">$</span>posterior_coclustering_matrix, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(fit<span class="sc">$</span>posterior_mean_coclustering_matrix, </span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">display_numbers =</span> <span class="cn">FALSE</span></span>
