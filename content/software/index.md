@@ -24,3 +24,8 @@
 **easybgm**</br>
 <p style="font-size:medium;text-align:justify">A user-friendly wrapper package for Bayesian analysis of graphical models. Can be downloaded from <a href="https://cran.r-project.org/web/packages/easybgm/index.html">cran</a> and developer versions can be downloaded from the <a href="https://github.com/sekulovskin/easybgm">Github repository</a>.</p> 
 </br>
+
+
+**JASP**</br>
+<p style="font-size:medium;text-align:justify"> A free, open-source statistical software program developed at the University of Amsterdam. Can be downloaded from <a href="https://jasp-stats.org/">here</a>. Contributed to the Bayesian network module</p> 
+</br>
