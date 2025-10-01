@@ -15,7 +15,7 @@ share: false
 
 **In Press**
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>PsyArXiv</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
 **2024**
 
