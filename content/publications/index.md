@@ -11,6 +11,7 @@ share: false
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N<b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M.(2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v1"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
 
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N<b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v1"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
 
