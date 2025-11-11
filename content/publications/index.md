@@ -7,16 +7,16 @@ share: false
 
 **Submitted for Publication**
 
-<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>.Sekulovski, N</b>.., Delhalle, M., & Sarafoglou, A. (2025). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Safeguarding Against Bias Without Preregistration: A Tutorial on Analysis Blinding for Network Analysis.</a>. <em>PsyArXiv</em></p>
+<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>Sekulovski, N</b>., Delhalle, M., & Sarafoglou, A. (2025). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Safeguarding Against Bias Without Preregistration: A Tutorial on Analysis Blinding for Network Analysis.</a>. <em>PsyArXiv</em></p>
 
 <p style="font-size:medium;text-align:justify">Pfadt, J. M., Bartoš, F., Godmann, H. R., Waaijers, M., Groot, L., Heo, I. , 
 Mensink, L., Nak, J., De Ruiter, J. P., Sarafoglou, A., Siepe, B. S., Arena, G. M., Akrong, E., Aust, F., van den Bergh, D., Brenner, W., Doekemeijer, R. A., Donzallaz, M. C., van Doorn, J., Echevarria, N. O., Finnemann, A., Geller, G., Hato, T., Koskinen, E., 
 Krijgsman, B., Kulbe, L., Lüken, M., Marsman, M.,  Ott, V. L., Pawel, S., Piestrak, O., de Ron, J., <b>Sekulovski, N</b>., Serry, M., Stefanów, A., Stevenson, N., Sadowski, B., Sopuch,  M., Vasileiou, A., Visser,  I., Völler, M., Wiechert, S., de Wit, K., Wuth,  J., Wagenmakers, E.-J. (2025). <a href = "https://osf.io/preprints/psyarxiv/ck3js_v1">A Methodological Metamorphosis: The Rapid Rise of Bayesian Inference and Open 
 Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>.., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M.(2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v1"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M.(2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v1"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>.., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v1"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>PsyArXiv</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v1"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
 
