@@ -22,7 +22,7 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 <p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://doi.org/10.31219/osf.io/f4pk9"> A Bayesian Independent Samples t Test for Parameter Differences in Networks of Binary and Ordinal Variables</a>. <em>Psychometrika</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://doi.org/10.31234/osf.io/93nxp"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
 **2024**
 
