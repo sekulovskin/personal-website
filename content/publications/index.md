@@ -16,11 +16,13 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v1"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
 
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N.</b>, Bartoš, F., van den Bergh, D., Arena, G., Godmann, H. R., Goyal, V., Pfadt, J. M., Marsman, M., & Raftery, A. E. (2025). <a href="https://doi.org/10.48550/arXiv.2511.23216">Comparing variable selection and model averaging methods for logistic regression</a>. <em>arXiv</em>.</p>
+
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v1"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
 
-<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://doi.org/10.31219/osf.io/f4pk9"> A Bayesian Independent Samples t Test for Parameter Differences in Networks of Binary and Ordinal Variables</a>. <em>Psychometrika</em>.</p>
+<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://doi.org/10.31219/osf.io/f4pk9"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
