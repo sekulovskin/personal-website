@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="tutorial_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="tutorial_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="tutorial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="tutorial_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="tutorial_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -146,8 +146,8 @@ text-align: justify}
 </style>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Stochastic Block Prior for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(cf., <a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to formally test hypotheses about clustering.</p>
-<p>In this brief tutorial, the analysis is first illustrated using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>, which contains the core functions needed to implement the method. The same analysis is then demonstrated using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. The package <code>easybgm</code> provides a more accessible interface for conducting the analysis, particularly for users without a strong background in <code>R</code>.</p>
+<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Stochastic Block Prior for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(cf., <a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to test hypotheses about clustering.</p>
+<p>In this brief tutorial, a mock analysis is first illustrated using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>. The same analysis is then demonstrated using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. The package <code>easybgm</code> provides a more accessible interface for conducting the analysis, particularly for users without a strong background in <code>R</code>.</p>
 </section>
 <section id="bgms" class="level1">
 <h1><code>bgms</code></h1>
@@ -156,16 +156,55 @@ text-align: justify}
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"bgms"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms) <span class="co"># load the bgms package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Suppose the goal is to assess whether the network structure inferred from an empirical dataset exhibits clustering. This can be investigated by estimating the most representative vector of node allocations given the data, which reveals the cluster assignment of each node and thus provides insight into potential clustering in the network. In addition, the function returns the estimated posterior probabilities for different numbers of clusters, enabling hypothesis testing about clustering using Bayes factors. All of this functionality is available through the <code>bgm</code> function in the <code>bgms</code> package.</p>
-<p>The first step is to estimate the model using <code>bgm</code>, and setting the <code>edge_prior</code> argument to <code>"Stochastic-Block"</code>. Several additional arguments are relevant when using the stochastic block model (SBM) as a prior for the network structure. One is the concentration parameter of the Dirichlet hyperprior on the cluster allocation probabilities (<code>dirichlet_alpha</code>). This parameter influences the expected cluster sizes: higher values favor more balanced cluster sizes, while lower values lead to more uneven, possibly sparse, cluster structures. The default is <code>dirichlet_alpha = 1</code>. Another argument is the rate parameter of the truncated Poisson prior (denoted as <code>lambda</code>), which governs the prior distribution over the number of clusters. This parameter encodes the expected number of clusters we expect before seeing the data; the default value <code>lambda = 1</code> implies no clustering (i.e., the nodes in the network form one cluster).</p>
+<p>Suppose the goal is to assess whether the network structure inferred from an empirical dataset exhibits clustering. This can be investigated by estimating the most representative vector of node allocations given the data, which reveals the cluster assignment of each node and thus provides insight into potential clustering in the network. In addition, the function returns the estimated posterior probabilities for different numbers of clusters, enabling hypothesis testing about clustering using Bayes factors. All of this functionality is available in the <code>bgm</code> function.</p>
+<p>The first step is to estimate the model using <code>bgm</code> with the argument <code>edge_prior = "Stochastic-Block"</code>. When using the stochastic block model (SBM) as a prior on the network structure, several additional arguments are important:</p>
+<ul>
+<li><strong>Beta prior on edge inclusion probabilities</strong>
+<ul>
+<li>The prior inclusion probability for the within and between block edges:
+<ul>
+<li><code>beta_bernoulli_alpha</code><br>
+</li>
+<li><code>beta_bernoulli_beta</code><br>
+</li>
+</ul></li>
+<li>Currently, in the CRAN version of bgms, users can only specify one set of these hyperparameters, however, in the <a href="https://github.com/Bayesian-Graphical-Modelling-Lab/bgms">GitHub version</a> of <code>bgms</code>, users may also specify separate shape parameters for within-cluster and between-cluster edges.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+</ul></li>
+<li><strong>Truncated Poisson prior on the number of clusters</strong>
+<ul>
+<li>The rate parameter <code>lambda</code> sets the prior distribution over the number of clusters.<br>
+</li>
+<li>It reflects how many clusters we expect <em>before</em> observing the data; <code>lambda = 1</code> corresponds roughly to expecting no clustering (all nodes in one cluster).<br>
+</li>
+<li>Although <code>lambda</code> is not exactly the expected number of clusters, it tracks it closely. For example:
+<ul>
+<li><code>lambda = 1.59</code> → expected number of clusters ≈ 2<br>
+</li>
+<li><code>lambda = 2.82</code> → expected number of clusters ≈ 3<br>
+</li>
+<li><code>lambda = 3.92</code> → expected number of clusters ≈ 4</li>
+</ul></li>
+</ul></li>
+<li><strong>Dirichlet hyperprior for cluster allocations</strong>
+<ul>
+<li>The concentration parameter <code>dirichlet_alpha</code> governs the expected sizes of the clusters.<br>
+</li>
+<li>Larger values encourage more balanced cluster sizes.<br>
+</li>
+<li>Smaller values encourage uneven, potentially sparse cluster structures.<br>
+</li>
+<li>Default: <code>dirichlet_alpha = 1</code>.</li>
+</ul></li>
+</ul>
 <p>In the example code below, the default values for these hyperparameters are used, along with the default settings for the remaining prior hyperparameters of the OMRF and other function arguments. Nevertheless, it is strongly recommended that researchers carefully evaluate these values when conducting their analyses. For further details, see, for example, <span class="citation" data-cites="bgms_package">Marsman et al. (<a href="#ref-bgms_package" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="SekulovskiSensitivity_2023">Sekulovski et al. (<a href="#ref-SekulovskiSensitivity_2023" role="doc-biblioref">2024</a>)</span>.</p>
 <p>In the code examples, <code>dataset</code> is a placeholder for the actual dataset to be analyzed. This dataset should be an <span class="math inline">\(n \times p\)</span> matrix or data frame, where <span class="math inline">\(n\)</span> denotes the number of observations and <span class="math inline">\(p\)</span> the number of variables. The variables may be binary, ordinal, or a combination of both.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms) <span class="co"># load the bgms package </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run the model</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(dataset, <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(data, <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, first we check the estimated (posterior) cluster allocation vector. The output is a vector whose length equals the number of variables (columns) in the dataset. There are two possible options for this, the posterior mean vector and the posterior mode vector. To examine this, we can inspect the allocations vectors in the fit object, where the results of our analysis are stored.</p>
+<p>Now, first we check the estimated (posterior) cluster allocations of the nodes. The output is a vector whose length equals the number of variables (columns) in the dataset. There are two possible options: the posterior mean vector and the posterior mode vector. To examine this, we can inspect the allocations vectors in the fit object, where the results of our analysis are stored.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Posterior mean:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit<span class="sc">$</span>posterior_mean_allocations)</span>
@@ -182,7 +221,7 @@ text-align: justify}
 \bigg/ \underbrace{\frac{p(\mathcal{H}_1)}{p(\mathcal{H}_0)}}_{\text{Prior Odds}}\]</span></p>
 <p>Depending on the hypotheses, we consider two types of Bayes factors:</p>
 <ul>
-<li>The Bayes factor testing the hypothesis of clustering, i.e., <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, against the null hypothesis of no clustering <span class="math inline">\(\mathcal{H}_0: B = 1\)</span>. For this, we first need to calculate the posterior odds of the two hypotheses, which is simply the ratio of the posterior probabilities of the two hypotheses. For <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, we would need to sum the posterior probabilities of all possible numbers of clusters greater than 1.</li>
+<li>The Bayes factor testing the hypothesis of clustering, i.e., <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, against the null hypothesis of no clustering <span class="math inline">\(\mathcal{H}_0: B = 1\)</span>. For this, we first need to calculate the posterior odds of the two hypotheses, which is simply the ratio of the posterior probabilities of the two hypotheses. For <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, we need to sum the posterior probabilities of all possible numbers of clusters greater than 1.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>H1 <span class="ot">&lt;-</span> <span class="fu">unname</span>(fit<span class="sc">$</span>posterior_num_blocks[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>]) <span class="co"># posterior probabilities under H1</span></span>
@@ -224,7 +263,7 @@ text-align: justify}
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H0:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>BF_12 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, researchers can also use the coclustering matrix, a symmetric matrix that contains the pairwise proportions of co-occurrence for all variables. This matrix can be plotted to visually assess the estimated number of clusters and to identify nodes that tend to switch between clusters.</p>
+<p>Researchers can also inspect the posterior coclustering matrix, a symmetric matrix that records, for every pair of variables, the proportion of posterior samples in which they are assigned to the same cluster. This matrix provides a useful visual summary of the clustering uncertainty: coherent blocks along the diagonal indicate well-supported clusters, while diffuse or mixed patterns highlight variables that frequently switch between clusters or lack a stable assignment.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pheatmap"</span>) <span class="co"># if not already installed</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
@@ -238,39 +277,33 @@ text-align: justify}
 </section>
 <section id="easybgm" class="level1">
 <h1><code>easybgm</code></h1>
-<p>Everything that has been illustrated using <code>bgms</code> can be more easily achieved using <code>easybgm</code>. Currently, the version of <code>easybgm</code> that includes the SBM prior is not yet available on CRAN. This update will be released on CRAN shortly. In the meantime, if you encounter any errors after installing the packages as described below, please feel free to contact the author of this blog post or open an issue on <a href="https://github.com/sekulovskin/easybgm">GitHub</a>. For now, we need to use the following code to install the stable GitHub version. On Windows, you must install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> before installing from GitHub using the following code, since the packages are compiled from source. On macOS and Linux, make sure the system’s build tools are installed (Xcode Command Line Tools on macOS, build-essential on Linux).</p>
+<p>Everything that has been illustrated using <code>bgms</code> can be more easily achieved using <code>easybgm</code>. We simply execute the analysis as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install easybgm (SBM branch) </span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#and all dependencies including the GitHub version of 'bgms'</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"remotes"</span>)) { </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)   </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}   </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"sekulovskin/easybgm"</span>, </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ref =</span> <span class="st">"SBM_in_easybgm"</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Note for Windows users:</strong> If an error appears such as <code>"cannot rename file ... reason 'Access is denied'"</code>, restart R or RStudio with administrative privileges (e.g., by right-clicking the icon and selecting “Run as administrator”), then re-run the installation commands.</p>
-<p>We now simply execute the analysis as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easybgm)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">easybgm</span>(dataset, </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">type =</span> <span class="st">"ordinal"</span>, <span class="co"># this analysis only works with binary and/or ordinal data</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"easybgm"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easybgm)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">easybgm</span>(dataset, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">type =</span> <span class="st">"ordinal"</span>, <span class="co"># this analysis only works with binary and/or ordinal data</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There is no need to perform any post-processing, manually inspect the result objects, or calculate Bayes factors “by hand.” Instead, the <code>summary</code> function can be used to display all relevant output directly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Following the edge-specific overview (for more details, see <span class="citation" data-cites="Huth2024easybgm">Huth et al. (<a href="#ref-Huth2024easybgm" role="doc-biblioref">2024</a>)</span>), the output provides a cluster-specific overview. This includes the posterior probabilities for all possible numbers of clusters, the estimated node memberships, and the Bayes factors comparing the hypothesis of clustering against the null hypothesis of no clustering.</p>
-<p>In case you wish to calculate the second type of Bayes factor, similar to the steps above, you can simply use the function <code>clusterBayesfactor</code>, by setting the argument <code>type = "simple"</code> and specifying the values for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>.</p>
+<p>In case researchers wish to calculate the second type of Bayes factor, similar to the steps above, they can simply use the function <code>clusterBayesfactor</code>, by setting the argument <code>type = "simple"</code> and specifying the values for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterBayesfactor</span>(fit, <span class="at">type =</span> <span class="st">"simple"</span>, <span class="at">b1 =</span> <span class="dv">1</span>, <span class="at">b2 =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterBayesfactor</span>(fit, <span class="at">type =</span> <span class="st">"simple"</span>, <span class="at">b1 =</span> <span class="dv">1</span>, <span class="at">b2 =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The posterior coclustering matrix can be plotted in a similar way as shown above for <code>bgms</code>, using the function <code>plotCoclusteringMatrix</code>.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 
 
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Huth2024easybgm" class="csl-entry" role="listitem">
@@ -285,7 +318,12 @@ Marsman, M., Huth, K., Sekulovski, N., &amp; Bergh, D. van den. (2023). <em>Bgms
 <div id="ref-SekulovskiSensitivity_2023" class="csl-entry" role="listitem">
 Sekulovski, N., Keetelaar, S., Haslbeck, J. M. B., &amp; Marsman, M. (2024). Sensitivity analysis of prior distributions in bayesian graphical modeling: Guiding informed prior choices for conditional independence testing. <em>Advances. In/Psychology</em>. <a href="https://doi.org/10.56296/aip00016/">https://doi.org/10.56296/aip00016/</a>
 </div>
-</div></section></div></main>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Windows users must install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> before installing from GitHub using the following code, since the packages are compiled from source. On macOS and Linux, make sure the system’s build tools are installed (Xcode Command Line Tools on macOS, build-essential on Linux). If an error such as <code>"cannot rename file ... reason 'Access is denied'"</code>, appears on a Windows machine: restart R or RStudio with administrative privileges (e.g., by right-clicking the icon and selecting “Run as administrator”), then re-run the installation commands.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
