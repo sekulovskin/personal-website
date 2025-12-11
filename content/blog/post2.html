@@ -159,15 +159,12 @@ text-align: justify}
 <p>Suppose the goal is to assess whether the network structure inferred from an empirical dataset exhibits clustering. This can be investigated by estimating the most representative vector of node allocations given the data, which reveals the cluster assignment of each node and thus provides insight into potential clustering in the network. In addition, the function returns the estimated posterior probabilities for different numbers of clusters, enabling hypothesis testing about clustering using Bayes factors. All of this functionality is available in the <code>bgm</code> function.</p>
 <p>The first step is to estimate the model using <code>bgm</code> with the argument <code>edge_prior = "Stochastic-Block"</code>. When using the stochastic block model (SBM) as a prior on the network structure, several additional arguments are important:</p>
 <ul>
-<li><strong>Beta prior on edge inclusion probabilities</strong>
-<ul>
-<li>The prior inclusion probability for the within and between block edges:
+<li><strong>Hyperparameters for the Beta prior on edge inclusion probabilities for the within and between block edges</strong>
 <ul>
 <li><code>beta_bernoulli_alpha</code><br>
 </li>
 <li><code>beta_bernoulli_beta</code><br>
 </li>
-</ul></li>
 <li>Currently, in the CRAN version of bgms, users can only specify one set of these hyperparameters, however, in the <a href="https://github.com/Bayesian-Graphical-Modelling-Lab/bgms">GitHub version</a> of <code>bgms</code>, users may also specify separate shape parameters for within-cluster and between-cluster edges.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 </ul></li>
 <li><strong>Truncated Poisson prior on the number of clusters</strong>
@@ -297,7 +294,7 @@ text-align: justify}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterBayesfactor</span>(fit, <span class="at">type =</span> <span class="st">"simple"</span>, <span class="at">b1 =</span> <span class="dv">1</span>, <span class="at">b2 =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The posterior coclustering matrix can be plotted in a similar way as shown above for <code>bgms</code>, using the function <code>plotCoclusteringMatrix</code>.</p>
+<p>The posterior coclustering matrix can be plotted in a similar way as shown above for <code>bgms</code>.</p>
 </section>
 <section id="references" class="level1 unnumbered">
 
