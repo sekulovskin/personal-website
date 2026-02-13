@@ -1,11 +1,9 @@
 ---
-title: "A Tutorial on Clustering Analysis for Bayesian Graphical Models using the R packages bgms and easybgm"
-summary: "This is a short software tutorial accompanying the paper 'Stochastic Block Models for Clustering in Psychological Networks'."
+title: "A Tutorial on Clustering in Bayesian Graphical Models Using the R Packages bgms and easybgm"
+summary: "This is a short software tutorial accompanying the paper 'A Bayesian Stochastic Block Model for Clustering in Graphical Models'."
 ---
 
-This is a short software tutorial accompanying the paper 'Stochastic Block Models for Clustering in Psychological Networks'
-
-<!--more-->
+This is a short software tutorial accompanying the paper "A Bayesian Stochastic Block Model for Clustering in Graphical Models".
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
@@ -146,62 +144,84 @@ text-align: justify}
 </style>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Stochastic Block Prior for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(cf., <a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to test hypotheses about clustering.</p>
-<p>In this brief tutorial, a mock analysis is first illustrated using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>. The same analysis is then demonstrated using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. The package <code>easybgm</code> provides a more accessible interface for conducting the analysis, particularly for users without a strong background in <code>R</code>.</p>
-</section>
-<section id="bgms" class="level1">
-<h1><code>bgms</code></h1>
-<p>We first need to make sure that the latest CRAN version of <code>bgms</code> is installed.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"bgms"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms) <span class="co"># load the bgms package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Suppose the goal is to assess whether the network structure inferred from an empirical dataset exhibits clustering. This can be investigated by estimating the most representative vector of node allocations given the data, which reveals the cluster assignment of each node and thus provides insight into potential clustering in the network. In addition, the function returns the estimated posterior probabilities for different numbers of clusters, enabling hypothesis testing about clustering using Bayes factors. All of this functionality is available in the <code>bgm</code> function.</p>
-<p>The first step is to estimate the model using <code>bgm</code> with the argument <code>edge_prior = "Stochastic-Block"</code>. When using the stochastic block model (SBM) as a prior on the network structure, several additional arguments are important:</p>
+<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Bayesian Stochastic Block Model for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(<a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to test hypotheses about clustering.</p>
+<p>In this brief tutorial, an example analysis is first illustrated using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>. The same analysis is then demonstrated using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. The package <code>easybgm</code> provides a more accessible interface for conducting the analysis, particularly for users without a strong background in <code>R</code>. In the near future, these functionalists will also be available in the Network module of open-source statistical software <a href="https://jasp-stats.org/">JASP</a></p>
+<p>Suppose the aim is to evaluate whether the network structure estimated from empirical data exhibits clustering. Within the Bayesian graphical modeling framework, this can be examined by estimating a representative node allocation vector from the posterior distribution. This allocation summarizes the most plausible cluster membership of each node given the data and thereby provides a direct indication of potential community structure in the network.</p>
+<p>In addition, the model yields posterior probabilities over the number of clusters, allowing researchers to quantify uncertainty about the clustering solution. These probabilities can be used to compute Bayes factors for testing hypotheses about the presence or absence of clustering, or for testing hypotheses about specific numbers of clusters.</p>
+<p>The first step is to estimate the model by setting the argument <code>edge_prior = "Stochastic-Block"</code> in either the <code>bgms</code> or <code>easybgm</code> functions. When using the stochastic block model (SBM) as a prior on the network structure, several additional arguments are important:</p>
 <ul>
-<li><strong>Hyperparameters for the Beta prior on edge inclusion probabilities for the within and between block edges</strong>
+<li><p><strong>Shape hyperparameters for the Beta prior distributions set on the probabilities for the inclusion of within and between block edges</strong></p>
 <ul>
 <li><code>beta_bernoulli_alpha</code><br>
 </li>
 <li><code>beta_bernoulli_beta</code><br>
 </li>
-<li>Currently, in the CRAN version of bgms, users can only specify one set of these hyperparameters, however, in the <a href="https://github.com/Bayesian-Graphical-Modelling-Lab/bgms">GitHub version</a> of <code>bgms</code>, users may also specify separate shape parameters for within-cluster and between-cluster edges.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li><code>beta_bernoulli_alpha_between</code></li>
+<li><code>beta_bernoulli_beta_between</code></li>
 </ul></li>
-<li><strong>Truncated Poisson prior on the number of clusters</strong>
+<li><p>These hyperparameters govern the expected density of edges within and between clusters.</p></li>
+<li><p>Larger values of <code>beta_bernoulli_alpha</code> and smaller values of <code>beta_bernoulli_beta</code> encourage denser connections within clusters.</p></li>
+<li><p>Conversely, smaller values of <code>beta_bernoulli_alpha_between</code> and larger values of <code>beta_bernoulli_beta_between</code> encourage sparser connections between clusters.</p></li>
+<li><p>In the paper, we recommend setting these hyperparameters to <code>beta_bernoulli_alpha = 8</code>, <code>beta_bernoulli_beta = 1</code>, <code>beta_bernoulli_alpha_between = 1</code>, and <code>beta_bernoulli_beta_between = 8</code>, in case of expectations of a strong clustering structure. If users do not expect a strong clustering structure, we recommend setting these hyperparameters to <code>beta_bernoulli_alpha = 1</code>, <code>beta_bernoulli_beta = 1</code>, <code>beta_bernoulli_alpha_between = 1</code>, and <code>beta_bernoulli_beta_between = 8</code>.</p></li>
+<li><p><strong>The rate hyperparameter of the truncated Poisson prior on the number of clusters</strong></p>
 <ul>
-<li>The rate parameter <code>lambda</code> sets the prior distribution over the number of clusters.<br>
-</li>
-<li>It reflects how many clusters we expect <em>before</em> observing the data; <code>lambda = 1</code> corresponds roughly to expecting no clustering (all nodes in one cluster).<br>
+<li><code>lambda</code><br>
 </li>
 <li>Although <code>lambda</code> is not exactly the expected number of clusters, it tracks it closely. For example:
 <ul>
+<li><code>lambda = 1</code> → expected number of clusters ≈ 1</li>
 <li><code>lambda = 1.59</code> → expected number of clusters ≈ 2<br>
 </li>
 <li><code>lambda = 2.82</code> → expected number of clusters ≈ 3<br>
 </li>
 <li><code>lambda = 3.92</code> → expected number of clusters ≈ 4</li>
+<li><code>lambda = 4.96</code> → expected number of clusters ≈ 5</li>
 </ul></li>
 </ul></li>
-<li><strong>Dirichlet hyperprior for cluster allocations</strong>
+<li><p><strong>The concentration parameter of the Dirichlet distribution on the probabilities of allocating the nodes into clusters</strong></p>
 <ul>
-<li>The concentration parameter <code>dirichlet_alpha</code> governs the expected sizes of the clusters.<br>
-</li>
-<li>Larger values encourage more balanced cluster sizes.<br>
+<li><code>dirichlet_alpha</code></li>
+<li>This hyperparameter controls how balanced we expect cluster sizes to be.
+<ul>
+<li>Larger values encourage more balanced cluster sizes of similar size.<br>
 </li>
 <li>Smaller values encourage uneven, potentially sparse cluster structures.<br>
 </li>
-<li>Default: <code>dirichlet_alpha = 1</code>.</li>
+<li>The default value of 1 corresponds to a neutral prior: all partitions of nodes are equally likely, without preferring equal or unequal clusters.</li>
+</ul></li>
+<li>We recommend leaving this hyperparameter at the default value, unless there are strong theoretical reasons to do otherwise.</li>
 </ul></li>
 </ul>
-<p>In the example code below, the default values for these hyperparameters are used, along with the default settings for the remaining prior hyperparameters of the OMRF and other function arguments. Nevertheless, it is strongly recommended that researchers carefully evaluate these values when conducting their analyses. For further details, see, for example, <span class="citation" data-cites="bgms_package">Marsman et al. (<a href="#ref-bgms_package" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="SekulovskiSensitivity_2023">Sekulovski et al. (<a href="#ref-SekulovskiSensitivity_2023" role="doc-biblioref">2024</a>)</span>.</p>
-<p>In the code examples, <code>dataset</code> is a placeholder for the actual dataset to be analyzed. This dataset should be an <span class="math inline">\(n \times p\)</span> matrix or data frame, where <span class="math inline">\(n\)</span> denotes the number of observations and <span class="math inline">\(p\)</span> the number of variables. The variables may be binary, ordinal, or a combination of both.</p>
+<p>It is strongly recommended that researchers carefully examine their choice of hyperparameter values when conducting analyses and perform prior sensitivity checks. For further discussion and practical guidance, see, for example, <span class="citation" data-cites="bgms_package">Marsman et al. (<a href="#ref-bgms_package" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="Huth2024easybgm">Huth et al. (<a href="#ref-Huth2024easybgm" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="SekulovskiSensitivity_2023">Sekulovski et al. (<a href="#ref-SekulovskiSensitivity_2023" role="doc-biblioref">2024</a>)</span></p>
+<p>In the code examples below, <code>data</code> is a placeholder for the actual dataset to be analyzed. This dataset should be an <span class="math inline">\(n \times p\)</span> matrix or data frame, where <span class="math inline">\(n\)</span> denotes the number of observations and <span class="math inline">\(p\)</span> the number of variables to be included in the network. In the current implementation, the variables may be binary, ordinal, or a combination of both.</p>
+<p>Suppose we have a dataset with 200 observations and 10 variables, and theoretical considerations suggest a two-cluster structure. In that case, the hyperparameters could be specified as follows:</p>
+<ul>
+<li><code>beta_bernoulli_alpha = 8</code>,</li>
+<li><code>beta_bernoulli_beta = 1</code>,</li>
+<li><code>beta_bernoulli_alpha_between = 1</code>,</li>
+<li><code>beta_bernoulli_beta_between = 8</code>,</li>
+<li><code>lambda = 1.59</code></li>
+</ul>
+</section>
+<section id="clustering-analysis-using-the-package-bgms" class="level1">
+<h1>Clustering Analysis using the package <code>bgms</code></h1>
+<p>We first need to make sure that the latest CRAN version of <code>bgms</code> is installed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms) <span class="co"># load the bgms package </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run the model</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(data, <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"bgms"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bgms)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>?bgm <span class="co"># for more details on the function and its arguments</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, first we check the estimated (posterior) cluster allocations of the nodes. The output is a vector whose length equals the number of variables (columns) in the dataset. There are two possible options: the posterior mean vector and the posterior mode vector. To examine this, we can inspect the allocations vectors in the fit object, where the results of our analysis are stored.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run the model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">bgm</span>(data, <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">beta_bernoulli_alpha =</span> <span class="dv">8</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">beta_bernoulli_beta =</span> <span class="dv">1</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">beta_bernoulli_alpha_between =</span> <span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">beta_bernoulli_beta_between =</span> <span class="dv">8</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">lambda =</span> <span class="fl">1.59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, first we check the estimated posterior cluster allocations of the nodes. The output is a vector whose length equals the number of variables (columns) in the dataset. There are two possible options: the posterior mean vector and the posterior mode vector. To examine this, we can inspect the allocations vectors in the fit object, where the results of our analysis are stored.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Posterior mean:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit<span class="sc">$</span>posterior_mean_allocations)</span>
@@ -209,14 +229,14 @@ text-align: justify}
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Posterior mode:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit<span class="sc">$</span>posterior_mode_allocations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can also examine the estimated posterior probabilities for all possible clusters (blocks). In the software, this ranges from 1 (i.e., no clustering) to the total number of variables in the dataset (i.e., each variable forms its own cluster).</p>
+<p>We can also examine the estimated posterior probabilities for all possible clusters. In the software, this ranges from 1 (i.e., no clustering) to the total number of variables in the dataset (i.e., each variable forms its own cluster). These probabilities provide an indication of the relative plausibility of each clustering solution given the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>posterior_num_blocks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>These posterior probabilities are particularly useful for calculating the cluster Bayes factors, which are defined as follows:</p>
+<p>The posterior probabilities are particularly useful for calculating the cluster Bayes factors, which are defined as follows:</p>
 <p><span class="math display">\[\text{BF}_{10} = \underbrace{\frac{p(\mathcal{H}_1\mid \text{data})}{p(\mathcal{H}_0 \mid \text{data})}}_{\text{Posterior Odds}}
 \bigg/ \underbrace{\frac{p(\mathcal{H}_1)}{p(\mathcal{H}_0)}}_{\text{Prior Odds}}\]</span></p>
-<p>Depending on the hypotheses, we consider two types of Bayes factors:</p>
+<p>Depending on the hypotheses, we have two types of Bayes factors:</p>
 <ul>
 <li>The Bayes factor testing the hypothesis of clustering, i.e., <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, against the null hypothesis of no clustering <span class="math inline">\(\mathcal{H}_0: B = 1\)</span>. For this, we first need to calculate the posterior odds of the two hypotheses, which is simply the ratio of the posterior probabilities of the two hypotheses. For <span class="math inline">\(\mathcal{H}_1: B &gt; 1\)</span>, we need to sum the posterior probabilities of all possible numbers of clusters greater than 1.</li>
 </ul>
@@ -226,10 +246,10 @@ text-align: justify}
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>posterior_odds <span class="ot">&lt;-</span> <span class="fu">sum</span>(H1) <span class="sc">/</span> H0 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After calculating the posterior odds, we need to divide these by the prior odds in order to obtain the Bayes factor. For this Bayes factor, the prior odds are defined as:</p>
+<p>After calculating the posterior odds, we need to divide by the prior odds in order to obtain the Bayes factor. For this Bayes factor, the prior odds are defined as:</p>
 <p><span class="math display">\[ \frac{(\exp(\lambda) - 1 - \lambda)}{\lambda}.\]</span> We calculate the prior odds as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> fit<span class="sc">$</span>arguments<span class="sc">$</span>lambda  <span class="co"># extract the value of lambda used (in this case the default)</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> fit<span class="sc">$</span>arguments<span class="sc">$</span>lambda  <span class="co"># extract the value of lambda used </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>prior_odds <span class="ot">&lt;-</span> (<span class="fu">exp</span>(lambda) <span class="sc">-</span> <span class="dv">1</span> <span class="sc">-</span> lambda) <span class="sc">/</span> lambda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally the Bayes factor is given by</p>
@@ -238,7 +258,7 @@ text-align: justify}
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H1:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>BF_10  </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H0:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>BF_10 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>BF_10 <span class="co"># inverse of the Bayes factor in favor of H1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>The Bayes factor testing the hypothesis of a specific number of clusters, i.e., <span class="math inline">\(\mathcal{H}_1: B = b_1\)</span>, against <span class="math inline">\(\mathcal{H}_2: B = b_2\)</span>. Say we wish to test the null hypothesis of one cluster against the hypothesis that assumes there are two clusters (i.e., <span class="math inline">\(b_1 = 1\)</span> and <span class="math inline">\(b_2 = 2\)</span>). For this, we follow similar steps as above.</li>
@@ -257,50 +277,58 @@ text-align: justify}
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>BF_12 <span class="ot">&lt;-</span> posterior_odds <span class="sc">/</span> prior_odds</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H1:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>BF_12  </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H0:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Bayes factor in favor of H2:</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span>BF_12 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Researchers can also inspect the posterior coclustering matrix, a symmetric matrix that records, for every pair of variables, the proportion of posterior samples in which they are assigned to the same cluster. This matrix provides a useful visual summary of the clustering uncertainty: coherent blocks along the diagonal indicate well-supported clusters, while diffuse or mixed patterns highlight variables that frequently switch between clusters or lack a stable assignment.</p>
+<p>Researchers can additionally examine the posterior co-clustering matrix, a symmetric matrix that contains, for each pair of variables, the proportion of posterior samples in which the two variables are assigned to the same cluster. This matrix offers an informative visual summary of clustering uncertainty. Diffuse or heterogeneous patterns suggest that certain variables frequently change cluster membership or do not have a well-defined allocation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pheatmap"</span>) <span class="co"># if not already installed</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">insstall.packages</span>(<span class="st">"pheatmap"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(fit<span class="sc">$</span>posterior_mean_coclustering_matrix, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">display_numbers =</span> <span class="cn">FALSE</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(fit<span class="sc">$</span>posterior_mean_coclustering_matrix, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#B8860B"</span>, <span class="st">"#009E73"</span>))(<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="easybgm" class="level1">
-<h1><code>easybgm</code></h1>
+<section id="clustering-analysis-using-the-package-easybgm" class="level1">
+<h1>Clustering Analysis using the package <code>easybgm</code></h1>
 <p>Everything that has been illustrated using <code>bgms</code> can be more easily achieved using <code>easybgm</code>. We simply execute the analysis as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"easybgm"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easybgm)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">easybgm</span>(dataset, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">easybgm</span>(data, </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">type =</span> <span class="st">"ordinal"</span>, <span class="co"># this analysis only works with binary and/or ordinal data</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">edge_prior =</span> <span class="st">"Stochastic-Block"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">update_method =</span> <span class="st">"adaptive-metropolis"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">beta_bernoulli_alpha =</span> <span class="dv">8</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">beta_bernoulli_beta =</span> <span class="dv">1</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">beta_bernoulli_alpha_between =</span> <span class="dv">1</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">beta_bernoulli_beta_between =</span> <span class="dv">8</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">lambda =</span> <span class="fl">1.59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There is no need to perform any post-processing, manually inspect the result objects, or calculate Bayes factors “by hand.” Instead, the <code>summary</code> function can be used to display all relevant output directly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Following the edge-specific overview (for more details, see <span class="citation" data-cites="Huth2024easybgm">Huth et al. (<a href="#ref-Huth2024easybgm" role="doc-biblioref">2024</a>)</span>), the output provides a cluster-specific overview. This includes the posterior probabilities for all possible numbers of clusters, the estimated node memberships, and the Bayes factors comparing the hypothesis of clustering against the null hypothesis of no clustering.</p>
+<p>Following the edge overview (for more details, see <span class="citation" data-cites="Huth2024easybgm">Huth et al. (<a href="#ref-Huth2024easybgm" role="doc-biblioref">2024</a>)</span>), the output from the summary function provides a clustering overview. This includes the posterior probabilities for all possible numbers of clusters, the estimated node memberships, and the Bayes factor comparing the hypothesis of clustering against the null hypothesis of no clustering.</p>
 <p>In case researchers wish to calculate the second type of Bayes factor, similar to the steps above, they can simply use the function <code>clusterBayesfactor</code>, by setting the argument <code>type = "simple"</code> and specifying the values for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterBayesfactor</span>(fit, <span class="at">type =</span> <span class="st">"simple"</span>, <span class="at">b1 =</span> <span class="dv">1</span>, <span class="at">b2 =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterBayesfactor</span>(fit, <span class="at">type =</span> <span class="st">"point"</span>, <span class="at">b1 =</span> <span class="dv">1</span>, <span class="at">b2 =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The posterior coclustering matrix can be plotted in a similar way as shown above for <code>bgms</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(fit<span class="sc">$</span>sbm<span class="sc">$</span>posterior_mean_coclustering_matrix, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">cluster_cols =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#B8860B"</span>, <span class="st">"#009E73"</span>))(<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="references" class="level1 unnumbered">
 
 
 </section>
-
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Huth2024easybgm" class="csl-entry" role="listitem">
@@ -315,12 +343,7 @@ Marsman, M., Huth, K., Sekulovski, N., &amp; Bergh, D. van den. (2023). <em>Bgms
 <div id="ref-SekulovskiSensitivity_2023" class="csl-entry" role="listitem">
 Sekulovski, N., Keetelaar, S., Haslbeck, J. M. B., &amp; Marsman, M. (2024). Sensitivity analysis of prior distributions in bayesian graphical modeling: Guiding informed prior choices for conditional independence testing. <em>Advances. In/Psychology</em>. <a href="https://doi.org/10.56296/aip00016/">https://doi.org/10.56296/aip00016/</a>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Windows users must install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> before installing from GitHub using the following code, since the packages are compiled from source. On macOS and Linux, make sure the system’s build tools are installed (Xcode Command Line Tools on macOS, build-essential on Linux). If an error such as <code>"cannot rename file ... reason 'Access is denied'"</code>, appears on a Windows machine: restart R or RStudio with administrative privileges (e.g., by right-clicking the icon and selecting “Run as administrator”), then re-run the installation commands.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
