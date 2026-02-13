@@ -3,8 +3,6 @@ title: "A Tutorial on Clustering in Bayesian Graphical Models Using the R Packag
 summary: "This is a short software tutorial accompanying the paper 'A Bayesian Stochastic Block Model for Clustering in Graphical Models'."
 ---
 
-This is a short software tutorial accompanying the paper "A Bayesian Stochastic Block Model for Clustering in Graphical Models".
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
@@ -162,7 +160,23 @@ text-align: justify}
 <li><p>These hyperparameters govern the expected density of edges within and between clusters.</p></li>
 <li><p>Larger values of <code>beta_bernoulli_alpha</code> and smaller values of <code>beta_bernoulli_beta</code> encourage denser connections within clusters.</p></li>
 <li><p>Conversely, smaller values of <code>beta_bernoulli_alpha_between</code> and larger values of <code>beta_bernoulli_beta_between</code> encourage sparser connections between clusters.</p></li>
-<li><p>In the paper, we recommend setting these hyperparameters to <code>beta_bernoulli_alpha = 8</code>, <code>beta_bernoulli_beta = 1</code>, <code>beta_bernoulli_alpha_between = 1</code>, and <code>beta_bernoulli_beta_between = 8</code>, in case of expectations of a strong clustering structure. If users do not expect a strong clustering structure, we recommend setting these hyperparameters to <code>beta_bernoulli_alpha = 1</code>, <code>beta_bernoulli_beta = 1</code>, <code>beta_bernoulli_alpha_between = 1</code>, and <code>beta_bernoulli_beta_between = 8</code>.</p></li>
+<li><p>Recommended settings:</p>
+<ul>
+<li>When clustering is expected:
+<ul>
+<li><code>beta_bernoulli_alpha = 8</code></li>
+<li><code>beta_bernoulli_beta = 1</code></li>
+<li><code>beta_bernoulli_alpha_between = 1</code></li>
+<li><code>beta_bernoulli_beta_between = 8</code></li>
+</ul></li>
+<li>When clustering is not expected:
+<ul>
+<li><code>beta_bernoulli_alpha = 1</code></li>
+<li><code>beta_bernoulli_beta = 1</code></li>
+<li><code>beta_bernoulli_alpha_between = 1</code></li>
+<li><code>beta_bernoulli_beta_between = 8</code></li>
+</ul></li>
+</ul></li>
 <li><p><strong>The rate hyperparameter of the truncated Poisson prior on the number of clusters</strong></p>
 <ul>
 <li><code>lambda</code><br>
