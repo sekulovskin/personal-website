@@ -14,13 +14,13 @@ bio: ''
 # Interests to show in About widget
 interests:
 - Bayesian Statistics
-- Network Psychometrics
+- Graphical Modeling 
 - Bayesian Hypothesis Testing
 
 # Education to show in About widget
 education:
   courses:
-  - course: PhD - Bayesian Network Psychometrics
+  - course: PhD - Bayesian Graphical Modeling
     institution: University of Amsterdam, The Netherlands
     year: 2022 - present
   - course: MSc in Methodology and Statistics
@@ -62,5 +62,5 @@ email: ""
 highlight_name: true
 ---
 
-I am a PhD candidate in the Department of Psychological Methods at the University of Amsterdam, working in the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). My research focuses on developing and applying Bayesian methods for analyzing graphical models, with a particular emphasis on cross-sectional psychological data. I am particularly interested in Bayesian hypothesis testing, network psychometrics as well as statistical and mathematical modeling of psychological constructs. On this website, you’ll find details about my publications, current projects, and contact information.
+I am a PhD candidate in the Department of Psychological Methods at the University of Amsterdam, working in the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). My research focuses on developing and applying Bayesian methods for analyzing graphical models, with a particular emphasis on cross-sectional psychological data. I am particularly interested in Bayesian hypothesis testing, network psychometrics as well as statistical and mathematical modeling of psychological constructs. On this website, you’ll find details about my publications, blog posts about some of my papers, and my contact information.
 
