@@ -1,6 +1,6 @@
 ---
 title: "A Tutorial on Clustering in Bayesian Graphical Models Using the R Packages bgms and easybgm"
-summary: "This is a short software tutorial accompanying the paper 'A Bayesian Stochastic Block Model for Clustering in Graphical Models'."
+summary: "This is a short software tutorial accompanying the paper 'A Stochastic Block Prior for Clustering in Graphical Models'."
 ---
 
 <!DOCTYPE html>
@@ -142,13 +142,13 @@ text-align: justify}
 </style>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Bayesian Stochastic Block Model for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(<a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to test hypotheses about clustering.</p>
+<p>This is a short software tutorial accompanying the paper <a href="https://osf.io/preprints/psyarxiv/29p3m_v1"><em>“A Stochastic Block Prior for Clustering in Graphical Models”</em></a>. The paper introduces the Stochastic Block Model as a prior on the network structure of the ordinal Markov random field graphical model <span class="citation" data-cites="MarsmanHaslbeck_2023_ordinal">(<a href="#ref-MarsmanHaslbeck_2023_ordinal" role="doc-biblioref">Marsman et al., 2025</a>)</span>. In addition to offering an approach for incorporating the theoretical assumption of clustering directly into the statistical model, the method provides a principled way to infer the number of clusters in the network given the data, and to test hypotheses about clustering.</p>
 <p>In this brief tutorial, an example analysis is first illustrated using the R package <code>bgms</code> <span class="citation" data-cites="bgms_package">(<a href="#ref-bgms_package" role="doc-biblioref">Marsman et al., 2023</a>)</span>. The same analysis is then demonstrated using the user-friendly wrapper package <code>easybgm</code> <span class="citation" data-cites="Huth2024easybgm">(<a href="#ref-Huth2024easybgm" role="doc-biblioref">Huth et al., 2024</a>)</span>. The package <code>easybgm</code> provides a more accessible interface for conducting the analysis, particularly for users without a strong background in <code>R</code>. In the near future, these functionalists will also be available in the Network module of open-source statistical software <a href="https://jasp-stats.org/">JASP</a></p>
 <p>Suppose the aim is to evaluate whether the network structure estimated from empirical data exhibits clustering. Within the Bayesian graphical modeling framework, this can be examined by estimating a representative node allocation vector from the posterior distribution. This allocation summarizes the most plausible cluster membership of each node given the data and thereby provides a direct indication of potential community structure in the network.</p>
 <p>In addition, the model yields posterior probabilities over the number of clusters, allowing researchers to quantify uncertainty about the clustering solution. These probabilities can be used to compute Bayes factors for testing hypotheses about the presence or absence of clustering, or for testing hypotheses about specific numbers of clusters.</p>
 <p>The first step is to estimate the model by setting the argument <code>edge_prior = "Stochastic-Block"</code> in either the <code>bgms</code> or <code>easybgm</code> functions. When using the stochastic block model (SBM) as a prior on the network structure, several additional arguments are important:</p>
 <ul>
-<li><p><strong>Shape hyperparameters for the Beta prior distributions set on the probabilities for the inclusion of within and between block edges</strong></p>
+<li><strong>Shape hyperparameters for the Beta prior distributions set on the probabilities for the inclusion of within and between block edges</strong>
 <ul>
 <li><code>beta_bernoulli_alpha</code><br>
 </li>
@@ -157,27 +157,14 @@ text-align: justify}
 <li><code>beta_bernoulli_alpha_between</code></li>
 <li><code>beta_bernoulli_beta_between</code></li>
 </ul></li>
-<li><p>These hyperparameters govern the expected density of edges within and between clusters.</p></li>
-<li><p>Larger values of <code>beta_bernoulli_alpha</code> and smaller values of <code>beta_bernoulli_beta</code> encourage denser connections within clusters.</p></li>
-<li><p>Conversely, smaller values of <code>beta_bernoulli_alpha_between</code> and larger values of <code>beta_bernoulli_beta_between</code> encourage sparser connections between clusters.</p></li>
-<li><p>Recommended settings:</p>
+<li>These hyperparameters govern the expected density of edges within and between clusters.</li>
+<li>Larger values of <code>beta_bernoulli_alpha</code> and smaller values of <code>beta_bernoulli_beta</code> encourage denser connections within clusters.</li>
+<li>Conversely, smaller values of <code>beta_bernoulli_alpha_between</code> and larger values of <code>beta_bernoulli_beta_between</code> encourage sparser connections between clusters.</li>
+<li>To calculate the proportion of connected edges implied by a specific set of hyperparameter values (for the within or between edges), the we can use the expression for the expected value of the beta distribution:</li>
+</ul>
+<p><span class="math display">\[\frac{\alpha}{\alpha + \beta}.\]</span></p>
 <ul>
-<li>When clustering is expected:
-<ul>
-<li><code>beta_bernoulli_alpha = 8</code></li>
-<li><code>beta_bernoulli_beta = 1</code></li>
-<li><code>beta_bernoulli_alpha_between = 1</code></li>
-<li><code>beta_bernoulli_beta_between = 8</code></li>
-</ul></li>
-<li>When clustering is not expected:
-<ul>
-<li><code>beta_bernoulli_alpha = 1</code></li>
-<li><code>beta_bernoulli_beta = 1</code></li>
-<li><code>beta_bernoulli_alpha_between = 1</code></li>
-<li><code>beta_bernoulli_beta_between = 8</code></li>
-</ul></li>
-</ul></li>
-<li><p><strong>The rate hyperparameter of the truncated Poisson prior on the number of clusters</strong></p>
+<li><strong>The rate hyperparameter of the truncated Poisson prior on the number of clusters</strong>
 <ul>
 <li><code>lambda</code><br>
 </li>
@@ -192,7 +179,7 @@ text-align: justify}
 <li><code>lambda = 4.96</code> → expected number of clusters ≈ 5</li>
 </ul></li>
 </ul></li>
-<li><p><strong>The concentration parameter of the Dirichlet distribution on the probabilities of allocating the nodes into clusters</strong></p>
+<li><strong>The concentration parameter of the Dirichlet distribution on the probabilities of allocating the nodes into clusters</strong>
 <ul>
 <li><code>dirichlet_alpha</code></li>
 <li>This hyperparameter controls how balanced we expect cluster sizes to be.
@@ -216,6 +203,7 @@ text-align: justify}
 <li><code>beta_bernoulli_beta_between = 8</code>,</li>
 <li><code>lambda = 1.59</code></li>
 </ul>
+<p>With this prior specification we say that we expect 2 clusters and that we expect dense connections within clusters (i.e., 8 / (8 + 1) = 0.89) and sparse connections between clusters (i.e., 1 / (1 + 8) = 0.11).</p>
 </section>
 <section id="clustering-analysis-using-the-package-bgms" class="level1">
 <h1>Clustering Analysis using the package <code>bgms</code></h1>
