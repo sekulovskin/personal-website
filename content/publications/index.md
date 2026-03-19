@@ -7,7 +7,7 @@ share: false
 
 **Submitted for Publication**
 
-<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>Sekulovski, N</b>., Delhalle, M., & Sarafoglou, A. (2025). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Safeguarding Against Bias Without Preregistration: A Tutorial on Analysis Blinding for Network Analysis.</a>. <em>PsyArXiv</em></p>
+<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>Sekulovski, N</b>., Delhalle, M., & Sarafoglou, A. (2025). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Safeguarding Against Bias Without Preregistration: A Tutorial on Analysis Blinding for Network Analysis.</a> <em>PsyArXiv</em>.</p>
 
 <p style="font-size:medium;text-align:justify">Pfadt, J. M., Bartoš, F., Godmann, H. R., Waaijers, M., Groot, L., Heo, I. , 
 Mensink, L., Nak, J., De Ruiter, J. P., Sarafoglou, A., Siepe, B. S., Arena, G. M., Akrong, E., Aust, F., van den Bergh, D., Brenner, W., Doekemeijer, R. A., Donzallaz, M. C., van Doorn, J., Echevarria, N. O., Finnemann, A., Geller, G., Hato, T., Koskinen, E., 
@@ -18,11 +18,13 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N.</b>, Bartoš, F., van den Bergh, D., Arena, G., Godmann, H. R., Goyal, V., Pfadt, J. M., Marsman, M., & Raftery, A. E. (2025). <a href="https://doi.org/10.48550/arXiv.2511.23216">Comparing variable selection and model averaging methods for logistic regression</a>. <em>arXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v1"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>PsyArXiv</em>.</p>
-
 **In Press**
 
-<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://doi.org/10.31219/osf.io/f4pk9"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v2"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
+
+**2025**
+
+<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://10.1017/psy.2025.10060"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
