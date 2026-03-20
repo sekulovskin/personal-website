@@ -62,5 +62,5 @@ email: ""
 highlight_name: true
 ---
 
-I am a PhD candidate in the Department of Psychological Methods at the University of Amsterdam, working in the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). My research focuses on developing and applying Bayesian methods for analyzing graphical models, with a particular emphasis on cross-sectional psychological data. I am particularly interested in Bayesian hypothesis testing, network psychometrics as well as statistical and mathematical modeling of psychological constructs. On this website, you’ll find details about my publications, blog posts about some of my papers, and my contact information.
+I am a PhD candidate at the Department of Psychological Methods of the University of Amsterdam, working in the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). My research focuses on developing and applying Bayesian methods for graphical models of cross-sectional psychological data, with broader interests in Bayesian hypothesis testing, network psychometrics, and the statistical modeling of psychological constructs. On this website, you'll find my publications, blog posts about some of my papers, and my contact information.
 
