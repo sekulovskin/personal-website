@@ -20,13 +20,13 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(2025). <a href = "https://doi.org/10.31234/osf.io/k2twq_v2"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(in press). <a href = "https://doi.org/10.31234/osf.io/k2twq_v2"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
 
 **2025**
 
-<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (in press). <a href = "https://10.1017/psy.2025.10060"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
+<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (2025). <a href = "https://10.1017/psy.2025.10060"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (in press). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2025). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
 **2024**
 
