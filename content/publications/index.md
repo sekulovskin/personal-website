@@ -18,7 +18,7 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(in press). <a href = "https://bpspsychub.onlinelibrary.wiley.com/doi/epdf/10.1111/bmsp.70045"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (in press). <a href = "https://doi.org/10.31234/osf.io/29p3m_v4"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>Psychological Methods</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (in press). <a href = "https://osf.io/preprints/psyarxiv/29p3m_v4"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>Psychological Methods</em>.</p>
 
 
 **2026** 
