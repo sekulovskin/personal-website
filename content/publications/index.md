@@ -14,15 +14,16 @@ Mensink, L., Nak, J., De Ruiter, J. P., Sarafoglou, A., Siepe, B. S., Arena, G. 
 Krijgsman, B., Kulbe, L., Lüken, M., Marsman, M.,  Ott, V. L., Pawel, S., Piestrak, O., de Ron, J., <b>Sekulovski, N</b>., Serry, M., Stefanów, A., Stevenson, N., Sadowski, B., Sopuch,  M., Vasileiou, A., Visser,  I., Völler, M., Wiechert, S., de Wit, K., Wuth,  J., Wagenmakers, E.-J. (2025). <a href = "https://osf.io/preprints/psyarxiv/ck3js_v1">A Methodological Metamorphosis: The Rapid Rise of Bayesian Inference and Open 
 Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (2025). <a href = "https://doi.org/10.31234/osf.io/29p3m_v3"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>PsyArXiv</em>.</p>
-
 **In Press**
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(in press). <a href = "https://bpspsychub.onlinelibrary.wiley.com/doi/epdf/10.1111/bmsp.70045"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
 
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (in press). <a href = "https://doi.org/10.31234/osf.io/29p3m_v4"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>Psychological Methods</em>.</p>
+
+
 **2026** 
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N.</b>, Bartoš, F., van den Bergh, D., Arena, G., Godmann, H. R., Goyal, V., Pfadt, J. M., Marsman, M., & Raftery, A. E. (2026). <a href="https://www.pnas.org/doi/10.1073/pnas.2534552123">Comparing variable selection and model averaging methods for logistic regression</a>. <em>Proc. Natl. Acad. Sci. U.S.A. 123 (19) e2534552123,</em>.</p>
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N.</b>, Bartoš, F., van den Bergh, D., Arena, G., Godmann, H. R., Goyal, V., Pfadt, J. M., Marsman, M., & Raftery, A. E. (2026). <a href="https://www.pnas.org/doi/10.1073/pnas.2534552123">Comparing variable selection and model averaging methods for logistic regression</a>. <em>Proceedings of the National Academy of Sciences 123 (19) e2534552123,</em>.</p>
 
 **2025**
 
