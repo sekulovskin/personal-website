@@ -16,10 +16,9 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
 
-<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(in press). <a href = "https://bpspsychub.onlinelibrary.wiley.com/doi/epdf/10.1111/bmsp.70045"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
-
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (in press). <a href = "https://osf.io/preprints/psyarxiv/29p3m_v4"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>Psychological Methods</em>.</p>
 
+<p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Waaijers, M., & Arena, G.(in press). <a href = "https://bpspsychub.onlinelibrary.wiley.com/doi/epdf/10.1111/bmsp.70045"> LLM-Based Prior Elicitation for Bayesian Graphical Modeling</a>. <em>British Journal of Mathematical and Statistical Psychology</em>.</p>
 
 **2026** 
 
@@ -27,7 +26,7 @@ Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 **2025**
 
-<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (2025). <a href = "https://10.1017/psy.2025.10060"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
+<p style="font-size:medium;text-align:justify">Marsman, M., Waldorp, L. J., <b>.Sekulovski, N</b>., & Haslbeck, J. M. B. (2025). <a href = "https://www.cambridge.org/core/journals/psychometrika/article/bayes-factor-tests-for-group-differences-in-ordinal-and-binary-graphical-models/9FA567DF6BB3187C2FC0F74F7F19F6B1"> Bayes Factor Tests for Group Differences in Ordinal and Binary Graphical Models</a>. <em>Psychometrika</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Blanken, T., Haslbeck, J. M. B., & Marsman, M. (2025). <a href = "https://link.springer.com/article/10.3758/s13428-025-02861-6"> The Impact of Dichotomization on Network Recovery</a>. <em>Behavior Research Methods</em>.</p>
 
