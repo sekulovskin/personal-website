@@ -7,14 +7,14 @@ share: false
 
 **Submitted for Publication**
 
-<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>Sekulovski, N</b>., Delhalle, M., & Sarafoglou, A. (2025). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Safeguarding Against Bias Without Preregistration: A Tutorial on Analysis Blinding for Network Analysis.</a> <em>PsyArXiv</em>.</p>
-
 <p style="font-size:medium;text-align:justify">Pfadt, J. M., Bartoš, F., Godmann, H. R., Waaijers, M., Groot, L., Heo, I. , 
 Mensink, L., Nak, J., De Ruiter, J. P., Sarafoglou, A., Siepe, B. S., Arena, G. M., Akrong, E., Aust, F., van den Bergh, D., Brenner, W., Doekemeijer, R. A., Donzallaz, M. C., van Doorn, J., Echevarria, N. O., Finnemann, A., Geller, G., Hato, T., Koskinen, E., 
 Krijgsman, B., Kulbe, L., Lüken, M., Marsman, M.,  Ott, V. L., Pawel, S., Piestrak, O., de Ron, J., <b>Sekulovski, N</b>., Serry, M., Stefanów, A., Stevenson, N., Sadowski, B., Sopuch,  M., Vasileiou, A., Visser,  I., Völler, M., Wiechert, S., de Wit, K., Wuth,  J., Wagenmakers, E.-J. (2025). <a href = "https://osf.io/preprints/psyarxiv/ck3js_v1">A Methodological Metamorphosis: The Rapid Rise of Bayesian Inference and Open 
 Science Practices in Psychology</a>. <em>PsyArXiv</em>.</p>
 
 **In Press**
+
+<p style="font-size:medium;text-align:justify">Hoekstra, R. H. A., Huth, K., <b>Sekulovski, N</b>., Delhalle, M., & Sarafoglou, A. (in press). <a href = "https://osf.io/preprints/psyarxiv/gruw5_v1">Analysis Blinding as a Complement to Preregistration: A Tutorial for Network Analysis.</a> <em>Advances in Methods and Practices in Psychological Science</em>.</p>
 
 <p style="font-size:medium;text-align:justify"><b>Sekulovski, N</b>., Arena, G.,  Haslbeck, J. M. B., Huth, K., Friel, N., & Marsman, M. (in press). <a href = "https://osf.io/preprints/psyarxiv/29p3m_v4"> A Stochastic Block Prior for Clustering in Graphical Models</a>. <em>Psychological Methods</em>.</p>
 
