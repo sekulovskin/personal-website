@@ -220,6 +220,10 @@ const month = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(
     max-width: 58ch;
     font-size: 17px;
     line-height: 1.7;
+    text-align: justify;
+    hyphens: auto;
+    /* Only split words of 7+ letters, keeping at least 3 letters on each side. */
+    hyphenate-limit-chars: 7 3 3;
   }
   .bio :global(p + p) {
     margin-top: 14px;
@@ -368,6 +372,11 @@ const month = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(
     }
   }
   @media (max-width: 560px) {
+    /* Phone lines are too short to justify without large gaps. */
+    .bio {
+      text-align: left;
+      hyphens: manual;
+    }
     .software {
       grid-template-columns: minmax(0, 1fr);
     }
