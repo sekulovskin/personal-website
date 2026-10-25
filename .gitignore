@@ -1,9 +1,12 @@
 # IDEs
 .idea/
 
-# Hugo
+# Hugo (root only, so astro-site/public/ is still committed)
 /resources/
-public/
+/public/
 jsconfig.json
 node_modules/
 .Rproj.user
+
+# macOS
+.DS_Store

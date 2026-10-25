@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found">
+  <div class="wrap page">
+    <p class="mono">404</p>
+    <h1>No edge here.</h1>
+    <p>This page doesn't exist (anymore). <a href="/">Go to the home page</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: clamp(56px, 10vw, 120px);
+    padding-bottom: 80px;
+  }
+  .mono {
+    color: var(--accent);
+  }
+  h1 {
+    margin: 8px 0 16px;
+    font-family: var(--serif);
+    font-size: clamp(44px, 8vw, 72px);
+  }
+  p:last-child {
+    color: var(--muted);
+  }
+</style>

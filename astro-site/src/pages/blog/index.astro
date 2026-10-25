@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+---
+
+<Base title="Blog">
+  <div class="wrap page">
+    <a class="back mono" href="/">← Home</a>
+    <h1>Blog</h1>
+    <p class="lead">Tutorials for some of my papers, and the occasional post.</p>
+    <PostList />
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 800px;
+    padding-top: clamp(40px, 8vw, 88px);
+    padding-bottom: 40px;
+  }
+  .back {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  h1 {
+    margin: 12px 0 8px;
+    font-family: var(--serif);
+    font-size: clamp(44px, 8vw, 64px);
+  }
+  .lead {
+    margin-bottom: 28px;
+    color: var(--muted);
+  }
+</style>

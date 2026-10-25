@@ -1,0 +1,199 @@
+---
+import type { Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+}
+
+const { pub } = Astro.props;
+
+// Very long author lists are shortened around your own name; a button shows the rest.
+const LONG = 12;
+const n = pub.authors.length;
+const me = pub.authors.findIndex((a) => a.me);
+const all = pub.authors.map((_, i) => i);
+const shortIdx = n > LONG ? [...new Set([0, 1, 2, me, n - 1])].filter((i) => i >= 0).sort((a, b) => a - b) : all;
+
+// APA-style "A, B, & C", with "…" wherever authors are skipped.
+const authorList = (indices: number[]) =>
+  indices.map((i, k) => ({
+    ...pub.authors[i],
+    sep:
+      (k > 0 ? ', ' : '') +
+      (k > 0 && i - indices[k - 1] > 1 ? '…, ' : '') +
+      (k > 0 && k === indices.length - 1 ? '& ' : ''),
+  }));
+const short = authorList(shortIdx);
+const full = n > LONG ? authorList(all) : null;
+---
+
+<li class="pub">
+  <h4 class="title">
+    {pub.href ? <a href={pub.href}>{pub.title}</a> : pub.title}
+  </h4>
+
+  <p class="authors">
+    <span class="short">{short.map((a) => <>{a.sep}{a.me ? <strong>{a.name}</strong> : a.name}</>)}</span>
+    {
+      full && (
+        <>
+          <span class="full" hidden>{full.map((a) => <>{a.sep}{a.me ? <strong>{a.name}</strong> : a.name}</>)}</span>
+          <button class="more" type="button" aria-expanded="false" data-n={n}>all {n} authors</button>
+        </>
+      )
+    }
+  </p>
+
+  <p class="venue">
+    {pub.venue && <em>{pub.venue}</em>}{pub.volume && <>, <em>{pub.volume}</em></>}{pub.issue && `(${pub.issue})`}{pub.pages && `, ${pub.pages}`}
+    {pub.status && <span class="status">{pub.status}</span>}
+  </p>
+
+  {pub.note && <p class="note">{pub.note}</p>}
+
+  <div class="links">
+    {
+      pub.links.map((l) => (
+        <a class="chip" href={l.href}>
+          {l.label}
+          {/^https?:/.test(l.href) && <span class="arrow">↗</span>}
+        </a>
+      ))
+    }
+    <button class="chip cite" type="button" aria-expanded="false">BibTeX</button>
+  </div>
+  <div class="bib" hidden>
+    <pre>{pub.bibtex}</pre>
+    <button class="copy" type="button">Copy</button>
+  </div>
+</li>
+
+<script>
+  document.addEventListener('click', async (ev) => {
+    const btn = (ev.target as HTMLElement).closest('button');
+    const pub = btn?.closest('.pub');
+    if (!btn || !pub) return;
+
+    if (btn.classList.contains('cite')) {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      pub.querySelector<HTMLElement>('.bib')!.hidden = !open;
+    } else if (btn.classList.contains('copy')) {
+      try {
+        await navigator.clipboard.writeText(pub.querySelector('pre')!.textContent ?? '');
+        btn.textContent = 'Copied';
+      } catch {
+        btn.textContent = 'Select and copy';
+      }
+      setTimeout(() => (btn.textContent = 'Copy'), 1600);
+    } else if (btn.classList.contains('more')) {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      pub.querySelector<HTMLElement>('.short')!.hidden = open;
+      pub.querySelector<HTMLElement>('.full')!.hidden = !open;
+      btn.textContent = open ? 'fewer authors' : `all ${btn.dataset.n} authors`;
+    }
+  });
+</script>
+
+<style>
+  .pub {
+    padding: 18px 0 20px;
+    border-top: 1px solid var(--line);
+  }
+  .title {
+    font-family: var(--sans);
+    font-size: 16.5px;
+    font-weight: 560;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
+  .title a {
+    text-decoration: none;
+  }
+  .title a:hover {
+    text-decoration: underline;
+  }
+  .authors,
+  .venue,
+  .note {
+    margin-top: 4px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .authors strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .more {
+    margin-left: 6px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 13px;
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .more:hover {
+    text-decoration: underline;
+  }
+  .status {
+    display: inline-block;
+    padding: 0 7px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 19px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    vertical-align: 1px;
+  }
+  .status:not(:first-child) {
+    margin-left: 4px;
+  }
+  .note {
+    font-size: 13.5px;
+    font-style: italic;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .bib {
+    position: relative;
+    margin-top: 10px;
+  }
+  pre {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 3px 9px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .copy:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+</style>

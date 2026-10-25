@@ -1,0 +1,72 @@
+---
+// One numbered section of the home page: the title sits in a narrow left
+// column (and sticks while you scroll through the section), content on the right.
+interface Props {
+  id: string;
+  num: number;
+  title: string;
+}
+
+const { id, num, title } = Astro.props;
+---
+
+<section id={id} class="section wrap reveal">
+  <header class="head">
+    <span class="num">{String(num).padStart(2, '0')}</span>
+    <h2>{title}</h2>
+  </header>
+  <div class="body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 40px;
+    padding-top: clamp(56px, 8vw, 96px);
+  }
+  .section::before {
+    content: '';
+    grid-column: 1 / -1;
+    height: 1px;
+    margin-bottom: clamp(8px, 2vw, 16px);
+    background: var(--line);
+  }
+  .head {
+    position: sticky;
+    top: calc(var(--header) + 28px);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 40px);
+    letter-spacing: -0.01em;
+  }
+  .body {
+    max-width: 720px;
+    min-width: 0;
+  }
+
+  @media (max-width: 860px) {
+    .section {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+    .head {
+      position: static;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 12px;
+    }
+  }
+</style>
