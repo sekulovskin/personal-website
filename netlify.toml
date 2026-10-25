@@ -1,21 +1,9 @@
+# The site is built with Astro from astro-site/ (see astro-site/README.md).
+# `publish` is relative to `base`.
 [build]
-  command = "hugo --gc --minify -b $URL"
-  publish = "public"
+  base = "astro-site"
+  command = "npm run build"
+  publish = "dist"
 
 [build.environment]
-  HUGO_VERSION = "0.89.4"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.production.environment]
-  HUGO_ENV = "production"
-
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
-
-[[plugins]]
-  package = "netlify-plugin-hugo-cache-resources"
-  [plugins.inputs]
-    debug = true
+  NODE_VERSION = "22"

@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+
+const updated = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+---
+
+<footer class="wrap">
+  <div class="inner">
+    <span>© {new Date().getFullYear()} {site.name}</span>
+    <span>Last updated {updated}</span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    margin-top: 40px;
+  }
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+  }
+</style>
