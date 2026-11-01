@@ -1,4 +1,4 @@
-I’m a postdoc in the Psychological Methods group at the University of Amsterdam and part of the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). Before that, I did my PhD in the same group, supervised by Maarten Marsman and Eric-Jan Wagenmakers.
+I’m a postdoc in the Psychological Methods group at the University of Amsterdam and part of the [Bayesian Graphical Modeling Lab](https://bayesiangraphicalmodeling.com/). Before that, I did my PhD in the same group.
 
 My research focuses on Bayesian statistical methods for psychological network models. I’m particularly interested in figuring out which variables are directly related, whether they form clusters, and how we can use prior information to test theories. A big part of my work also involves developing open-source software and making these methods accessible to applied researchers through R and JASP. I also enjoy collaborating with applied researchers and figuring out how statistical methods can help answer their research questions.
 
